@@ -4,7 +4,7 @@ set is_si_enabled false
 
 set top_design aes_cipher_top
 
-set link_library "* /home/md1/eda/techlibs/SMIC/SCC14NSFP_90SDB_9TC16_RVT_v1p0a/Liberty/scc14nsfp_90sdb_9tc16_rvt_ssg_v0p63_125c_ccs.db"
+set link_library "* ../Timing_Lib/scc14nsfp_90sdb_9tc16_rvt_ssg_v0p63_125c_ccs.db"
 
 
 set netlist "../Icc2Output/${top_design}_route.v"

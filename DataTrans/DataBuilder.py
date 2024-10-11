@@ -383,9 +383,8 @@ def LoadDrcMap(design, verbose=False):
         print(f'{design} drc map loaded!')
     return DrcMap
 
-def BuildTimingLib(verbose=False):
-    if verbose:
-        print(f'Building cell timing lib.')
+def BuildTimingLib():
+    print(f'Building cell timing lib.')
     cells = TimingLib_Parser.Read_TimingLib()
     save_dir = Save_Path + 'TimingLib'
     if not os.path.exists(save_dir):
@@ -475,8 +474,7 @@ def BuildTimingLib(verbose=False):
     save_path = os.path.join(save_dir, 'LibData_normalized.sav')
     with open(save_path, 'wb') as f:
         pickle.dump(cells, f)
-    if verbose:
-        print(f'Cell timing lib complete!')
+    print(f'Cell timing lib complete!')
 
 def LoadTimingLib(verbose=False):
     if verbose:
