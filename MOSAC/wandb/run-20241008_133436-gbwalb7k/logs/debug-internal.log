@@ -1,0 +1,22 @@
+{"time":"2024-10-08T13:34:36.382821792+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-08T13:34:36.38283085+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/RL/wandb/run-20241008_133436-gbwalb7k/logs/debug-core.log"}
+{"time":"2024-10-08T13:34:36.388309797+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-08T13:34:36.390046828+08:00","level":"INFO","msg":"created new stream","id":"gbwalb7k"}
+{"time":"2024-10-08T13:34:36.390064983+08:00","level":"INFO","msg":"stream: started","id":"gbwalb7k"}
+{"time":"2024-10-08T13:34:36.390071392+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"gbwalb7k"}}
+{"time":"2024-10-08T13:34:36.390073519+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"gbwalb7k"}}
+{"time":"2024-10-08T13:34:36.390078209+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"gbwalb7k"}}
+{"time":"2024-10-08T13:34:36.948154873+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-08T13:34:36.948606599+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-08T13:34:36.948711046+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-08T13:34:37.856246195+08:00","level":"INFO","msg":"stream: closing","id":"gbwalb7k"}
+{"time":"2024-10-08T13:34:37.856267498+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-08T13:34:37.857002617+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-08T13:34:38.107096387+08:00","level":"WARN","msg":"No job ingredients found, not creating job artifact"}
+{"time":"2024-10-08T13:34:38.107107671+08:00","level":"WARN","msg":"No source type found, not creating job artifact"}
+{"time":"2024-10-08T13:34:38.107110911+08:00","level":"INFO","msg":"sender: sendDefer: no job artifact to save"}
+{"time":"2024-10-08T13:34:38.877275456+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-08T13:34:39.327178974+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"gbwalb7k"}}
+{"time":"2024-10-08T13:34:39.327205229+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"gbwalb7k"}}
+{"time":"2024-10-08T13:34:39.327209864+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"gbwalb7k"}}
+{"time":"2024-10-08T13:34:39.327259211+08:00","level":"INFO","msg":"stream: closed","id":"gbwalb7k"}

@@ -1,0 +1,68 @@
+_wandb:
+    value:
+        cli_version: 0.18.2
+        code_path: code/test_cgra_dse.py
+        m: []
+        python_version: 3.11.9
+        t:
+            "1":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 53
+                - 55
+                - 76
+            "2":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 53
+                - 55
+                - 76
+            "3":
+                - 7
+                - 13
+                - 16
+                - 23
+                - 55
+            "4": 3.11.9
+            "5": 0.18.2
+            "6": 4.37.2
+            "8":
+                - 5
+            "12": 0.18.2
+            "13": linux-x86_64
+algo:
+    value: MOSAC
+alpha:
+    value: 1
+autotune:
+    value: true
+batch_size:
+    value: 128
+buffer_size:
+    value: 1000
+env_id:
+    value: dim-test-v0
+gamma:
+    value: 0.99
+learning_starts:
+    value: 0
+net_arch:
+    value:
+        - 256
+        - 256
+policy_freq:
+    value: 2
+policy_lr:
+    value: 0.0001
+q_lr:
+    value: 0.0001
+seed:
+    value: 42
+target_net_freq:
+    value: 1
+tau:
+    value: 0.005
