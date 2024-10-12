@@ -172,7 +172,7 @@ class DT_ECO(gym.Env):
                     Interaction.VerilogInlineChange(self.current_design, changed_cell_dict, Incremental=True) 
                     
                 # # run pt
-                Interaction.VerilogInline_PT_Iteration(self.current_design)
+                # Interaction.VerilogInline_PT_Iteration(self.current_design)
                 # Timing Graph update (inline)
                 self.graph = TimingGraphTrans.LoadTimingGraph(self.current_design+'_inline', True)               
                 self.nodes, self.nodes_rev = TimingGraphTrans.LoadNodeDict(self.current_design+'_inline')
@@ -193,7 +193,7 @@ class DT_ECO(gym.Env):
                 Interaction.Write_Incremental_ECO_Scripts(self.current_design, self.sizedCellList)
                 
                 # run icc2 and pt
-                Interaction.ECO_PRPT_Iteration(self.current_design)
+                # Interaction.ECO_PRPT_Iteration(self.current_design)
                 # Timing Graph update (ECO)
                 self.graph = TimingGraphTrans.LoadTimingGraph(self.current_design+'_eco', True)
                 # Physical Data update (ECO)
@@ -250,16 +250,16 @@ if __name__ == "__main__":
     start_time = time.time()
     env = DT_ECO()
     env.reset()
-    # for _ in range(env.steps_needed):
-    #     env.render()
-    #     action = env.action_space.sample() # random action space sampling
-    #     # print(f'action: {action}#{type(action)}')
-    #     current_state, vec_reward, done, truncated, info = env.step(action)
-    #     # np.set_printoptions(edgeitems=10, threshold=20, precision=4, suppress=False, linewidth=np.inf)
-    #     # print(current_state['gate_sizes'])
-    #     print(f'reward: {vec_reward}')
-    #     if done:
-    #         env.reset()
+    for _ in range(env.steps_needed):
+        env.render()
+        action = env.action_space.sample() # random action space sampling
+        # print(f'action: {action}#{type(action)}')
+        current_state, vec_reward, done, truncated, info = env.step(action)
+        # np.set_printoptions(edgeitems=10, threshold=20, precision=4, suppress=False, linewidth=np.inf)
+        # print(current_state['gate_sizes'])
+        print(f'reward: {vec_reward}')
+        if done:
+            env.reset()
     env.close()
     end_time = time.time()
     elapsed_time = end_time - start_time
