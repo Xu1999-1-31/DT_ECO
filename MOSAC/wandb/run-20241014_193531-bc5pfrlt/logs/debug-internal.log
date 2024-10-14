@@ -1,0 +1,19 @@
+{"time":"2024-10-14T19:35:31.508636715+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T19:35:31.508642287+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_193531-bc5pfrlt/logs/debug-core.log"}
+{"time":"2024-10-14T19:35:31.521315227+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T19:35:31.522758314+08:00","level":"INFO","msg":"created new stream","id":"bc5pfrlt"}
+{"time":"2024-10-14T19:35:31.522768387+08:00","level":"INFO","msg":"stream: started","id":"bc5pfrlt"}
+{"time":"2024-10-14T19:35:31.522771072+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"bc5pfrlt"}}
+{"time":"2024-10-14T19:35:31.522776225+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"bc5pfrlt"}}
+{"time":"2024-10-14T19:35:31.522775663+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"bc5pfrlt"}}
+{"time":"2024-10-14T19:35:32.0282514+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T19:35:32.028589517+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T19:35:32.028667543+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T19:38:08.907007869+08:00","level":"INFO","msg":"stream: closing","id":"bc5pfrlt"}
+{"time":"2024-10-14T19:38:08.907024415+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T19:38:08.907858454+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T19:38:10.87259542+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T19:38:11.353172306+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"bc5pfrlt"}}
+{"time":"2024-10-14T19:38:11.35320348+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"bc5pfrlt"}}
+{"time":"2024-10-14T19:38:11.353226077+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"bc5pfrlt"}}
+{"time":"2024-10-14T19:38:11.353239854+08:00","level":"INFO","msg":"stream: closed","id":"bc5pfrlt"}

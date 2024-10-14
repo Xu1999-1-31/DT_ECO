@@ -10,6 +10,7 @@ class GraphSpace(spaces.Space):
         assert isinstance(graph, dgl.DGLHeteroGraph), "Input must be a DGLHeteroGraph"
         
         # Define the shape as (number_of_nodes, number_of_edges)
+        # node numbers, node features, edge numbers, cellarc features, netarc features
         shape = (graph.number_of_nodes(), graph.ndata['feature'].shape[1], graph.number_of_edges(), graph.edata['feature'][('node', 'cellarc', 'node')].shape[1], graph.edata['feature'][('node', 'netarc', 'node')].shape[1])
         self.graph = graph
         

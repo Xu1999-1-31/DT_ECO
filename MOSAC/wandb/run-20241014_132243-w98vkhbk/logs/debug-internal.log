@@ -1,0 +1,19 @@
+{"time":"2024-10-14T13:22:43.20053131+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T13:22:43.200536016+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_132243-w98vkhbk/logs/debug-core.log"}
+{"time":"2024-10-14T13:22:43.209450102+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T13:22:43.211109062+08:00","level":"INFO","msg":"created new stream","id":"w98vkhbk"}
+{"time":"2024-10-14T13:22:43.211118867+08:00","level":"INFO","msg":"stream: started","id":"w98vkhbk"}
+{"time":"2024-10-14T13:22:43.211121444+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"w98vkhbk"}}
+{"time":"2024-10-14T13:22:43.211125512+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"w98vkhbk"}}
+{"time":"2024-10-14T13:22:43.211127492+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"w98vkhbk"}}
+{"time":"2024-10-14T13:22:43.694794357+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T13:22:43.69509703+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T13:22:43.696520421+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T13:23:07.826795583+08:00","level":"INFO","msg":"stream: closing","id":"w98vkhbk"}
+{"time":"2024-10-14T13:23:07.826808299+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T13:23:07.827558607+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T13:23:09.381153368+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T13:23:10.451856037+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"w98vkhbk"}}
+{"time":"2024-10-14T13:23:10.451877944+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"w98vkhbk"}}
+{"time":"2024-10-14T13:23:10.451913022+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"w98vkhbk"}}
+{"time":"2024-10-14T13:23:10.451920741+08:00","level":"INFO","msg":"stream: closed","id":"w98vkhbk"}

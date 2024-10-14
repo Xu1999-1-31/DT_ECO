@@ -76,9 +76,11 @@ def PhysicalDataTrans(design, scale, rebuild = False, verbose = False):
             Padding_Mask[x_min_idx:x_max_idx, y_min_idx:y_max_idx] = 1
             CPath_Padding_Mask[x_min_idx:x_max_idx, y_min_idx:y_max_idx] = 1
 
+        CPath_Padding_Mask.unsqueeze(0)
         CPath_Padding.append(CPath_Padding_Mask)
         # torch.set_printoptions(threshold=torch.inf)
         # print(Padding_Mask)
+    Padding_Mask.unsqueeze(0)
     # for Padding in CPath_Padding:
     #     plt.imshow(Padding.numpy(), cmap='gray')
     #     plt.axis('off')

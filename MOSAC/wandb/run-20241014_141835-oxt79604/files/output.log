@@ -1,0 +1,88 @@
+()
+actions: 0
+sa10_reg_2_/D sa10_reg_2_/Q
+()
+actions: 3
+Traceback (most recent call last):
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 50, in <module>
+    agent.train(
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 544, in train
+    self.update()
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 411, in update
+    print(self.qf1_target(mb_next_obs).shape)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 82, in forward
+    q_values = self.critic(g, img, padding_mask, Gate_feature)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/Model/models.py", line 177, in forward
+    nf = self.gnn(g)
+         ^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/Model/models.py", line 130, in forward
+    nf = self.gnn_layers[0](g, nf)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/Model/models.py", line 92, in forward
+    g.update_all(self.message_func_forward_cellarc, fn.sum('msg_f1', 'n_f1_sum'), etype='cellarc')
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/heterograph.py", line 5112, in update_all
+    ndata = core.message_passing(
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/core.py", line 406, in message_passing
+    msgdata = invoke_edge_udf(
+              ^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/core.py", line 96, in invoke_edge_udf
+    return func(ebatch)
+           ^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/Model/models.py", line 48, in message_func_forward_cellarc
+    x = self.MLP_msg_forward_cellarc(combined_features)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/Model/models.py", line 19, in forward
+    return self.layers(x)
+          ^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (4334976x68 and 14x64)

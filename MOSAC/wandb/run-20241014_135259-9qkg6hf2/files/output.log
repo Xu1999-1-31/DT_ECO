@@ -1,0 +1,235 @@
+torch.Size([49514, 5])
+tensor([[ 0.0813,  0.1320,  0.1113, -0.0882,  0.0335,  0.0422,  0.0370, -0.0972,
+          0.0436,  0.0744, -0.0597, -0.1494,  0.1220,  0.0488]],
+       grad_fn=<AddmmBackward0>)
+()
+actions: 11
+11
+sa10_reg_2_/D sa10_reg_2_/Q
+torch.Size([49514, 5])
+tensor([[ 0.0850,  0.1376,  0.1142, -0.0911,  0.0361,  0.0472,  0.0405, -0.1036,
+          0.0457,  0.0760, -0.0563, -0.1476,  0.1183,  0.0597]],
+       grad_fn=<AddmmBackward0>)
+()
+actions: 3
+3
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([49514, 5])
+torch.Size([6337792, 5])
+tensor([[ 0.0820,  0.1348,  0.1120,  ..., -0.1480,  0.1157,  0.0585],
+        [ 0.0850,  0.1376,  0.1142,  ..., -0.1476,  0.1183,  0.0597],
+        [ 0.0820,  0.1348,  0.1120,  ..., -0.1480,  0.1157,  0.0585],
+        ...,
+        [ 0.0820,  0.1348,  0.1120,  ..., -0.1480,  0.1157,  0.0585],
+        [ 0.0820,  0.1348,  0.1120,  ..., -0.1480,  0.1157,  0.0585],
+        [ 0.0850,  0.1376,  0.1142,  ..., -0.1476,  0.1183,  0.0597]])
+torch.Size([6337792, 32])
+Traceback (most recent call last):
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 50, in <module>
+    agent.train(
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 541, in train
+    self.update()
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 408, in update
+    qf1_next_target = (self.qf1_target(mb_next_obs) * self.weights_tensor).sum(dim = -1)#(128,9,2) (1,1,2)这里要沿着最后一个维度相乘
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 82, in forward
+    q_values = self.critic(g, img, padding_mask, Gate_feature)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/Model/models.py", line 177, in forward
+    nf = self.gnn(g)
+         ^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/Model/models.py", line 129, in forward
+    nf = self.gnn_layers[0](g, nf)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/Model/models.py", line 92, in forward
+    g.update_all(self.message_func_forward_cellarc, fn.sum('msg_f1', 'n_f1_sum'), etype='cellarc')
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/heterograph.py", line 5112, in update_all
+    ndata = core.message_passing(
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/core.py", line 406, in message_passing
+    msgdata = invoke_edge_udf(
+              ^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/core.py", line 96, in invoke_edge_udf
+    return func(ebatch)
+           ^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/Model/models.py", line 48, in message_func_forward_cellarc
+    x = self.MLP_msg_forward_cellarc(combined_features)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/Model/models.py", line 19, in forward
+    return self.layers(x)
+          ^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (4334976x68 and 14x64)

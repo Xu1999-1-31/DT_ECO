@@ -44,6 +44,7 @@ class TimingGNN(torch.nn.Module):
         src_features = edges.src['nf']
         dst_features = edges.dst['nf']
         edge_features = edges.data['feature'][:, -4:]
+        # print(src_features.shape, dst_features.shape, edge_features.shape)
         combined_features = torch.cat([src_features, dst_features, edge_features], dim=1)
         x = self.MLP_msg_forward_cellarc(combined_features)
         k, f1, f2 = torch.split(x, [1, self.h1, self.h2], dim=1)
@@ -123,16 +124,17 @@ class MultiLayerTimingGNN(torch.nn.Module):
         self.gnn_layers.append(TimingGNN(hidden_nf, in_ef, out_nf, h1=h1, h2=h2))
 
     def forward(self, g):
-        nf = g.ndata['feature']
+        with g.local_scope():
+            nf = g.ndata['feature']
 
-        # First layer propagation using initial node features
-        nf = self.gnn_layers[0](g, nf)
+            # First layer propagation using initial node features
+            nf = self.gnn_layers[0](g, nf)
 
-        # Propagate through remaining layers
-        for i in range(1, self.num_layers):
-            nf = self.gnn_layers[i](g, nf)
+            # Propagate through remaining layers
+            for i in range(1, self.num_layers):
+                nf = self.gnn_layers[i](g, nf)
 
-        return nf
+            return nf
 
 class CNN(torch.nn.Module):
     def __init__(self, in_channels=4):
@@ -150,19 +152,46 @@ class CNN(torch.nn.Module):
         x = F.relu(self.conv3(x))
         x = self.conv4(x)
         return x
-    
+
+class SelfAttentionPool(torch.nn.Module):
+    def __init__(self, embedding_dim, num_heads, num_layers):
+        super(SelfAttentionPool, self).__init__()
+        
+        # Self-Attention (MultiheadAttention or Transformer Encoder)
+        self.attention = torch.nn.TransformerEncoder(
+            torch.nn.TransformerEncoderLayer(d_model=embedding_dim, nhead=num_heads, batch_first=True),
+            num_layers=num_layers
+        )
+        
+        # pooling
+        self.global_pool = torch.nn.AdaptiveAvgPool1d(1)  # Global Average Pooling
+
+    def forward(self, x):
+        # Self-Attention
+        attention_output = self.attention(x)  # [batch_size, seq_len, embedding_dim]
+
+        # pool the seq_len dim： [batch_size, embedding_dim, seq_len]
+        attention_output = attention_output.permute(0, 2, 1)
+        
+        # global mean pooling: [batch_size, embedding_dim, 1]
+        pooled_output = self.global_pool(attention_output).squeeze(-1)
+        
+        return pooled_output  # output dim: [batch_size, embedding_dim]
+
 class MultiModalNN(torch.nn.Module):
-    def __init__(self, num_layers, hidden_nf, out_nf, output, in_nf = 5, in_ef = 4, h1=32, h2=32, in_channels=4):
+    def __init__(self, num_layers, hidden_nf, out_nf, output, embedding_dim, num_heads=4, num_Attention_layer=3, in_nf = 5, in_ef = 4, h1=32, h2=32, in_channels=4):
         super(MultiModalNN, self).__init__()
         self.gnn = MultiLayerTimingGNN(num_layers, hidden_nf, out_nf, in_nf, in_ef, h1, h2)
         self.cnn = CNN(in_channels)
+        self.AttentionPool = SelfAttentionPool(embedding_dim, num_heads, num_Attention_layer)
         self.MLP_cnn_forward = MLP(64*64, 64, 64, 32)   # MLP after Padding
         self.MLP_gnn_forward = MLP(out_nf, 64, 64, 32) # MLP after pooling
+        self.MLP_gsize_forward = MLP(embedding_dim, 64, 64, 32) # MLP after SelfAttentionPool
         self.MLP_CPath_Gate = MLP(15, 64, 64, 32) # MLP for Gate feature on CPath
-        self.MLP_Output = MLP(96, 64, 64, output)
+        self.MLP_Output = MLP(128, 64, 64, output)
         
-    def forward(self, g, img, padding_mask, Gate_feature):
-        # Inssure the data is in batch form
+    def forward(self, g, img, padding_mask, Gate_feature, Gate_size):
+        # Ensure the data is in batch form
         if not hasattr(g, 'batch_size'):
             g = dgl.batch([g])
         if img.dim() == 3:
@@ -171,27 +200,33 @@ class MultiModalNN(torch.nn.Module):
             padding_mask = padding_mask.unsqueeze(0)
         if Gate_feature.dim() == 1:
             Gate_feature = Gate_feature.unsqueeze(0)
+        if Gate_size.dim() == 2:
+            Gate_size = Gate_size.unsqueeze(0)
         
         # GNN part: process the batched graph
-        nf = self.gnn(g)
-        padding_mask_expanded = g.ndata['padding_mask'].unsqueeze(-1)
-        g.ndata['feature'] = nf * padding_mask_expanded
-        sum_nf = dgl.sum_nodes(g, 'feature')
-        num_masked_nodes = dgl.sum_nodes(g, 'padding_mask')
-        pooled_nf = sum_nf / (num_masked_nodes + 1e-6) # avoide division by zero
+        with g.local_scope():
+            nf = self.gnn(g)
+            padding_mask_expanded = g.ndata['padding_mask'].unsqueeze(-1)
+            g.ndata['feature'] = nf * padding_mask_expanded
+            sum_nf = dgl.sum_nodes(g, 'feature')
+            num_masked_nodes = dgl.sum_nodes(g, 'padding_mask').unsqueeze(-1)
+            pooled_nf = sum_nf / (num_masked_nodes + 1e-6) # avoide division by zero
 
         # CNN part: process the batch of images
         img_batch_size = img.size(0)  # Assume img is of shape (batch_size, channels, height, width)
         img = self.cnn(img)  # Process each image
         img = torch.mul(img, padding_mask) 
         img = img.view(img_batch_size, -1)
-
+        
+        # Gate size part: process the gate size sequence
+        gsize = self.AttentionPool(Gate_size)
+        gsize = self.MLP_gsize_forward(gsize)
+        
         Img_feature = self.MLP_cnn_forward(img)
         Gnn_feature = self.MLP_gnn_forward(pooled_nf)
         Gate_feature = self.MLP_CPath_Gate(Gate_feature)
 
         # Concatenate features across the batch
-        combined_features = torch.cat([Img_feature, Gnn_feature, Gate_feature], dim=1)  # Concatenate along feature dim
+        combined_features = torch.cat([Img_feature, Gnn_feature, gsize, Gate_feature], dim=1)  # Concatenate along feature dim
         Output = self.MLP_Output(combined_features)
-
         return Output

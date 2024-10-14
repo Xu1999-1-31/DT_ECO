@@ -1,0 +1,19 @@
+{"time":"2024-10-14T13:17:49.242067963+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T13:17:49.242073206+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_131749-6933p46n/logs/debug-core.log"}
+{"time":"2024-10-14T13:17:49.25224058+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T13:17:49.254137585+08:00","level":"INFO","msg":"created new stream","id":"6933p46n"}
+{"time":"2024-10-14T13:17:49.254148857+08:00","level":"INFO","msg":"stream: started","id":"6933p46n"}
+{"time":"2024-10-14T13:17:49.254162071+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"6933p46n"}}
+{"time":"2024-10-14T13:17:49.254156916+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"6933p46n"}}
+{"time":"2024-10-14T13:17:49.254157371+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"6933p46n"}}
+{"time":"2024-10-14T13:17:49.783557322+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T13:17:49.783826058+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T13:17:49.78391811+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T13:18:14.008827232+08:00","level":"INFO","msg":"stream: closing","id":"6933p46n"}
+{"time":"2024-10-14T13:18:14.008839362+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T13:18:14.009674501+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T13:18:15.243237487+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T13:18:15.749901977+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"6933p46n"}}
+{"time":"2024-10-14T13:18:15.749922443+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"6933p46n"}}
+{"time":"2024-10-14T13:18:15.749953615+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"6933p46n"}}
+{"time":"2024-10-14T13:18:15.749956096+08:00","level":"INFO","msg":"stream: closed","id":"6933p46n"}

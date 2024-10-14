@@ -1,0 +1,109 @@
+()
+actions: 9
+sa10_reg_2_/D sa10_reg_2_/Q
+()
+actions: 11
+1
+()
+actions: 12
+2
+()
+actions: 4
+3
+()
+actions: 0
+4
+()
+actions: 0
+5
+()
+actions: 9
+6
+()
+actions: 12
+7
+()
+actions: 0
+8
+()
+actions: 7
+9
+()
+actions: 4
+10
+()
+actions: 11
+11
+()
+actions: 12
+12
+()
+actions: 3
+13
+()
+actions: 10
+14
+()
+actions: 0
+15
+()
+actions: 6
+16
+()
+actions: 8
+17
+()
+actions: 6
+Traceback (most recent call last):
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 50, in <module>
+    agent.train(
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 542, in train
+    self.update()
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 435, in update
+    qf1_values = (self.qf1(mb_obs) * self.weights_tensor).sum(dim = -1)
+                  ^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 82, in forward
+    q_values = self.critic(g, img, padding_mask, Gate_feature)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/Model/models.py", line 179, in forward
+    nf = self.gnn(g)
+         ^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/Model/models.py", line 135, in forward
+    nf = self.gnn_layers[i](g, nf)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/Model/models.py", line 97, in forward
+    g.update_all(self.message_func_backward_cellarc, fn.mean('msg_b', 'n_b_mean'), etype='cellarc')
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/heterograph.py", line 5112, in update_all
+    ndata = core.message_passing(
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/core.py", line 410, in message_passing
+    if is_builtin(rfunc):
+       ^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/core.py", line 11, in is_builtin
+    def is_builtin(func):
+
+KeyboardInterrupt

@@ -1,0 +1,19 @@
+{"time":"2024-10-14T13:07:42.927956577+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T13:07:42.927961393+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_130742-brotkyku/logs/debug-core.log"}
+{"time":"2024-10-14T13:07:42.95733755+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T13:07:42.958874871+08:00","level":"INFO","msg":"created new stream","id":"brotkyku"}
+{"time":"2024-10-14T13:07:42.958885136+08:00","level":"INFO","msg":"stream: started","id":"brotkyku"}
+{"time":"2024-10-14T13:07:42.958895062+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"brotkyku"}}
+{"time":"2024-10-14T13:07:42.958921728+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"brotkyku"}}
+{"time":"2024-10-14T13:07:42.958928255+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"brotkyku"}}
+{"time":"2024-10-14T13:07:43.459425775+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T13:07:43.459849146+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T13:07:43.459923222+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T13:08:07.097824101+08:00","level":"INFO","msg":"stream: closing","id":"brotkyku"}
+{"time":"2024-10-14T13:08:07.097846609+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T13:08:07.098517029+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T13:08:08.198768483+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T13:08:08.684093538+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"brotkyku"}}
+{"time":"2024-10-14T13:08:08.684116548+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"brotkyku"}}
+{"time":"2024-10-14T13:08:08.68411286+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"brotkyku"}}
+{"time":"2024-10-14T13:08:08.684154556+08:00","level":"INFO","msg":"stream: closed","id":"brotkyku"}

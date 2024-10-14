@@ -64,6 +64,9 @@ class MOSoftQNetwork(nn.Module):
             hidden_nf=64, 
             out_nf=32,
             output=self.action_dim*self.reward_dim, 
+            embedding_dim=self.obs_shape['gate_sizes'][1],
+            num_heads=4,
+            num_Attention_layer=3,
             in_nf=self.obs_shape['timing_graph'][1], 
             in_ef=self.obs_shape['timing_graph'][4], 
             h1=32, 
@@ -77,9 +80,10 @@ class MOSoftQNetwork(nn.Module):
         g = obs['timing_graph']
         img = obs['layout']
         padding_mask = obs['padding_mask']
+        Gate_sizes = obs['gate_sizes']
         Gate_feature = obs['gate_features']
         
-        q_values = self.critic(g, img, padding_mask, Gate_feature)
+        q_values = self.critic(g, img, padding_mask, Gate_feature, Gate_sizes)
         return q_values.view(-1, self.action_dim, self.reward_dim)
 
 
@@ -99,7 +103,7 @@ class MOSACActor(nn.Module):
         super().__init__()
         self.obs_shape = obs_shape
         self.action_dim = action_dim
-        print(f'obs_shape: {obs_shape}')
+        # print(f'obs_shape: {obs_shape}')
 
         # S -> ... -> |A| (mean)
         #          -> |A| (std)
@@ -108,6 +112,9 @@ class MOSACActor(nn.Module):
             hidden_nf=64, 
             out_nf=32,
             output=self.action_dim, 
+            embedding_dim=self.obs_shape['gate_sizes'][1],
+            num_heads=4,
+            num_Attention_layer=3,
             in_nf=self.obs_shape['timing_graph'][1], 
             in_ef=self.obs_shape['timing_graph'][4],
             h1=32, 
@@ -121,8 +128,9 @@ class MOSACActor(nn.Module):
         g = obs['timing_graph']
         img = obs['layout']
         padding_mask = obs['padding_mask']
+        Gate_sizes = obs['gate_sizes']
         Gate_feature = obs['gate_features']
-        logits = self.actor_net(g, img, padding_mask, Gate_feature)
+        logits = self.actor_net(g, img, padding_mask, Gate_feature, Gate_sizes)
 
         return logits
 
@@ -139,6 +147,21 @@ class MOSACActor(nn.Module):
         #print(f'action_probs.shape: {action_probs.shape}')
         return action, log_probs, action_probs
 
+
+def GPU_Memory_Monitor():
+    if th.cuda.is_available():
+        device = th.device('cuda')
+
+        # already allocated memory
+        allocated_memory = th.cuda.memory_allocated(device)
+
+        # reserved memory
+        reserved_memory = th.cuda.memory_reserved(device)
+
+        print(f"Allocated memory: {allocated_memory / (1024**2):.2f} MB")
+        print(f"Reserved memory: {reserved_memory / (1024**2):.2f} MB")
+    else:
+        print("No GPU available.")
 
 class MOSAC(MOPolicy, MOAgent):
     """Multi-objective Soft Actor-Critic (SAC) algorithm.
@@ -239,20 +262,29 @@ class MOSAC(MOPolicy, MOAgent):
         self.actor = MOSACActor(
             obs_shape=self.obs_shape,
             action_dim=self.action_dim,
-        ).to(self.device)#输入状态空间的维度和输入动作的可选值
+        ).to(self.device)# input observation space, output action
 
+        
         self.qf1 = MOSoftQNetwork(
             obs_shape=self.obs_shape, action_dim=self.action_dim, reward_dim=self.reward_dim
-        ).to(self.device)#同上
+        ).to(self.device)# input observation space, output action dim * reward dim
+        
+        
         self.qf2 = MOSoftQNetwork(
             obs_shape=self.obs_shape, action_dim=self.action_dim, reward_dim=self.reward_dim
         ).to(self.device)
+        
+        
         self.qf1_target = MOSoftQNetwork(
             obs_shape=self.obs_shape, action_dim=self.action_dim, reward_dim=self.reward_dim
         ).to(self.device)
+        
+        
         self.qf2_target = MOSoftQNetwork(
             obs_shape=self.obs_shape, action_dim=self.action_dim, reward_dim=self.reward_dim
         ).to(self.device)
+        
+        
         self.qf1_target.requires_grad_(False)
         self.qf2_target.requires_grad_(False)
         self.qf1_target.load_state_dict(self.qf1.state_dict())
@@ -260,6 +292,7 @@ class MOSAC(MOPolicy, MOAgent):
         self.q_optimizer = optim.Adam(list(self.qf1.parameters()) + list(self.qf2.parameters()), lr=self.q_lr)
         self.actor_optimizer = optim.Adam(list(self.actor.parameters()), lr=self.policy_lr)
 
+        
         # Automatic entropy tuning
         self.autotune = autotune
         if self.autotune:
@@ -281,8 +314,10 @@ class MOSAC(MOPolicy, MOAgent):
             action_dim=self.action_shape[0],
             rew_dim=self.reward_dim,
             max_size=self.buffer_size,
+            device=self.device
         )
 
+        
         # Logging
         self.project_name = project_name
         self.experiment_name = experiment_name
@@ -374,7 +409,7 @@ class MOSAC(MOPolicy, MOAgent):
         self.weights_tensor = th.from_numpy(self.weights).float().to(self.device)
 
     @override
-    def eval(self, obs: np.ndarray, w: Optional[np.ndarray] = None) -> Union[int, np.ndarray]:
+    def eval(self, obs: dict, w: Optional[np.ndarray] = None) -> Union[int, np.ndarray]:
         """Returns the best action to perform for the given obs.
 
         Args:
@@ -383,8 +418,13 @@ class MOSAC(MOPolicy, MOAgent):
         Return:
             action as a numpy array (continuous actions)
         """
-        obs = th.as_tensor(obs).float().to(self.device)
-        obs = obs.unsqueeze(0)
+        for key, value in obs.items():
+            if isinstance(value, np.ndarray):
+                obs[key] = th.as_tensor(value, dtype=th.float32).to(self.device).unsqueeze(0)
+            elif isinstance(value, th.Tensor):
+                obs[key] = value.to(self.device).unsqueeze(0)
+            else:
+                obs[key] = value.to(self.device)
         with th.no_grad():
             action, _, _ = self.actor.get_action(obs)
 
@@ -393,23 +433,24 @@ class MOSAC(MOPolicy, MOAgent):
     @override
     def update(self):
         (mb_obs, mb_act, mb_rewards, mb_next_obs, mb_dones) = self.buffer.sample(
-            self.batch_size, to_tensor=True, device=self.device
+            self.batch_size, device=self.device, use_cer=True
         )# sample a batch of experiences from the buffer
+        # print('mb_obs',mb_obs['timing_graph'].ndata['feature'].shape)
+        
         with th.no_grad():
             _, log_probs, action_probs = self.actor.get_action(mb_next_obs)
             # (!) Q values are scalarized before being compared (min of ensemble networks)
-
-            qf1_next_target = (self.qf1_target(mb_next_obs) * self.weights_tensor).sum(dim = -1)#(128,9,2) (1,1,2)这里要沿着最后一个维度相乘
-            qf2_next_target = (self.qf2_target(mb_next_obs) * self.weights_tensor).sum(dim = -1)#(128,9)
-
+            # print('mb_next_obs',mb_next_obs['timing_graph'].ndata['feature'].shape)
+            # print(self.qf1_target(mb_next_obs).shape)
             
+            qf1_next_target = (self.qf1_target(mb_next_obs) * self.weights_tensor).sum(dim = -1) #(batch size, action dim, reward dim) (1, 1, reward dim) calculate the  total reward
+            qf2_next_target = (self.qf2_target(mb_next_obs) * self.weights_tensor).sum(dim = -1) 
             soft_state_values = (action_probs * (th.min(qf1_next_target, qf2_next_target) - self.alpha_tensor * log_probs)).sum(dim = 1)#(128,9)
             scalarized_rewards = (mb_rewards * self.weights_tensor).sum(dim = -1)
-            next_q_value = scalarized_rewards.flatten() + (1 - mb_dones.flatten()) * self.gamma * soft_state_values
+            next_q_value = scalarized_rewards.flatten() + (~mb_dones.flatten()).float() * self.gamma * soft_state_values
 
-        qf1_a_values = (self.qf1(mb_obs) * self.weights_tensor).sum(dim = -1).gather(1, mb_act.long()).squeeze(-1)#(128,9)用(128,9)gather
+        qf1_a_values = (self.qf1(mb_obs) * self.weights_tensor).sum(dim = -1).gather(1, mb_act.long()).squeeze(-1)
         qf2_a_values = (self.qf2(mb_obs) * self.weights_tensor).sum(dim = -1).gather(1, mb_act.long()).squeeze(-1)
-
         qf1_loss = F.mse_loss(qf1_a_values, next_q_value)# calculate mse between qf1_a_values and next_q_value
         qf2_loss = F.mse_loss(qf2_a_values, next_q_value)
         qf_loss = qf1_loss + qf2_loss
@@ -417,7 +458,8 @@ class MOSAC(MOPolicy, MOAgent):
         self.q_optimizer.zero_grad(set_to_none=True)
         qf_loss.backward()
         self.q_optimizer.step()
-
+        # GPU_Memory_Monitor()
+        
         if self.global_step % self.policy_freq == 0:  # TD 3 Delayed update support
             for _ in range(self.policy_freq):  # compensate for the delay by doing 'actor_update_interval' instead of 1
                 _, log_probs, action_probs = self.actor.get_action(mb_obs)
@@ -447,7 +489,7 @@ class MOSAC(MOPolicy, MOAgent):
             polyak_update(params=self.qf2.parameters(), target_params=self.qf2_target.parameters(), tau=self.tau)
             self.qf1_target.requires_grad_(False)
             self.qf2_target.requires_grad_(False)
-
+        
         if self.global_step % 100 == 0 and self.log:
             log_str = f"_{self.id}" if self.id is not None else ""
             to_log = {
@@ -462,7 +504,7 @@ class MOSAC(MOPolicy, MOAgent):
             if self.autotune:
                 to_log[f"losses{log_str}/alpha_loss"] = alpha_loss.item()
             wandb.log(to_log)
-
+        
     def train(self, total_timesteps: int, eval_env: Optional[gym.Env] = None, start_time=None):
         """Train the agent.
 
@@ -483,31 +525,24 @@ class MOSAC(MOPolicy, MOAgent):
             else:
                 th_obs = {}
                 for key, value in obs.items():
-                    if isinstance(value, np.ndarray):
-                        th_obs[key] = th.as_tensor(value, dtype=th.float32).to(self.device).unsqueeze(0)
-                    elif isinstance(value, th.Tensor):
+                    if isinstance(value, th.Tensor):
                         th_obs[key] = value.to(self.device).unsqueeze(0)
                     else:
                         th_obs[key] = value.to(self.device)
                 actions, _, _ = self.actor.get_action(th_obs)
                 actions = actions.detach().cpu().numpy()
 
-            #print(self.global_step)
             # execute the game and log data
             if actions.ndim == 2:
                 actions = np.squeeze(actions)
-            print(actions.shape)
-            print(f'actions: {actions}')
             next_obs, rewards, terminated, truncated, infos = self.env.step(actions)
-            # print(f'rewards: {rewards}')
-            # print(f'next_obs: {next_obs}')
+            print(rewards)
 
             # TRY NOT TO MODIFY: save data to reply buffer; handle `final_observation`
             real_next_obs = next_obs
             if "final_observation" in infos:
                 real_next_obs = infos["final_observation"]
             self.buffer.add(obs=obs, next_obs=real_next_obs, action=actions, reward=rewards, done=terminated)
-            
             #print(rewards)
             if terminated == True:
                 # Log rewards to a CSV file 
@@ -516,12 +551,6 @@ class MOSAC(MOPolicy, MOAgent):
                 csv_filename = f"sac_data/rewards_log_SAC{self.id}.csv" 
                 file_exists = os.path.isfile(csv_filename) 
                 
-                #print(f'collect reward: {reward}')
-                # with open(csv_filename, mode='a', newline='') as file: 
-                #     writer = csv.writer(file) 
-                #     if not file_exists: 
-                #         writer.writerow(["obs", "Reward[0]", "Reward[1]"]) # Write header if file doesn't exist 
-                #     writer.writerow([obs, rewards_to_log[0], rewards_to_log[1]]) 
 
             # TRY NOT TO MODIFY: CRUCIAL step easy to overlook
             obs = next_obs
@@ -533,6 +562,7 @@ class MOSAC(MOPolicy, MOAgent):
             # ALGO LOGIC: training.
             if self.global_step > self.learning_starts:
                 self.update()
+                # print(self.global_step)
                 if self.log and self.global_step % 100 == 0:
                     print("SPS:", int(self.global_step / (time.time() - start_time)))
                     wandb.log(

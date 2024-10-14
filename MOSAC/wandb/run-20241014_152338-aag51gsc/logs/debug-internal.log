@@ -1,0 +1,19 @@
+{"time":"2024-10-14T15:23:38.604737864+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T15:23:38.604742945+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_152338-aag51gsc/logs/debug-core.log"}
+{"time":"2024-10-14T15:23:38.609811932+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T15:23:38.611790385+08:00","level":"INFO","msg":"created new stream","id":"aag51gsc"}
+{"time":"2024-10-14T15:23:38.611800404+08:00","level":"INFO","msg":"stream: started","id":"aag51gsc"}
+{"time":"2024-10-14T15:23:38.611811289+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"aag51gsc"}}
+{"time":"2024-10-14T15:23:38.611802973+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"aag51gsc"}}
+{"time":"2024-10-14T15:23:38.611807232+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"aag51gsc"}}
+{"time":"2024-10-14T15:23:39.09888874+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T15:23:39.099217241+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T15:23:39.099279508+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T15:23:39.728271715+08:00","level":"INFO","msg":"stream: closing","id":"aag51gsc"}
+{"time":"2024-10-14T15:23:39.72828954+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T15:23:39.728774023+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T15:23:41.455954012+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T15:23:41.926844385+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"aag51gsc"}}
+{"time":"2024-10-14T15:23:41.926861298+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"aag51gsc"}}
+{"time":"2024-10-14T15:23:41.92686508+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"aag51gsc"}}
+{"time":"2024-10-14T15:23:41.926902455+08:00","level":"INFO","msg":"stream: closed","id":"aag51gsc"}

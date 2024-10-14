@@ -1,0 +1,19 @@
+{"time":"2024-10-14T15:46:07.932643803+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T15:46:07.93265343+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_154607-otgjra4n/logs/debug-core.log"}
+{"time":"2024-10-14T15:46:07.936817307+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T15:46:07.938633147+08:00","level":"INFO","msg":"created new stream","id":"otgjra4n"}
+{"time":"2024-10-14T15:46:07.938647674+08:00","level":"INFO","msg":"stream: started","id":"otgjra4n"}
+{"time":"2024-10-14T15:46:07.938650887+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"otgjra4n"}}
+{"time":"2024-10-14T15:46:07.938649211+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"otgjra4n"}}
+{"time":"2024-10-14T15:46:07.938663321+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"otgjra4n"}}
+{"time":"2024-10-14T15:46:08.48946523+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T15:46:08.489760926+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T15:46:08.489840141+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T15:46:09.396676263+08:00","level":"INFO","msg":"stream: closing","id":"otgjra4n"}
+{"time":"2024-10-14T15:46:09.396689873+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T15:46:09.397286966+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T15:46:10.502509585+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T15:46:11.736159674+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"otgjra4n"}}
+{"time":"2024-10-14T15:46:11.736219038+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"otgjra4n"}}
+{"time":"2024-10-14T15:46:11.736223292+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"otgjra4n"}}
+{"time":"2024-10-14T15:46:11.736261187+08:00","level":"INFO","msg":"stream: closed","id":"otgjra4n"}

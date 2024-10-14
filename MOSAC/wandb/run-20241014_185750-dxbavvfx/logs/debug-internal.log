@@ -1,0 +1,15 @@
+{"time":"2024-10-14T18:57:50.45914078+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T18:57:50.459146459+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_185750-dxbavvfx/logs/debug-core.log"}
+{"time":"2024-10-14T18:57:50.468987254+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T18:57:50.471030996+08:00","level":"INFO","msg":"created new stream","id":"dxbavvfx"}
+{"time":"2024-10-14T18:57:50.471045575+08:00","level":"INFO","msg":"stream: started","id":"dxbavvfx"}
+{"time":"2024-10-14T18:57:50.471058383+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"dxbavvfx"}}
+{"time":"2024-10-14T18:57:50.471090758+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"dxbavvfx"}}
+{"time":"2024-10-14T18:57:50.471112621+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"dxbavvfx"}}
+{"time":"2024-10-14T18:57:50.947538674+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T18:57:50.947912612+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T18:57:50.949409634+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T18:57:56.787835363+08:00","level":"INFO","msg":"stream: closing","id":"dxbavvfx"}
+{"time":"2024-10-14T18:57:56.787848618+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T18:57:56.788346113+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T18:57:57.853409344+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}

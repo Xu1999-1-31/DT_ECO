@@ -1,0 +1,17 @@
+Allocated memory: 1220.16 MB
+Reserved memory: 17948.00 MB
+Allocated memory: 1220.16 MB
+Reserved memory: 17948.00 MB
+Allocated memory: 1220.16 MB
+Reserved memory: 17948.00 MB
+Allocated memory: 1220.16 MB
+Reserved memory: 17948.00 MB
+Traceback (most recent call last):
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 49, in <module>
+    agent.train(
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 564, in train
+    self.update()
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 503, in update
+    torch.cuda.empty_cache()
+    ^^^^^
+NameError: name 'torch' is not defined

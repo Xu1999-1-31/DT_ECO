@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 49, in <module>
+    agent.train(
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 570, in train
+    self.update()
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 438, in update
+    mb_obs_sub = {key: val[start:end].to('cuda') for key, val in mb_obs.items()}
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 438, in <dictcomp>
+    mb_obs_sub = {key: val[start:end].to('cuda') for key, val in mb_obs.items()}
+                       ~~~^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/heterograph.py", line 2411, in __getitem__
+    raise DGLError(
+dgl._ffi.base.DGLError: Invalid key "slice(0, 5, None)". Must be one of the edge types.

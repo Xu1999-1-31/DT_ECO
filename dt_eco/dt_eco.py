@@ -67,7 +67,7 @@ class DT_ECO(gym.Env):
         
         # Set the action space based on the maximum footprint length
         max_length = max(len(v) for v in self.footprint.values()) # max gate type
-        self.action_space_list = [i for i in range(max_length)]  # action space
+        self.gate_size_list = [i/max_length for i in range(max_length)]  # action space
         
         # Dynamic creation of observation space based on the loaded data
         num_nodes = self.graph.number_of_nodes()  # dynamically get the number of nodes
@@ -77,7 +77,7 @@ class DT_ECO(gym.Env):
         scale = layout_shape[1]  # assume layout has shape (channels, height, width)
         
         self.max_cells = max(len(path.Cellname_to_Cell.keys()) for path in self.CriticalPaths)
-        self.gate_sizes = np.zeros((len(self.CriticalPaths), self.max_cells), dtype=np.int32)
+        self.gate_sizes = np.zeros((len(self.CriticalPaths), self.max_cells), dtype=np.float32)
         self.sizedCellList = [] # all dicts with sized cells
         self.Gate_feature = th.zeros(15, dtype=th.float32)
         self._add_graph_padding()
@@ -95,7 +95,7 @@ class DT_ECO(gym.Env):
         self.observation_space = spaces.Dict({
             'gate_sizes': spaces.Box(
                 low=0, high=14,  # gate sizes are discrete values between 0 and 14
-                shape=(len(self.CriticalPaths), self.max_cells), dtype=np.int32
+                shape=(len(self.CriticalPaths), self.max_cells), dtype=np.float32
             ),
             'timing_graph': GraphSpace(
                 self.graph
@@ -110,19 +110,27 @@ class DT_ECO(gym.Env):
             ),
             'padding_mask': spaces.Box(
                 low=0, high=1,  # padding masks are binary [0, 1]
-                shape=(scale // 8, scale // 8),
+                shape=(1, scale // 8, scale // 8),
                 dtype=np.float32
             ),
         })
         
         self.action_space = spaces.Discrete(max_length)
+        # self.reward_space = spaces.Box(
+        #     low=np.array([-100000, 0]),
+        #     high=np.array([0, 100000]),
+        #     dtype=np.float32,
+        # )
+        # # reward space [[low[0]:high[0]], [low[1]:high[1]]]
+        # self.reward_dim = 2
+        
         self.reward_space = spaces.Box(
-            low=np.array([-100000, 0]),
-            high=np.array([0, 100000]),
+            low=np.array([0]),
+            high=np.array([1]),
             dtype=np.float32,
         )
         # reward space [[low[0]:high[0]], [low[1]:high[1]]]
-        self.reward_dim = 2
+        self.reward_dim = 1
         
         self.inline=False # if inline Verilog timing or not
         
@@ -144,7 +152,8 @@ class DT_ECO(gym.Env):
                 if self.graph.has_edges_between(self.nodes[current_gate + '/' + inpin], self.nodes[current_gate + '/' + outpin], etype='cellarc'):
                     ef_index.append(self.graph.edge_ids(self.nodes[current_gate + '/' + inpin], self.nodes[current_gate + '/' + outpin], etype='cellarc'))
                 else:
-                    print(current_gate + '/' + inpin, current_gate + '/' + outpin)
+                    # print(current_gate + '/' + inpin, current_gate + '/' + outpin)
+                    pass
         Gate_nf = th.sum(th.nan_to_num(self.graph.ndata['CPath'][nf_index], nan=0.0), dim=0)
         Gate_ef = th.mean(self.graph.edata['feature'][('node', 'cellarc', 'node')][ef_index], dim=0)
         self.Gate_feature = th.cat([Gate_nf, Gate_ef], dim=0)
@@ -173,14 +182,14 @@ class DT_ECO(gym.Env):
         self.nodes, self.nodes_rev = TimingGraphTrans.LoadNodeDict(self.current_design)
         self.Layout, _, self.Cpath_Padding, self.CriticalPaths = PhysicalDataTrans.LoadPhysicalData(self.current_design, 512, False)
         self.max_cells = max(len(path.Cellname_to_Cell.keys()) for path in self.CriticalPaths)
-        self.gate_sizes = np.zeros((len(self.CriticalPaths), self.max_cells), dtype=np.int32)
+        self.gate_sizes = np.zeros((len(self.CriticalPaths), self.max_cells), dtype=np.float32)
         self.Gate_feature = th.zeros(15, dtype=th.float32)
         self._add_graph_padding()
         return self._get_obs(), {}
     
     def _get_obs(self, ECO=False):
         #Combine gate sizes, timing graph, layout, and padding mask into a single observation.
-        gate_sizes = self.gate_sizes  # gate sizes
+        gate_sizes = th.from_numpy(self.gate_sizes)  # gate sizes
         timing_graph_features = self.graph  # get graph
         gate_features = self.Gate_feature  # get gate features
         
@@ -204,13 +213,13 @@ class DT_ECO(gym.Env):
         if ECO and inline:
             raise ValueError("ECO and inline cannot both be True at the same time.")
         if inline:
-            _, tns = DataBuilder.BuildGlobalTimingData(self.current_design+'_inline')
+            wns, tns = DataBuilder.BuildGlobalTimingData(self.current_design+'_inline')
             drc = DataBuilder.BuildDrcNumber(self.current_design)
         elif ECO:
-            _, tns = DataBuilder.BuildGlobalTimingData(self.current_design+'_eco')
+            wns, tns = DataBuilder.BuildGlobalTimingData(self.current_design+'_eco')
             drc = DataBuilder.BuildDrcNumber(self.current_design+'_eco')
         else:
-            _, tns = DataBuilder.BuildGlobalTimingData(self.current_design)
+            wns, tns = DataBuilder.BuildGlobalTimingData(self.current_design)
             drc = DataBuilder.BuildDrcNumber(self.current_design)
         return [tns, drc]
     
@@ -218,12 +227,12 @@ class DT_ECO(gym.Env):
         # new episode begin
         if self.current_path_index >= len(self.CriticalPaths):
             self.current_path_index = 0
+            self.sizedCellList
             self.inline = False
              
         if self.current_gate_index < len(self.CriticalPaths[self.current_path_index].Cellname_to_Cell.keys()): # one action not finished // Cellname_to_Cell: U222 -> NAND
-            print(action)
-            self.chosen_sizes.append(self.action_space_list[action])  # append the gate size list
-            self._get_gate_sizes()
+            self.chosen_sizes.append(self.gate_size_list[action])  # append the gate size list
+            self.gate_sizes = np.zeros((len(self.CriticalPaths), self.max_cells), dtype=np.float32)
             
             # if the action finished and episode not: one critical merged path is sized
             if len(self.chosen_sizes) == len(self.CriticalPaths[self.current_path_index].Cellname_to_Cell.keys()) and self.current_path_index != len(self.CriticalPaths) - 1:
@@ -238,7 +247,7 @@ class DT_ECO(gym.Env):
                     Interaction.VerilogInlineChange(self.current_design, changed_cell_dict, Incremental=True) 
                     
                 # # run pt
-                # Interaction.VerilogInline_PT_Iteration(self.current_design)
+                Interaction.VerilogInline_PT_Iteration(self.current_design)
                 # Timing Graph update (inline)
                 self.graph = TimingGraphTrans.LoadTimingGraph(self.current_design+'_inline', True)               
                 self.nodes, self.nodes_rev = TimingGraphTrans.LoadNodeDict(self.current_design+'_inline')
@@ -288,29 +297,29 @@ class DT_ECO(gym.Env):
             vec_reward = self._get_tns_drc(self.inline)
             info = {}
         
+        vec_reward = -1/vec_reward[0]  # only return -tns
         # get current graph padding
         self._add_graph_padding()
-
-                
-                
+    
         return self._get_obs(done), vec_reward, done, False, info
 
     def _get_gate_sizes(self):
         gate_sizes = np.zeros(len(self.CriticalPaths[self.current_path_index].Cellname_to_Cell.keys()), dtype=np.int32)  # total number of gates on paths
-        gate_sizes[:len(self.chosen_sizes)] = [self.action_space_list.index(val) + 1 for val in self.chosen_sizes] # plus 1 to avoid 0, since 0 means gate remain its original size
+        gate_sizes[:len(self.chosen_sizes)] = [val + self.gate_size_list[1] for val in self.chosen_sizes] # plus 1/max_length to avoid 0, since 0 means gate remain its original size
         self.gate_sizes[self.current_path_index, :len(gate_sizes)] = gate_sizes # update the gate sizes observation
         return gate_sizes
     
     def _get_sized_cellDict(self):
         sizedCell = {}
         for (cellname, celltype), chosedsize in zip(self.CriticalPaths[self.current_path_index].Cellname_to_Cell.items(), self._get_gate_sizes()):
-            originalsize = celltype
+            originalsize = celltype # NANDX2
             cellfootprint = self.timingLib[celltype].footprint # Cell Timing Lib Structure
-            maxsize = len(self.footprint[cellfootprint]) # target cell list
+            maxsize = len(self.footprint[cellfootprint])* self.gate_size_list[1] # chosed size should be less than maxsize
             if chosedsize == 0:
                 pass # 0 means remain the original size
             elif chosedsize <= maxsize:
-                newsize = self.footprint[cellfootprint][chosedsize - 1]
+                chosedsize = self.gate_size_list.index(chosedsize - self.gate_size_list[1]) # resore the size to the index
+                newsize = self.footprint[cellfootprint][chosedsize]
                 sizedCell[cellname] = [originalsize, newsize]
             else:
                 pass # invalid size

@@ -1,0 +1,19 @@
+{"time":"2024-10-14T13:51:29.600876+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T13:51:29.600881409+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_135129-4cpukndi/logs/debug-core.log"}
+{"time":"2024-10-14T13:51:29.613478847+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T13:51:29.615509022+08:00","level":"INFO","msg":"created new stream","id":"4cpukndi"}
+{"time":"2024-10-14T13:51:29.615522154+08:00","level":"INFO","msg":"stream: started","id":"4cpukndi"}
+{"time":"2024-10-14T13:51:29.615524198+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"4cpukndi"}}
+{"time":"2024-10-14T13:51:29.615528838+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"4cpukndi"}}
+{"time":"2024-10-14T13:51:29.615527537+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"4cpukndi"}}
+{"time":"2024-10-14T13:51:30.103679386+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T13:51:30.103995201+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T13:51:30.104088064+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T13:51:54.399787768+08:00","level":"INFO","msg":"stream: closing","id":"4cpukndi"}
+{"time":"2024-10-14T13:51:54.39980819+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T13:51:54.400431676+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T13:51:55.689971504+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T13:51:56.186778972+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"4cpukndi"}}
+{"time":"2024-10-14T13:51:56.186813129+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"4cpukndi"}}
+{"time":"2024-10-14T13:51:56.18683841+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"4cpukndi"}}
+{"time":"2024-10-14T13:51:56.186850644+08:00","level":"INFO","msg":"stream: closed","id":"4cpukndi"}

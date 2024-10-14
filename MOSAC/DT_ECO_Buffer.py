@@ -1,6 +1,35 @@
 import torch as th
 import numpy as np
 import dgl
+# import copy
+
+# def clone_graph(g):
+#     # distinguish graph and heterograph
+#     if len(g.etypes) > 1:
+#         # 创建一个空的异质图，确保边类型包含源节点类型和目标节点类型
+#         g_clone = dgl.heterograph({
+#             g.to_canonical_etype(etype): (g.edges(etype=etype)[0], g.edges(etype=etype)[1]) for etype in g.etypes
+#         }, num_nodes_dict={ntype: g.num_nodes(ntype) for ntype in g.ntypes})
+        
+#         # 复制每种边类型的边特性
+#         for etype in g.etypes:
+#             for key, value in g.edges[etype].data.items():
+#                 g_clone.edges[etype].data[key] = value.clone()
+
+#         # 复制每种节点类型的节点特性
+#         for ntype in g.ntypes:
+#             for key, value in g.nodes[ntype].data.items():
+#                 g_clone.nodes[ntype].data[key] = value.clone()
+    
+#     else:
+#         g_clone = dgl.graph((g.edges()[0], g.edges()[1]), num_nodes=g.num_nodes())
+        
+#         for key, value in g.ndata.items():
+#             g_clone.ndata[key] = value.clone()
+#         for key, value in g.edata.items():
+#             g_clone.edata[key] = value.clone()
+    
+#     return g_clone
 
 class ReplayBuffer:
     """Replay buffer for multi-objective reinforcement learning with structured observation space using PyTorch tensors for observations and gate_features, NumPy for actions, rewards, done, and gate_sizes."""
@@ -10,7 +39,7 @@ class ReplayBuffer:
         obs_shape,
         action_dim,
         rew_dim=1,
-        max_size=100000,
+        max_size=100,
         device='cpu',
     ):
         """Initialize the replay buffer with mixed data types (PyTorch for observations and gate_features, NumPy for actions, rewards, done, and gate_sizes)."""
@@ -18,17 +47,17 @@ class ReplayBuffer:
         self.ptr, self.size = 0, 0
         self.device = device
         
-        # Initialize buffer for each part of the observation space
-        self.gate_sizes = np.zeros((max_size,) + obs_shape['gate_sizes'], dtype=np.int32)  # gate_sizes as NumPy array
-        self.layout = th.zeros((max_size,) + obs_shape['layout'], dtype=th.float32, device=device)
-        self.padding_mask = th.zeros((max_size,) + obs_shape['padding_mask'], dtype=th.float32, device=device)
-        self.gate_features = th.zeros((max_size,) + obs_shape['gate_features'], dtype=th.float32, device=device)
+        # Initialize buffer for each part of the observation space, the original data are saved in CPU memory
+        self.gate_sizes = th.zeros((max_size,) + obs_shape['gate_sizes'], dtype=th.float32, device='cpu')  # gate_sizes as NumPy array
+        self.layout = th.zeros((max_size,) + obs_shape['layout'], dtype=th.float32, device='cpu')
+        self.padding_mask = th.zeros((max_size,) + obs_shape['padding_mask'], dtype=th.float32, device='cpu')
+        self.gate_features = th.zeros((max_size,) + obs_shape['gate_features'], dtype=th.float32, device='cpu')
 
         # Buffer for storing DGL graph objects (timing graph)
         self.timing_graph = [None] * max_size  # List for DGL graphs
 
         # Initialize buffer for next observations
-        self.next_gate_sizes = np.zeros_like(self.gate_sizes)  # gate_sizes as NumPy array
+        self.next_gate_sizes = th.zeros_like(self.gate_sizes)  # gate_sizes as NumPy array
         self.next_layout = th.zeros_like(self.layout)
         self.next_padding_mask = th.zeros_like(self.padding_mask)
         self.next_gate_features = th.zeros_like(self.gate_features)
@@ -42,18 +71,18 @@ class ReplayBuffer:
     def add(self, obs, action, reward, next_obs, done):
         """Add a new experience to the buffer, using mixed data types."""
         # Store current observation components
-        self.gate_sizes[self.ptr] = np.array(obs['gate_sizes']).copy()  # Store gate_sizes as NumPy array
-        self.layout[self.ptr] = obs['layout'].clone().to(self.device)
-        self.padding_mask[self.ptr] = obs['padding_mask'].clone().to(self.device)
-        self.gate_features[self.ptr] = obs['gate_features'].clone().to(self.device)
-        self.timing_graph[self.ptr] = obs['timing_graph']  # Store DGL graph object directly
+        self.gate_sizes[self.ptr] = obs['gate_sizes'].clone().to('cpu')  # Store gate_sizes as NumPy array
+        self.layout[self.ptr] = obs['layout'].clone().to('cpu')
+        self.padding_mask[self.ptr] = obs['padding_mask'].clone().to('cpu')
+        self.gate_features[self.ptr] = obs['gate_features'].clone().to('cpu')
+        self.timing_graph[self.ptr] = obs['timing_graph'].to('cpu')  # Store DGL graph object directly
 
         # Store next observation components
-        self.next_gate_sizes[self.ptr] = np.array(next_obs['gate_sizes']).copy()  # Next gate_sizes as NumPy array
-        self.next_layout[self.ptr] = next_obs['layout'].clone().to(self.device)
-        self.next_padding_mask[self.ptr] = next_obs['padding_mask'].clone().to(self.device)
-        self.next_gate_features[self.ptr] = next_obs['gate_features'].clone().to(self.device)
-        self.next_timing_graph[self.ptr] = next_obs['timing_graph']  # Store next DGL graph object
+        self.next_gate_sizes[self.ptr] = next_obs['gate_sizes'].clone().to('cpu')  # Next gate_sizes as NumPy array
+        self.next_layout[self.ptr] = next_obs['layout'].clone().to('cpu')
+        self.next_padding_mask[self.ptr] = next_obs['padding_mask'].clone().to('cpu')
+        self.next_gate_features[self.ptr] = next_obs['gate_features'].clone().to('cpu')
+        self.next_timing_graph[self.ptr] = next_obs['timing_graph'].to('cpu')  # Store next DGL graph object
 
         # Store action, reward, and done (NumPy arrays)
         self.actions[self.ptr] = np.array(action).copy()
@@ -72,24 +101,24 @@ class ReplayBuffer:
 
         # Create a dictionary for observations (PyTorch tensors and NumPy arrays)
         observations = {
-            'gate_sizes': self.gate_sizes[inds],  # gate_sizes as NumPy array
-            'layout': self.layout[inds],
-            'padding_mask': self.padding_mask[inds],
-            'gate_features': th.tensor(self.gate_features[inds], dtype=th.float32, device=device),
+            'gate_sizes': self.gate_sizes[inds].to(self.device),  # gate_sizes as NumPy array
+            'layout': self.layout[inds].to(self.device),
+            'padding_mask': self.padding_mask[inds].to(self.device),
+            'gate_features': self.gate_features[inds].clone().detach().to(self.device),
         }
 
         # Create a dictionary for next observations
         next_observations = {
-            'gate_sizes': self.next_gate_sizes[inds],  # Next gate_sizes as NumPy array
-            'layout': self.next_layout[inds],
-            'padding_mask': self.next_padding_mask[inds],
-            'gate_features': th.tensor(self.next_gate_features[inds], dtype=th.float32, device=device),
+            'gate_sizes': self.next_gate_sizes[inds].to(self.device),  # Next gate_sizes as NumPy array
+            'layout': self.next_layout[inds].to(self.device),
+            'padding_mask': self.next_padding_mask[inds].to(self.device),
+            'gate_features': self.next_gate_features[inds].clone().detach().to(self.device),
         }
 
         # Batch the DGL graphs for both current and next observations
-        batched_graph = dgl.batch([self.timing_graph[i] for i in inds])
-        next_batched_graph = dgl.batch([self.next_timing_graph[i] for i in inds])
-
+        batched_graph = dgl.batch([self.timing_graph[i] for i in inds]).to(self.device)
+        next_batched_graph = dgl.batch([self.next_timing_graph[i] for i in inds]).to(self.device)
+        
         observations['timing_graph'] = batched_graph
         next_observations['timing_graph'] = next_batched_graph
 
