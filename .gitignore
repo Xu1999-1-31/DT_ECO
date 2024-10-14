@@ -7,3 +7,4 @@ work/Timing_Lib/*
 DataTrans/Data/*
 DataTrans/Processed_Data/*
 __pycache__/
+MOSAC/wandb/*
