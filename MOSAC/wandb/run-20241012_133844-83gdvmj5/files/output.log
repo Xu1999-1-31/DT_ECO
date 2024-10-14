@@ -1,9 +1,0 @@
-Traceback (most recent call last):
-  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 36, in <module>
-    (mb_obs, mb_act, mb_rewards, mb_next_obs, mb_dones) = agent.buffer.sample(128)
-                                                          ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO_Buffer.py", line 91, in sample
-    inds = np.random.choice(self.size, batch_size, replace=replace)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "numpy/random/mtrand.pyx", line 945, in numpy.random.mtrand.RandomState.choice
-ValueError: a must be greater than 0 unless no samples are taken

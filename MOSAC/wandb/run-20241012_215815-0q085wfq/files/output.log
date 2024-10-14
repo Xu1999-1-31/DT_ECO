@@ -1,8 +1,0 @@
-gate_sizes
-timing_graph
-Traceback (most recent call last):
-  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 49, in <module>
-    agent.train(
-  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 498, in train
-    raise ValueError(f"Unsupported data type for observation key '{key}': {type(value)}")
-ValueError: Unsupported data type for observation key 'timing_graph': <class 'dgl.heterograph.DGLGraph'>

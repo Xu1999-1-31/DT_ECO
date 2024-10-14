@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 43, in <module>
-    print(obs.shape)
-          ^^^^^^^^^
-AttributeError: 'dict' object has no attribute 'shape'
