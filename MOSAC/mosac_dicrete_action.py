@@ -34,6 +34,7 @@ sys.path.append('/home/jiajiexu/DT_ECO/DataTrans/'); sys.path.append('/home/jiaj
 import TimingGraphTrans
 import PhysicalDataTrans
 import models
+import dgl
 
 # ALGO LOGIC: initialize agent here:
 class MOSoftQNetwork(nn.Module):
@@ -64,16 +65,21 @@ class MOSoftQNetwork(nn.Module):
             out_nf=32,
             output=self.action_dim*self.reward_dim, 
             in_nf=self.obs_shape['timing_graph'][1], 
-            in_ef=4, 
+            in_ef=self.obs_shape['timing_graph'][4], 
             h1=32, 
             h2=32,
             in_channels=self.obs_shape['layout'][0]
         )
 
-    def forward(self, g, img, padding_mask, node_num, Gate_num):
+    def forward(self, obs):
         """Forward pass of the soft Q-network."""
         # Pass multi-modal inputs through the critic
-        q_values = self.critic(g, img, padding_mask, node_num, Gate_num)
+        g = obs['timing_graph']
+        img = obs['layout']
+        padding_mask = obs['padding_mask']
+        Gate_feature = obs['gate_features']
+        
+        q_values = self.critic(g, img, padding_mask, Gate_feature)
         return q_values.view(-1, self.action_dim, self.reward_dim)
 
 
@@ -88,39 +94,41 @@ class MOSACActor(nn.Module):
         self,
         obs_shape: int,
         action_dim: int,
-        reward_dim: int,
     ):
         """Initialize SAC actor."""
         super().__init__()
         self.obs_shape = obs_shape
         self.action_dim = action_dim
-        self.reward_dim = reward_dim
         print(f'obs_shape: {obs_shape}')
 
         # S -> ... -> |A| (mean)
         #          -> |A| (std)
-        self.critic = models.MultiModalNN(
+        self.actor_net = models.MultiModalNN(
             num_layers=3, 
             hidden_nf=64, 
             out_nf=32,
-            output=self.action_dim*self.reward_dim, 
+            output=self.action_dim, 
             in_nf=self.obs_shape['timing_graph'][1], 
-            in_ef=4, 
+            in_ef=self.obs_shape['timing_graph'][4],
             h1=32, 
             h2=32,
             in_channels=self.obs_shape['layout'][0]
         )
 
 
-    def forward(self, g, img, padding_mask, node_num, Gate_num):
+    def forward(self, obs):
         """Forward pass of the actor network."""
-        logits = self.actor_net(g, img, padding_mask, node_num, Gate_num)
+        g = obs['timing_graph']
+        img = obs['layout']
+        padding_mask = obs['padding_mask']
+        Gate_feature = obs['gate_features']
+        logits = self.actor_net(g, img, padding_mask, Gate_feature)
 
         return logits
 
-    def get_action(self, g, img, padding_mask, node_num, Gate_num):
+    def get_action(self, obs):
         """Get action from the actor network."""
-        logits = self(g, img, padding_mask, node_num, Gate_num)
+        logits = self(obs)
         action_probs = F.softmax(logits, dim = -1) # action probability distribution
         action_dist = th.distributions.Categorical(action_probs)
         action = action_dist.sample().view(-1, 1) # sample action from distribution
@@ -231,7 +239,6 @@ class MOSAC(MOPolicy, MOAgent):
         self.actor = MOSACActor(
             obs_shape=self.obs_shape,
             action_dim=self.action_dim,
-            reward_dim=self.reward_dim,
         ).to(self.device)#输入状态空间的维度和输入动作的可选值
 
         self.qf1 = MOSoftQNetwork(
@@ -387,7 +394,7 @@ class MOSAC(MOPolicy, MOAgent):
     def update(self):
         (mb_obs, mb_act, mb_rewards, mb_next_obs, mb_dones) = self.buffer.sample(
             self.batch_size, to_tensor=True, device=self.device
-        )#(128,20)
+        )# sample a batch of experiences from the buffer
         with th.no_grad():
             _, log_probs, action_probs = self.actor.get_action(mb_next_obs)
             # (!) Q values are scalarized before being compared (min of ensemble networks)
@@ -425,14 +432,8 @@ class MOSAC(MOPolicy, MOAgent):
                 actor_loss.backward()
                 self.actor_optimizer.step()
 
-                if self.autotune:
-                    #print(f'action_probs: {action_probs}##{action_probs.shape}')
-                    #print(f'log_probs: {log_probs}##{log_probs.shape}')
-                    #print(f'entopies: {entropies}##{entropies.shape}')
-                    #print(f'target_entropy: {self.target_entropy}')
+                if self.autotune: # automatic tuning of alpha
                     alpha_loss = (self.log_alpha * (self.target_entropy + entropies).detach()).mean()
-                    #print(f'alpha_loss :{alpha_loss}')
-                    #alpha_loss = (-self.log_alpha * (log_probs + self.target_entropy)).mean()
 
                     self.a_optimizer.zero_grad(set_to_none=True)
                     alpha_loss.backward()
@@ -455,7 +456,6 @@ class MOSAC(MOPolicy, MOAgent):
                 f"losses{log_str}/qf2_values": qf2_a_values.mean().item(),
                 f"losses{log_str}/qf1_loss": qf1_loss.item(),
                 f"losses{log_str}/qf2_loss": qf2_loss.item(),
-                #f"losses{log_str}/qf_loss": qf_loss.item() / 2.0,
                 f"losses{log_str}/actor_loss": actor_loss.item(),
                 "global_step": self.global_step,
             }
@@ -481,8 +481,14 @@ class MOSAC(MOPolicy, MOAgent):
             if self.global_step < self.learning_starts:
                 actions = self.env.action_space.sample()
             else:
-                th_obs = th.as_tensor(obs).float().to(self.device)
-                th_obs = th_obs.unsqueeze(0)
+                th_obs = {}
+                for key, value in obs.items():
+                    if isinstance(value, np.ndarray):
+                        th_obs[key] = th.as_tensor(value, dtype=th.float32).to(self.device).unsqueeze(0)
+                    elif isinstance(value, th.Tensor):
+                        th_obs[key] = value.to(self.device).unsqueeze(0)
+                    else:
+                        th_obs[key] = value.to(self.device)
                 actions, _, _ = self.actor.get_action(th_obs)
                 actions = actions.detach().cpu().numpy()
 
@@ -490,8 +496,8 @@ class MOSAC(MOPolicy, MOAgent):
             # execute the game and log data
             if actions.ndim == 2:
                 actions = np.squeeze(actions)
-            #print(actions.shape)
-            # print(f'actions: {actions}')
+            print(actions.shape)
+            print(f'actions: {actions}')
             next_obs, rewards, terminated, truncated, infos = self.env.step(actions)
             # print(f'rewards: {rewards}')
             # print(f'next_obs: {next_obs}')

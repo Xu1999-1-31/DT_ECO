@@ -20,6 +20,13 @@ else
         cp -r ../dt_eco "$MO_GYM_PATH/envs"
         echo "Copied ../dt_eco to $MO_GYM_PATH/envs"
 
+        # Check if the __init__.py file exists in the envs directory
+        if [ -f "$MO_GYM_PATH/envs/__init__.py" ]; then
+            # Rename the original __init__.py to __init__.py.bak
+            mv "$MO_GYM_PATH/envs/__init__.py" "$MO_GYM_PATH/envs/__init__.py.bak"
+            echo "Renamed original __init__.py in "$MO_GYM_PATH/envs/" to __init__.py.bak"
+        fi
+
         # Check if the __init__.py file exists in the current directory
         if [ -f "./__init__.py" ]; then
             # Copy __init__.py to the envs directory

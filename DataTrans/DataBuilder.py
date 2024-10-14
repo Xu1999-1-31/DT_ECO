@@ -602,6 +602,32 @@ class Net_Arc:
         delay_repr = ', '.join([f'{delay:.8f}' for delay in self.Delay])
         return f"NetArc(from_pin='{self.from_pin}', to_pin='{self.to_pin}', from_pin_cap='{self.inpin_cap:.8f}', to_pin_cap='{self.outpin_cap:.8f}', total_cap='{self.totalCap:.8f}', \nDelay={{ {delay_repr} }}\n)"
 
+def BuildPtCells(design, verbose=False):
+    if verbose:
+        print(f'Building {design} PrimeTime Cells.')
+    inPtCellRpt = Global_var.PtRpt_Path + design + '_cell.rpt'
+    PtCells = PtCellRpt_Parser.Read_PtCellRpt(inPtCellRpt)
+    save_dir = Save_Path + 'PtCell/' + design
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+    save_path = os.path.join(save_dir, 'PtCell.sav')
+    with open(save_path, 'wb') as f:
+        pickle.dump(PtCells, f)
+    if verbose:
+        print(f'{design} PrimeTime Cells complete!')
+        
+def LoadPtCells(design, verbose=False):
+    if verbose:
+        print(f'Loading {design} PrimeTime Cells.')
+    save_dir = Save_Path + 'PtCell/' + design
+    save_path = os.path.join(save_dir, 'PtCell.sav')
+    if not os.path.exists(save_path):
+        BuildPtCells(design)
+    with open(save_path, 'rb') as f:
+        PtCells = pickle.load(f)
+    if verbose:
+        print(f'{design} PrimeTime Cells loaded!')
+    return PtCells
 
 def BuildTimingArc(design, verbose=False):
     if verbose:

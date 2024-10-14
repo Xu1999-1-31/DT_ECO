@@ -1,0 +1,19 @@
+{"time":"2024-10-14T11:06:24.888410777+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T11:06:24.88841947+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_110624-izeiau69/logs/debug-core.log"}
+{"time":"2024-10-14T11:06:24.898878934+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T11:06:24.901152485+08:00","level":"INFO","msg":"created new stream","id":"izeiau69"}
+{"time":"2024-10-14T11:06:24.901168587+08:00","level":"INFO","msg":"stream: started","id":"izeiau69"}
+{"time":"2024-10-14T11:06:24.901173393+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"izeiau69"}}
+{"time":"2024-10-14T11:06:24.901180569+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"izeiau69"}}
+{"time":"2024-10-14T11:06:24.901177003+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"izeiau69"}}
+{"time":"2024-10-14T11:06:25.654416591+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T11:06:25.65489392+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T11:06:25.655036414+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T11:06:26.346735752+08:00","level":"INFO","msg":"stream: closing","id":"izeiau69"}
+{"time":"2024-10-14T11:06:26.346754111+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T11:06:26.347516726+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T11:06:27.588276557+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T11:06:28.088694249+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"izeiau69"}}
+{"time":"2024-10-14T11:06:28.088723244+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"izeiau69"}}
+{"time":"2024-10-14T11:06:28.08875243+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"izeiau69"}}
+{"time":"2024-10-14T11:06:28.088780898+08:00","level":"INFO","msg":"stream: closed","id":"izeiau69"}

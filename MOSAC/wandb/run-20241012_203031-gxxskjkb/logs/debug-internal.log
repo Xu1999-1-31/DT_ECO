@@ -1,0 +1,19 @@
+{"time":"2024-10-12T20:30:31.093983337+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-12T20:30:31.093992734+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241012_203031-gxxskjkb/logs/debug-core.log"}
+{"time":"2024-10-12T20:30:31.105726189+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-12T20:30:31.108322947+08:00","level":"INFO","msg":"created new stream","id":"gxxskjkb"}
+{"time":"2024-10-12T20:30:31.108346898+08:00","level":"INFO","msg":"stream: started","id":"gxxskjkb"}
+{"time":"2024-10-12T20:30:31.108351363+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"gxxskjkb"}}
+{"time":"2024-10-12T20:30:31.108354004+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"gxxskjkb"}}
+{"time":"2024-10-12T20:30:31.108362402+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"gxxskjkb"}}
+{"time":"2024-10-12T20:30:31.59418637+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-12T20:30:31.594625255+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-12T20:30:31.594735334+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-12T20:30:32.269456398+08:00","level":"INFO","msg":"stream: closing","id":"gxxskjkb"}
+{"time":"2024-10-12T20:30:32.269476929+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-12T20:30:32.270187676+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-12T20:30:33.573930472+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-12T20:30:34.070292547+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"gxxskjkb"}}
+{"time":"2024-10-12T20:30:34.070332815+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"gxxskjkb"}}
+{"time":"2024-10-12T20:30:34.070327152+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"gxxskjkb"}}
+{"time":"2024-10-12T20:30:34.070407919+08:00","level":"INFO","msg":"stream: closed","id":"gxxskjkb"}

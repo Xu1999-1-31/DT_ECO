@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 49, in <module>
+    agent.train(
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 486, in train
+    th_obs = th.as_tensor(obs).float().to(self.device)
+             ^^^^^^^^^^^^^^^^^
+RuntimeError: Could not infer dtype of dict

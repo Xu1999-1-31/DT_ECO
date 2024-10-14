@@ -5,7 +5,8 @@ parser_dir = os.path.join(Path, 'Parsers')
 model_dir = os.path.join(Path, 'Model')
 builder_dir = os.path.join(Path, 'DataTrans')
 work_dir = os.path.join(Path, 'work')
-sys.path.append(parser_dir);sys.path.append(model_dir);sys.path.append(builder_dir);sys.path.append(work_dir)
+MOSAC_dir = os.path.join(Path, 'MOSAC')
+sys.path.append(parser_dir);sys.path.append(model_dir);sys.path.append(builder_dir);sys.path.append(work_dir);sys.path.append(MOSAC_dir)
 
 #path to the Library
 # Lib_Path = '/home/md1/eda/techlibs/SMIC/SCC14NSFP_90SDB_9TC16_RVT_v1p0a/Liberty/scc14nsfp_90sdb_9tc16_rvt_ssg_v0p63_125c_ccs.lib'

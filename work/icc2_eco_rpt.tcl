@@ -32,5 +32,5 @@ write_sdc -output ../Icc2Output/${bench}_eco_route.sdc
 write_def  ../Icc2Output/${bench}_eco_route.def
 
 set_app_option -name extract.enable_coupling_cap -value true
-set_parasitics_parameters -early_spec rcworst -late_spec rcbest
+set_parasitics_parameters -early_spec rcbest -late_spec rcworst
 write_parasitics  -output ../Icc2Output/${bench}_eco

@@ -2,6 +2,7 @@ from typing import List, Optional
 import numpy as np
 import gymnasium as gym
 from gymnasium import spaces
+import torch as th
 import os
 import sys
 main_script_path = os.path.abspath(sys.argv[0])  # absolute path to the python script being run
@@ -15,6 +16,7 @@ import TimingGraphTrans
 import PhysicalDataTrans
 import Interaction
 import ReBuildPtScripts
+from DT_ECO_Space import GraphSpace
 import time
 
 
@@ -34,17 +36,20 @@ class DT_ECO(gym.Env):
         self.render_mode = render_mode  # online monitor
         self.current_design = current_design  # the design to be optimized
         
+        self.current_gate_index = 0 # the number of the gate on the path
+        self.current_path_index = 0 # the number of the path
+        
         # Rebuild Pt Timing Arc scripts
         ReBuildPtScripts.ReBuildPtScripts(self.current_design)
         
         # Load the timing graph
-        self.graph = TimingGraphTrans.LoadTimingGraph(self.current_design, False)
+        self.graph = TimingGraphTrans.LoadTimingGraph(self.current_design, True)
         
         # Load the node dictionary (pin -> number, number -> pin)
         self.nodes, self.nodes_rev = TimingGraphTrans.LoadNodeDict(self.current_design)
         
         # Load the physical data (layout, padding mask, critical path)
-        self.Layout, _, self.Cpath_Padding, self.CriticalPaths = PhysicalDataTrans.LoadPhysicalData(self.current_design, 512, False)
+        self.Layout, self.Padding_Mask, self.Cpath_Padding, self.CriticalPaths = PhysicalDataTrans.LoadPhysicalData(self.current_design, 512, False)
 
         # Total number of cells
         self.num_cells = 0
@@ -56,6 +61,9 @@ class DT_ECO(gym.Env):
         
         # Load the timing library and cell footprint
         self.timingLib, self.footprint = DataBuilder.LoadNormalizedTimingLib()
+        
+        # Load Pt Cells to distinguish the in and out pin of the cell
+        self.PtCells = DataBuilder.LoadPtCells(self.current_design)
         
         # Set the action space based on the maximum footprint length
         max_length = max(len(v) for v in self.footprint.values()) # max gate type
@@ -71,15 +79,30 @@ class DT_ECO(gym.Env):
         self.max_cells = max(len(path.Cellname_to_Cell.keys()) for path in self.CriticalPaths)
         self.gate_sizes = np.zeros((len(self.CriticalPaths), self.max_cells), dtype=np.int32)
         self.sizedCellList = [] # all dicts with sized cells
+        self.Gate_feature = th.zeros(15, dtype=th.float32)
+        self._add_graph_padding()
+
+        
+        '''
+        the observation space contains six parameters:
+        gate_sizes represent the sizes currently chosen, 
+        timing graph contains the current step timing graph,
+        gate_features are preprocessed timing features for the target gate of the step,
+        layout is the physical layout of the design,
+        padding_mask is the padding mask of the current critical path.
+        '''
         
         self.observation_space = spaces.Dict({
             'gate_sizes': spaces.Box(
                 low=0, high=14,  # gate sizes are discrete values between 0 and 14
                 shape=(len(self.CriticalPaths), self.max_cells), dtype=np.int32
             ),
-            'timing_graph': spaces.Box(
-                low=0, high=1,  # node features are normalized [0, 1]
-                shape=(num_nodes, node_feature_dim), dtype=np.float32
+            'timing_graph': GraphSpace(
+                self.graph
+            ),
+            'gate_features': spaces.Box(
+                low=0, high=10,  # sum of gate node 'CPath' feature and mean of gate edge feature
+                shape=(15,), dtype=np.float32
             ),
             'layout': spaces.Box(
                 low=0, high=1,  # physical features are normalized [0, 1]
@@ -87,7 +110,7 @@ class DT_ECO(gym.Env):
             ),
             'padding_mask': spaces.Box(
                 low=0, high=1,  # padding masks are binary [0, 1]
-                shape=(len(self.Cpath_Padding), scale // 8, scale // 8),
+                shape=(scale // 8, scale // 8),
                 dtype=np.float32
             ),
         })
@@ -109,6 +132,34 @@ class DT_ECO(gym.Env):
         
         print(f'Initialized DT_ECO environment with observation space: \n<{self.observation_space}>\nand action space: \n<{self.action_space}>')
         
+    def _process_gate_features(self):
+        current_gate = list(self.CriticalPaths[self.current_path_index].Cellname_to_Cell.keys())[self.current_gate_index]
+        nf_index = []
+        ef_index = []
+        for outpin in self.PtCells[current_gate].outpins:
+            nf_index.append(self.nodes[current_gate + '/' + outpin])
+            for inpin in self.PtCells[current_gate].inpins:
+                nf_index.append(self.nodes[current_gate + '/' + inpin])
+                # avoid edge not exist, probably arc from D to Q
+                if self.graph.has_edges_between(self.nodes[current_gate + '/' + inpin], self.nodes[current_gate + '/' + outpin], etype='cellarc'):
+                    ef_index.append(self.graph.edge_ids(self.nodes[current_gate + '/' + inpin], self.nodes[current_gate + '/' + outpin], etype='cellarc'))
+                else:
+                    print(current_gate + '/' + inpin, current_gate + '/' + outpin)
+        Gate_nf = th.sum(th.nan_to_num(self.graph.ndata['CPath'][nf_index], nan=0.0), dim=0)
+        Gate_ef = th.mean(self.graph.edata['feature'][('node', 'cellarc', 'node')][ef_index], dim=0)
+        self.Gate_feature = th.cat([Gate_nf, Gate_ef], dim=0)
+    
+    # add the padding mask for the nodes on critical path
+    def _add_graph_padding(self):
+        node_numbers = []
+        pins = self.CriticalPaths[self.current_path_index].Pins
+        for pin in pins:
+            nodes = self.nodes[pin.name]
+            node_numbers.append(nodes)
+        padding_mask = th.zeros(self.graph.num_nodes(), dtype=th.float32)
+        padding_mask[node_numbers] = 1 # 1 means nodes on critical path
+        self.graph.ndata['padding_mask'] = padding_mask
+        
     def render(self): # needed
         pass
     
@@ -116,27 +167,36 @@ class DT_ECO(gym.Env):
         super().reset(seed=seed)
         self.current_gate_index = 0 # the number of the gate on the path
         self.current_path_index = 0 # the number of the path
-        self.chosen_sizes = []
-        self.sizedCellList = []
+        self.chosen_sizes = [] # the sizes of the gates on the path
+        self.sizedCellList = [] # all dicts with sized cells
         self.graph = TimingGraphTrans.LoadTimingGraph(self.current_design, False)
         self.nodes, self.nodes_rev = TimingGraphTrans.LoadNodeDict(self.current_design)
         self.Layout, _, self.Cpath_Padding, self.CriticalPaths = PhysicalDataTrans.LoadPhysicalData(self.current_design, 512, False)
         self.max_cells = max(len(path.Cellname_to_Cell.keys()) for path in self.CriticalPaths)
         self.gate_sizes = np.zeros((len(self.CriticalPaths), self.max_cells), dtype=np.int32)
+        self.Gate_feature = th.zeros(15, dtype=th.float32)
+        self._add_graph_padding()
         return self._get_obs(), {}
     
-    def _get_obs(self):
+    def _get_obs(self, ECO=False):
         #Combine gate sizes, timing graph, layout, and padding mask into a single observation.
         gate_sizes = self.gate_sizes  # gate sizes
-        timing_graph_features = self.graph.ndata['feature'].numpy()  # get node features
-        layout = self.Layout.numpy()  # physical layout
-        padding_mask = [mask.numpy() for mask in self.Cpath_Padding]  # padding mask
+        timing_graph_features = self.graph  # get graph
+        gate_features = self.Gate_feature  # get gate features
+        
+        layout = self.Layout  # physical layout
+        if ECO:
+            padding_mask = self.Padding_Mask
+        else:
+            padding_mask = self.Cpath_Padding[self.current_path_index]
+        # node_numbers = self.node_numbers
         
         obs = {
-            "gate_sizes": gate_sizes,
-            "timing_graph": timing_graph_features,
-            "layout": layout,
-            "padding_mask": padding_mask,
+            'gate_sizes': gate_sizes,
+            'timing_graph': timing_graph_features,
+            'gate_features': gate_features,
+            'layout': layout,
+            'padding_mask': padding_mask,
         }
         return obs
     
@@ -155,7 +215,13 @@ class DT_ECO(gym.Env):
         return [tns, drc]
     
     def step(self, action):  
+        # new episode begin
+        if self.current_path_index >= len(self.CriticalPaths):
+            self.current_path_index = 0
+            self.inline = False
+             
         if self.current_gate_index < len(self.CriticalPaths[self.current_path_index].Cellname_to_Cell.keys()): # one action not finished // Cellname_to_Cell: U222 -> NAND
+            print(action)
             self.chosen_sizes.append(self.action_space_list[action])  # append the gate size list
             self._get_gate_sizes()
             
@@ -197,7 +263,7 @@ class DT_ECO(gym.Env):
                 # Timing Graph update (ECO)
                 self.graph = TimingGraphTrans.LoadTimingGraph(self.current_design+'_eco', True)
                 # Physical Data update (ECO)
-                self.Layout, _, self.Cpath_Padding, self.CriticalPaths = PhysicalDataTrans.LoadPhysicalData(self.current_design+'_eco', 512, True)
+                self.Layout, self.Padding_Mask, self.Cpath_Padding, self.CriticalPaths = PhysicalDataTrans.LoadPhysicalData(self.current_design+'_eco', 512, True)
                 
                 done = True
                 info = {'message':'One PR Episode completed sucessfully'}
@@ -209,21 +275,25 @@ class DT_ECO(gym.Env):
                 done = False
                 vec_reward = self._get_tns_drc(self.inline)
                 info = {}
+            self._process_gate_features()
+            # get the gate feature for the current gate
             self.current_gate_index += 1
         else: # new action begin
             self.current_gate_index = 0
             self.chosen_sizes = []
             self.current_path_index += 1
             self.sizedCellList = []
+            self.Gate_feature = th.zeros(15, dtype=th.float32)
             done = False
             vec_reward = self._get_tns_drc(self.inline)
             info = {}
-            # new episode begin
-            if self.current_path_index >= len(self.CriticalPaths):
-                self.current_path_index = 0
-                self.inline = False
         
-        return self._get_obs(), vec_reward, done, False, info
+        # get current graph padding
+        self._add_graph_padding()
+
+                
+                
+        return self._get_obs(done), vec_reward, done, False, info
 
     def _get_gate_sizes(self):
         gate_sizes = np.zeros(len(self.CriticalPaths[self.current_path_index].Cellname_to_Cell.keys()), dtype=np.int32)  # total number of gates on paths
@@ -250,16 +320,16 @@ if __name__ == "__main__":
     start_time = time.time()
     env = DT_ECO()
     env.reset()
-    for _ in range(env.steps_needed):
-        env.render()
-        action = env.action_space.sample() # random action space sampling
-        # print(f'action: {action}#{type(action)}')
-        current_state, vec_reward, done, truncated, info = env.step(action)
-        # np.set_printoptions(edgeitems=10, threshold=20, precision=4, suppress=False, linewidth=np.inf)
-        # print(current_state['gate_sizes'])
-        print(f'reward: {vec_reward}')
-        if done:
-            env.reset()
+    # for _ in range(env.steps_needed):
+    #     env.render()
+    #     action = env.action_space.sample() # random action space sampling
+    #     # print(f'action: {action}#{type(action)}')
+    #     current_state, vec_reward, done, truncated, info = env.step(action)
+    #     # np.set_printoptions(edgeitems=10, threshold=20, precision=4, suppress=False, linewidth=np.inf)
+    #     # print(current_state['gate_sizes'])
+    #     print(f'reward: {vec_reward}')
+    #     if done:
+    #         env.reset()
     env.close()
     end_time = time.time()
     elapsed_time = end_time - start_time

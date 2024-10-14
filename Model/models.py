@@ -23,7 +23,7 @@ class TimingGNN(torch.nn.Module):
     def __init__(self, in_nf, in_ef, out_nf, h1=32, h2=32):
         super(TimingGNN, self).__init__()
         self.in_nf = in_nf  # node feature dimension
-        self.in_ef = in_ef  # edge feature dimension
+        self.in_ef = in_ef  # edge feature dimension (net arc feature)
         self.out_nf = out_nf  # output node feature dimension
         self.h1 = h1  # hidden layer for sum and max
         self.h2 = h2
@@ -158,23 +158,40 @@ class MultiModalNN(torch.nn.Module):
         self.cnn = CNN(in_channels)
         self.MLP_cnn_forward = MLP(64*64, 64, 64, 32)   # MLP after Padding
         self.MLP_gnn_forward = MLP(out_nf, 64, 64, 32) # MLP after pooling
-        self.MLP_CPath_Gate = MLP(20, 64, 64, 32) # MLP for Gate feature on CPath
+        self.MLP_CPath_Gate = MLP(15, 64, 64, 32) # MLP for Gate feature on CPath
         self.MLP_Output = MLP(96, 64, 64, output)
         
-    def forward(self, g, img, padding_mask, node_num, Gate_num):
-        edge_ids = g.edge_ids(Gate_num[0], Gate_num[1], etype='cellarc')
-        Gate_ef = g.edata['feature'][('node', 'cellarc', 'node')][edge_ids].view(-1)
-        Gate_nf = g.ndata['CPath'][Gate_num].view(-1)
-        if torch.isnan(Gate_nf).any():
-            raise ValueError(f"The tensor contains NaN values! Gate not in Critical Path.")
-        Gate_feature = torch.cat([Gate_nf, Gate_ef], dim=0)
+    def forward(self, g, img, padding_mask, Gate_feature):
+        # Inssure the data is in batch form
+        if not hasattr(g, 'batch_size'):
+            g = dgl.batch([g])
+        if img.dim() == 3:
+            img = img.unsqueeze(0)
+        if padding_mask.dim() == 3:
+            padding_mask = padding_mask.unsqueeze(0)
+        if Gate_feature.dim() == 1:
+            Gate_feature = Gate_feature.unsqueeze(0)
+        
+        # GNN part: process the batched graph
         nf = self.gnn(g)
-        nf = nf[node_num]
-        pooled_nf = torch.mean(nf, 0)
-        img = self.cnn(img).squeeze(0)
-        img = torch.mul(img, padding_mask).view(-1)
+        padding_mask_expanded = g.ndata['padding_mask'].unsqueeze(-1)
+        g.ndata['feature'] = nf * padding_mask_expanded
+        sum_nf = dgl.sum_nodes(g, 'feature')
+        num_masked_nodes = dgl.sum_nodes(g, 'padding_mask')
+        pooled_nf = sum_nf / (num_masked_nodes + 1e-6) # avoide division by zero
+
+        # CNN part: process the batch of images
+        img_batch_size = img.size(0)  # Assume img is of shape (batch_size, channels, height, width)
+        img = self.cnn(img)  # Process each image
+        img = torch.mul(img, padding_mask) 
+        img = img.view(img_batch_size, -1)
+
         Img_feature = self.MLP_cnn_forward(img)
         Gnn_feature = self.MLP_gnn_forward(pooled_nf)
         Gate_feature = self.MLP_CPath_Gate(Gate_feature)
-        Output = self.MLP_Output(torch.cat([Img_feature, Gnn_feature, Gate_feature], dim=0))
+
+        # Concatenate features across the batch
+        combined_features = torch.cat([Img_feature, Gnn_feature, Gate_feature], dim=1)  # Concatenate along feature dim
+        Output = self.MLP_Output(combined_features)
+
         return Output
