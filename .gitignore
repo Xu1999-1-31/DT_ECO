@@ -24,4 +24,5 @@ DataTrans/Processed_Data/*
 
 __pycache__/
 
+*.log*
 */wandb/*
