@@ -16593,7 +16593,7 @@ NAND2V0P5_90S9T16R U1083 ( .A1 ( n903 ) , .A2 ( HFSNET_6 ) , .ZN ( n667 ) ,
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 NAND2V1_90S9T16R U1084 ( .A1 ( n904 ) , .A2 ( HFSNET_7 ) , .ZN ( n668 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-NOR3V2_90S9T16R ctmTdsLR_1_7328 ( .A1 ( n3511 ) , .A2 ( n3281 ) , 
+NOR3V1_90S9T16R ctmTdsLR_1_7328 ( .A1 ( n3511 ) , .A2 ( n3281 ) , 
     .A3 ( n2112 ) , .ZN ( popt_net_2949 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
 BUFV8_90S9T16R HFSBUF_2385_2 ( .I ( ld_r ) , .Z ( HFSNET_2 ) , .VDD ( VDD ) , 
@@ -16746,9 +16746,9 @@ NOR4V4_90S9T16R ctmTdsLR_1_7691 ( .A1 ( n27815 ) , .A2 ( n27914 ) ,
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 INV2_90S9T16R U1155 ( .I ( sa12_sr[6] ) , .ZN ( n1506 ) , .VDD ( VDD ) , 
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-NAND2V2_90S9T16R U1156 ( .A1 ( n1035 ) , .A2 ( n1036 ) , .ZN ( n1548 ) , 
+NAND2V0P5_90S9T16R U1156 ( .A1 ( n1035 ) , .A2 ( n1036 ) , .ZN ( n1548 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-CLKNAND2V2_90S9T16R U1157 ( .A1 ( n1217 ) , .A2 ( n988 ) , .ZN ( n1035 ) , 
+CLKNAND2V1_90S9T16R U1157 ( .A1 ( n1217 ) , .A2 ( n988 ) , .ZN ( n1035 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 XOR3V1_90S9T16R U1158 ( .A1 ( w1[14] ) , .A2 ( sa31_sr[6] ) , 
     .A3 ( sa31_sr[5] ) , .Z ( n1133 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
@@ -17158,7 +17158,7 @@ NAND4BBV4_90S9T16R ctmTdsLR_1_7078 ( .A1 ( popt_net_2981 ) ,
     .VSS ( VSS ) ) ;
 INV0P5_90S9T16R U1372 ( .I ( n1388 ) , .ZN ( n750 ) , .VDD ( VDD ) , 
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-INV6_90S9T16R U1373 ( .I ( ZBUF_69_62 ) , .ZN ( n1217 ) , .VDD ( VDD ) , 
+INV0P5_90S9T16R U1373 ( .I ( ZBUF_69_62 ) , .ZN ( n1217 ) , .VDD ( VDD ) , 
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 CLKINV10_90S9T16R U1374 ( .I ( n133 ) , .ZN ( n752 ) , .VDD ( VDD ) , 
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
@@ -17225,7 +17225,7 @@ INV0P5_90S9T16R U1411 ( .I ( n1247 ) , .ZN ( n773 ) , .VDD ( VDD ) ,
 NOR2V1_90S9T16R ctmTdsLR_1_8584 ( .A1 ( n2489_CDR1 ) , .A2 ( popt_net_3679 ) , 
     .ZN ( n3830_CDR1 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
     .VSS ( VSS ) ) ;
-INV2_90S9T16R ZINV_83_inst_11332 ( .I ( n372 ) , .ZN ( ZINV_83_216 ) , 
+INV10_90S9T16R ZINV_83_inst_11332 ( .I ( n372 ) , .ZN ( ZINV_83_216 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 MUX2NV5_90S9T16R U1414 ( .I0 ( n775 ) , .I1 ( n776 ) , .S ( HFSNET_2 ) , 
     .ZN ( n774 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
@@ -18332,7 +18332,7 @@ XOR2V1_90S9T16R U1944 ( .A1 ( n1244 ) , .A2 ( text_in_r[15] ) , .Z ( n1245 ) ,
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 CLKINV0P5_90S9T16R U1945 ( .I ( ZBUF_273_41 ) , .ZN ( n1244 ) , .VDD ( VDD ) , 
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-MUX2NV4_90S9T16R U1946 ( .I0 ( n1357 ) , .I1 ( n1356 ) , .S ( HFSNET_2 ) , 
+MUX2NV2_90S9T16R U1946 ( .I0 ( n1357 ) , .I1 ( n1356 ) , .S ( HFSNET_2 ) , 
     .ZN ( N249 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 XOR2V1_90S9T16R U1947 ( .A1 ( n1355 ) , .A2 ( text_in_r[111] ) , 
     .Z ( n1356 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
@@ -18388,7 +18388,7 @@ XOR2V1_90S9T16R U1968 ( .A1 ( n1377 ) , .A2 ( text_in_r[23] ) , .Z ( n1378 ) ,
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 CLKINV0P5_90S9T16R U1969 ( .I ( ZBUF_294_5 ) , .ZN ( n1377 ) , .VDD ( VDD ) , 
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-MUX2V5_90S9T16R U1970 ( .I0 ( n1119 ) , .I1 ( n1120 ) , .S ( HFSNET_2 ) , 
+MUX2V1_90S9T16R U1970 ( .I0 ( n1119 ) , .I1 ( n1120 ) , .S ( HFSNET_2 ) , 
     .Z ( N233 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 XNOR2V1_90S9T16R U1971 ( .A1 ( n73 ) , .A2 ( text_in_r[103] ) , 
     .ZN ( n1120 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
@@ -18565,7 +18565,7 @@ CLKINV1_90S9T16R U2051 ( .I ( w2[29] ) , .ZN ( n36 ) , .VDD ( VDD ) ,
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 CLKINV1_90S9T16R U2052 ( .I ( ZBUF_20_143 ) , .ZN ( n37 ) , .VDD ( VDD ) , 
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-INV8_90S9T16R ZINV_447_inst_123 ( .I ( n403 ) , .ZN ( ZINV_447_19 ) , 
+INV10_90S9T16R ZINV_447_inst_123 ( .I ( n403 ) , .ZN ( ZINV_447_19 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 OAI211V1_90S9T16R U2054 ( .A1 ( dcnt[3] ) , .A2 ( n3 ) , .B ( HFSNET_21 ) , 
     .C ( rst ) , .ZN ( n142 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
@@ -19123,7 +19123,7 @@ CLKNAND2V2_90S9T16R ctmTdsLR_1_5393 ( .A1 ( popt_net_2046 ) , .A2 ( n688 ) ,
 OR3V4_90S9T16R ctmTdsLR_1_8487 ( .A1 ( popt_net_3650 ) , .A2 ( n40111_CDR1 ) , 
     .A3 ( n27210 ) , .Z ( sa12_sr[1] ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
-INV1_90S9T16R ctmTdsLR_1_7154 ( .I ( popt_net_3011 ) , .ZN ( n1881 ) , 
+INV4_90S9T16R ctmTdsLR_1_7154 ( .I ( popt_net_3011 ) , .ZN ( n1881 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 CLKNOR2V2_90S9T16R ctmTdsLR_9_4064 ( .A1 ( ZINV_385_145 ) , .A2 ( HFSNET_3 ) , 
     .ZN ( popt_net_1327 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
@@ -19166,7 +19166,7 @@ AND2V10_90S9T16R ctmTdsLR_1_7608 ( .A1 ( n13917 ) , .A2 ( n13817 ) ,
 NAND2V1_90S9T16R ctmTdsLR_7_4233 ( .A1 ( sa32_sr[6] ) , 
     .A2 ( popt_net_1422 ) , .ZN ( popt_net_1424 ) , .VDD ( VDD ) , 
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-CLKNAND2V1_90S9T16R ctmTdsLR_2_7155 ( .A1 ( n3811 ) , .A2 ( n3711 ) , 
+CLKNAND2V16_90S9T16R ctmTdsLR_2_7155 ( .A1 ( n3811 ) , .A2 ( n3711 ) , 
     .ZN ( popt_net_3011 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
     .VSS ( VSS ) ) ;
 NAND2XBV3_90S9T16R ctmTdsLR_1_4703 ( .A1 ( n3607 ) , .B1 ( popt_net_1677 ) , 
@@ -19350,7 +19350,7 @@ CLKNAND2V1_90S9T16R ctmTdsLR_2_3029 ( .A1 ( n14614 ) , .A2 ( n2765 ) ,
     .VSS ( VSS ) ) ;
 XNOR2V5_90S9T16R U326 ( .A1 ( w0[21] ) , .A2 ( ZBUF_68_14 ) , .ZN ( n295 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-AO21V2_90S9T16R ctmTdsLR_2_10230 ( .A1 ( n5074 ) , .A2 ( n5016 ) , 
+AO21V0P5_90S9T16R ctmTdsLR_2_10230 ( .A1 ( n5074 ) , .A2 ( n5016 ) , 
     .B ( n2351 ) , .Z ( popt_net_4390 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
 AOI21V1_90S9T16R ctmTdsLR_1_10129 ( .A1 ( n5644 ) , .A2 ( n5654_CDR1 ) , 
@@ -20037,7 +20037,7 @@ NAND2V5_90S9T16R ctmTdsLR_1_10072 ( .A1 ( n17615 ) , .A2 ( popt_net_4311 ) ,
 NAND2V5_90S9T16R ctmTdsLR_1_7661 ( .A1 ( popt_net_3194 ) , 
     .A2 ( popt_net_3195 ) , .ZN ( N242 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
-CLKNAND2V5_90S9T16R ctmTdsLR_1_7016 ( .A1 ( popt_net_2789 ) , 
+CLKNAND2V6_90S9T16R ctmTdsLR_1_7016 ( .A1 ( popt_net_2789 ) , 
     .A2 ( popt_net_2949 ) , .ZN ( n5124 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
 NOR3V2_90S9T16R ctmTdsLR_2_3725 ( .A1 ( popt_net_1101 ) , .A2 ( n2333_CDR1 ) , 
@@ -20677,7 +20677,7 @@ OAOI211V1_90S9T16R U3661 ( .A1 ( n425 ) , .A2 ( n8641_CDR1 ) , .B ( n8321 ) ,
 NOR4V2_90S9T16R U3651 ( .A1 ( n523_CDR1 ) , .A2 ( n7381_CDR1 ) , 
     .A3 ( n6471_CDR1 ) , .A4 ( n588_CDR1 ) , .ZN ( n5051_CDR1 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-CLKINV8_90S9T16R ctmTdsLR_1_7159 ( .I ( popt_net_3013 ) , .ZN ( n4464_CDR1 ) , 
+CLKINV12_90S9T16R ctmTdsLR_1_7159 ( .I ( popt_net_3013 ) , .ZN ( n4464_CDR1 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 NAND4BBV4_90S9T16R ctmTdsLR_1_10342 ( .A1 ( n4734 ) , .A2 ( popt_net_4444 ) , 
     .B1 ( popt_net_4445 ) , .B2 ( n4714 ) , .ZN ( n5094 ) , .VDD ( VDD ) , 
@@ -21232,7 +21232,7 @@ NOR2XBV8_90S9T16R U14010 ( .A1 ( w3[19] ) , .B1 ( n8271 ) , .ZN ( n483 ) ,
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 NAND2V12_90S9T16R U13910 ( .A1 ( n483 ) , .A2 ( n482 ) , .ZN ( n8131 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-NAND2V2_90S9T16R ctmTdsLR_2_7160 ( .A1 ( ZINV_258_62 ) , .A2 ( n14411 ) , 
+NAND2V24_90S9T16R ctmTdsLR_2_7160 ( .A1 ( ZINV_258_62 ) , .A2 ( n14411 ) , 
     .ZN ( popt_net_3013 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
     .VSS ( VSS ) ) ;
 NAND2V2_90S9T16R U13710 ( .A1 ( ropt_net_4483 ) , .A2 ( n8051 ) , 
@@ -21721,7 +21721,7 @@ NOR2V4_90S9T16R ctmTdsLR_9_4717 ( .A1 ( n937 ) , .A2 ( HFSNET_2 ) ,
 OAI222V1_90S9T16R U3642 ( .A1 ( n8082 ) , .A2 ( n7402 ) , .B1 ( n7762 ) , 
     .B2 ( n7812 ) , .C1 ( n4351 ) , .C2 ( n7562 ) , .ZN ( n6892 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-OAI211V1_90S9T16R ctmTdsLR_1_6269 ( .A1 ( n1210 ) , .A2 ( popt_net_2547 ) , 
+OAI211V2_90S9T16R ctmTdsLR_1_6269 ( .A1 ( n1210 ) , .A2 ( popt_net_2547 ) , 
     .B ( popt_net_2548 ) , .C ( popt_net_2550 ) , .ZN ( N231 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 INV1_90S9T16R U3622 ( .I ( n6572 ) , .ZN ( n8472 ) , .VDD ( VDD ) , 
@@ -24944,7 +24944,7 @@ AO22V0P5_90S9T16R U5161 ( .A1 ( n4944_CDR1 ) , .A2 ( n4934 ) ,
 AO22V0P5_90S9T16R U5151 ( .A1 ( n4354_CDR1 ) , .A2 ( n4344_CDR1 ) , 
     .B1 ( n4394_CDR1 ) , .B2 ( n4924_CDR1 ) , .Z ( n4824_CDR1 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-CLKNAND2V2_90S9T16R U5141 ( .A1 ( n2341 ) , .A2 ( n2331 ) , .ZN ( n2351 ) , 
+CLKNAND2V12_90S9T16R U5141 ( .A1 ( n2341 ) , .A2 ( n2331 ) , .ZN ( n2351 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 AO21V1_90S9T16R U5131 ( .A1 ( n4544 ) , .A2 ( n365 ) , .B ( n6915 ) , 
     .Z ( n2991 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
@@ -25107,7 +25107,7 @@ OA12V0P5_90S9T16R U4533 ( .A1 ( n4434_CDR1 ) , .A2 ( n2413 ) ,
 OAI21V1_90S9T16R U4524 ( .A1 ( n5064 ) , .A2 ( n4464_CDR1 ) , 
     .B ( n5055_CDR1 ) , .ZN ( n4474 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
-AO21V2_90S9T16R U45110 ( .A1 ( n4894_CDR1 ) , .A2 ( n4121 ) , 
+AO21V1_90S9T16R U45110 ( .A1 ( n4894_CDR1 ) , .A2 ( n4121 ) , 
     .B ( n4245_CDR1 ) , .Z ( n4264_CDR1 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
 OA12V0P5_90S9T16R U4505 ( .A1 ( n4354_CDR1 ) , .A2 ( n4101 ) , 
@@ -25225,7 +25225,7 @@ NOR2V0P5_90S9T16R U4055 ( .A1 ( n2421 ) , .A2 ( ZBUF_51_74 ) , .ZN ( n2451 ) ,
 NAND3V2_90S9T16R ctmTdsLR_1_9761 ( .A1 ( n1091 ) , .A2 ( n944 ) , 
     .A3 ( n943 ) , .ZN ( popt_net_726 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
-NAND2V2_90S9T16R U4035 ( .A1 ( n4424_CDR1 ) , .A2 ( n5055_CDR1 ) , 
+NAND2V3_90S9T16R U4035 ( .A1 ( n4424_CDR1 ) , .A2 ( n5055_CDR1 ) , 
     .ZN ( n2331 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
     .VSS ( VSS ) ) ;
 NOR2V0P5_90S9T16R U4025 ( .A1 ( n2061 ) , .A2 ( n4684 ) , .ZN ( n2101 ) , 
@@ -25279,7 +25279,7 @@ OR4V2_90S9T16R U3835 ( .A1 ( n4112_CDR1 ) , .A2 ( n2471_CDR1 ) ,
 NOR4V2_90S9T16R U3825 ( .A1 ( n11210 ) , .A2 ( n2921 ) , .A3 ( n2912 ) , 
     .A4 ( n2901 ) , .ZN ( n10510 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
-NAND3V5_90S9T16R U38110 ( .A1 ( n10710 ) , .A2 ( ZINV_4_158 ) , 
+NAND3V12_90S9T16R U38110 ( .A1 ( n10710 ) , .A2 ( ZINV_4_158 ) , 
     .A3 ( n1910 ) , .ZN ( n4284 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
 OR4V4_90S9T16R U3805 ( .A1 ( n4304_CDR1 ) , .A2 ( n395_CDR1 ) , 
@@ -25385,7 +25385,7 @@ OAI21V1_90S9T16R ctmTdsLR_3_10078 ( .A1 ( n46914_CDR1 ) ,
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 INV2_90S9T16R U3425 ( .I ( n3411 ) , .ZN ( n2071 ) , .VDD ( VDD ) , 
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-OR3V4_90S9T16R U3405 ( .A1 ( n2821 ) , .A2 ( n2813 ) , .A3 ( n2801 ) , 
+OR3V3_90S9T16R U3405 ( .A1 ( n2821 ) , .A2 ( n2813 ) , .A3 ( n2801 ) , 
     .Z ( n12711 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
     .VSS ( VSS ) ) ;
 OR4V2_90S9T16R U3395 ( .A1 ( n3112 ) , .A2 ( ZBUF_5_204 ) , 
@@ -25449,7 +25449,7 @@ OA12V2_90S9T16R U3155 ( .A1 ( n4874_CDR1 ) , .A2 ( n2771 ) ,
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
 AND2V12_90S9T16R U3145 ( .A1 ( sa00[2] ) , .A2 ( n1582 ) , .Z ( n14610 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-NAND2V8_90S9T16R U3135 ( .A1 ( n14411 ) , .A2 ( n15211 ) , .ZN ( n4654 ) , 
+NAND2V20_90S9T16R U3135 ( .A1 ( n14411 ) , .A2 ( n15211 ) , .ZN ( n4654 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 AND2V10_90S9T16R U3125 ( .A1 ( n1592 ) , .A2 ( n1602 ) , .Z ( n14311 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
@@ -25506,10 +25506,10 @@ CLKNOR2V0P5_90S9T16R ctmTdsLR_3_5958 ( .A1 ( n30412 ) , .A2 ( n42713 ) ,
     .VSS ( VSS ) ) ;
 CLKAND2V4_90S9T16R U2845 ( .A1 ( n13211 ) , .A2 ( n4994 ) , .Z ( n13610 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-NAND2V6_90S9T16R U2835 ( .A1 ( n14411 ) , .A2 ( ZINV_258_62 ) , 
+NAND2V24_90S9T16R U2835 ( .A1 ( n14411 ) , .A2 ( ZINV_258_62 ) , 
     .ZN ( n3811 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
     .VSS ( VSS ) ) ;
-OR3V4_90S9T16R U2825 ( .A1 ( n2110 ) , .A2 ( n408_CDR1 ) , 
+OR3V5_90S9T16R U2825 ( .A1 ( n2110 ) , .A2 ( n408_CDR1 ) , 
     .A3 ( ZINV_4_175 ) , .Z ( sa00_sr[4] ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
 NAND2V8_90S9T16R U2805 ( .A1 ( ZINV_324_176 ) , .A2 ( n14810 ) , 
@@ -25545,9 +25545,9 @@ AOI21V1_90S9T16R U2685 ( .A1 ( n365 ) , .A2 ( n3811 ) , .B ( n4493 ) ,
     .VSS ( VSS ) ) ;
 CLKINV10_90S9T16R U2675 ( .I ( n2312 ) , .ZN ( n2761 ) , .VDD ( VDD ) , 
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-NAND2V1_90S9T16R U2665 ( .A1 ( n4464_CDR1 ) , .A2 ( n3411 ) , .ZN ( n8215 ) , 
+NAND2V0P5_90S9T16R U2665 ( .A1 ( n4464_CDR1 ) , .A2 ( n3411 ) , .ZN ( n8215 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-CLKNAND2V2_90S9T16R U2655 ( .A1 ( n8215 ) , .A2 ( n8116 ) , .ZN ( n2821 ) , 
+CLKNAND2V20_90S9T16R U2655 ( .A1 ( n8215 ) , .A2 ( n8116 ) , .ZN ( n2821 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 AOI22V1_90S9T16R U2645 ( .A1 ( n4334_CDR1 ) , .A2 ( n4974_CDR1 ) , 
     .B1 ( n4354_CDR1 ) , .B2 ( ZBUF_28_31 ) , .ZN ( n10911 ) , .VDD ( VDD ) , 
@@ -25562,7 +25562,7 @@ CLKINV0P5_90S9T16R U2619 ( .I ( n4874_CDR1 ) , .ZN ( n6716 ) , .VDD ( VDD ) ,
 NAND2XBV2_90S9T16R ctmTdsLR_4_4083 ( .A1 ( HFSNET_7 ) , .B1 ( n1191 ) , 
     .ZN ( popt_net_1339 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
     .VSS ( VSS ) ) ;
-INV2_90S9T16R U2575 ( .I ( n4284 ) , .ZN ( n6315 ) , .VDD ( VDD ) , 
+INV14_90S9T16R U2575 ( .I ( n4284 ) , .ZN ( n6315 ) , .VDD ( VDD ) , 
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 CLKINV2_90S9T16R ZINV_4_inst_11165 ( .I ( popt_net_3447 ) , 
     .ZN ( ZINV_4_184 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
@@ -25701,7 +25701,7 @@ AO21BV4_90S9T16R U19414 ( .A1 ( n14610 ) , .A2 ( ZINV_258_62 ) ,
     .VSS ( VSS ) ) ;
 NAND2V4_90S9T16R U19214 ( .A1 ( sa00[0] ) , .A2 ( n1592 ) , .ZN ( n6115 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-AND4V4_90S9T16R U19114 ( .A1 ( n1592 ) , .A2 ( n1582 ) , .A3 ( n1613 ) , 
+AND4V6_90S9T16R U19114 ( .A1 ( n1592 ) , .A2 ( n1582 ) , .A3 ( n1613 ) , 
     .A4 ( sa00[0] ) , .Z ( n403 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
 CLKINV10_90S9T16R U19014 ( .I ( n4504 ) , .ZN ( n4944_CDR1 ) , .VDD ( VDD ) , 
@@ -25873,7 +25873,7 @@ CLKAND2V4_90S9T16R U12114 ( .A1 ( n4674 ) , .A2 ( n5005 ) , .Z ( n13010 ) ,
 NAND4BBV2_90S9T16R U12014 ( .A1 ( n350 ) , .A2 ( n3491 ) , .B1 ( n10911 ) , 
     .B2 ( n11010 ) , .ZN ( n6815 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
-CLKINV10_90S9T16R U11914 ( .I ( n4654 ) , .ZN ( n4424_CDR1 ) , .VDD ( VDD ) , 
+CLKINV1_90S9T16R U11914 ( .I ( n4654 ) , .ZN ( n4424_CDR1 ) , .VDD ( VDD ) , 
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 NAND4BBV2_90S9T16R U11714 ( .A1 ( n3911_CDR1 ) , .A2 ( n11810_CDR1 ) , 
     .B1 ( n1811 ) , .B2 ( n6105 ) , .ZN ( n4304_CDR1 ) , .VDD ( VDD ) , 
@@ -25978,7 +25978,7 @@ NAND2V1_90S9T16R U7110 ( .A1 ( n14910 ) , .A2 ( n2761 ) , .ZN ( n220 ) ,
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 NAND2V1_90S9T16R U706 ( .A1 ( n4011 ) , .A2 ( n3631 ) , .ZN ( n369 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-NAND4BBV4_90S9T16R U696 ( .A1 ( ZBUF_2_157 ) , .A2 ( n1931 ) , .B1 ( n4615 ) , 
+NAND4BBV1_90S9T16R U696 ( .A1 ( ZBUF_2_157 ) , .A2 ( n1931 ) , .B1 ( n4615 ) , 
     .B2 ( n11101 ) , .ZN ( n3281 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
 CLKAND2V0P5_90S9T16R U686 ( .A1 ( n3311 ) , .A2 ( n4584 ) , .Z ( n3011 ) , 
@@ -26001,7 +26001,7 @@ NOR4BBV2_90S9T16R U626 ( .A1 ( n2131 ) , .A2 ( n398 ) , .B1 ( n1641 ) ,
 MUX2NV0P5C_90S9T16R ctmTdsLR_1_7225 ( .I0 ( n1386 ) , .I1 ( n1385 ) , 
     .S ( HFSNET_4 ) , .ZN ( N132 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
-NAND4V3_90S9T16R U606 ( .A1 ( n2861 ) , .A2 ( n2851 ) , .A3 ( n2841 ) , 
+NAND4V5_90S9T16R U606 ( .A1 ( n2861 ) , .A2 ( n2851 ) , .A3 ( n2841 ) , 
     .A4 ( n2831 ) , .ZN ( n372 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
 AO12V1_90S9T16R U597 ( .A1 ( n333 ) , .A2 ( n364 ) , .B ( n5005 ) , 
@@ -26077,7 +26077,7 @@ OA22V1_90S9T16R U2518 ( .A1 ( n2513 ) , .A2 ( n3301 ) , .B1 ( n13111 ) ,
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
 CLKNAND2V1_90S9T16R U2418 ( .A1 ( n4674 ) , .A2 ( n8810 ) , .ZN ( n4121 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-AND2V8_90S9T16R U2240 ( .A1 ( sa00[3] ) , .A2 ( n1613 ) , .Z ( n14411 ) , 
+AND2V6_90S9T16R U2240 ( .A1 ( sa00[3] ) , .A2 ( n1613 ) , .Z ( n14411 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 AO21BV3_90S9T16R U21104 ( .A1 ( n8910 ) , .A2 ( n5025_CDR1 ) , .B ( n10110 ) , 
     .Z ( n3871 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
@@ -31589,7 +31589,7 @@ OA12V2_90S9T16R U36310 ( .A1 ( n9815_CDR1 ) , .A2 ( n2906 ) ,
 NOR2XBV1_90S9T16R U36212 ( .A1 ( n2906 ) , .B1 ( n4808 ) , 
     .ZN ( n2506_CDR1 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
     .VSS ( VSS ) ) ;
-NAND2V1_90S9T16R ctmTdsLR_10_6278 ( .A1 ( n1210 ) , .A2 ( popt_net_2549 ) , 
+NAND2V16_90S9T16R ctmTdsLR_10_6278 ( .A1 ( n1210 ) , .A2 ( popt_net_2549 ) , 
     .ZN ( popt_net_2550 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
     .VSS ( VSS ) ) ;
 AND2V10_90S9T16R U36010 ( .A1 ( sa11[1] ) , .A2 ( n1836 ) , .Z ( n1696 ) , 
@@ -38146,7 +38146,7 @@ CLKINV1_90S9T16R U31515 ( .I ( n39410 ) , .ZN ( n7030 ) , .VDD ( VDD ) ,
 NAND2V1_90S9T16R ctmTdsLR_3_6568 ( .A1 ( popt_net_2449 ) , .A2 ( n1466 ) , 
     .ZN ( popt_net_2697 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
     .VSS ( VSS ) ) ;
-NAND3V12_90S9T16R ctmTdsLR_1_6569 ( .A1 ( popt_net_42 ) , .A2 ( ZINV_4_69 ) , 
+NAND3V5_90S9T16R ctmTdsLR_1_6569 ( .A1 ( popt_net_42 ) , .A2 ( ZINV_4_69 ) , 
     .A3 ( popt_net_2699 ) , .ZN ( ZBUF_69_62 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
 CLKINV1_90S9T16R U31218 ( .I ( n22011 ) , .ZN ( n6730 ) , .VDD ( VDD ) , 
@@ -39681,7 +39681,7 @@ AND2V10_90S9T16R U18825 ( .A1 ( n15322 ) , .A2 ( n15222 ) , .Z ( n12821 ) ,
 AOI22V2_90S9T16R U18725 ( .A1 ( n47513_CDR1 ) , .A2 ( n43513 ) , 
     .B1 ( n45013_CDR1 ) , .B2 ( n4209 ) , .ZN ( n43813 ) , .VDD ( VDD ) , 
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-INV4_90S9T16R ctmTdsLR_1_4603 ( .I ( sa00[2] ) , .ZN ( n1613 ) , 
+INV2_90S9T16R ctmTdsLR_1_4603 ( .I ( sa00[2] ) , .ZN ( n1613 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 AND2V1_90S9T16R ctmTdsLR_2_9162 ( .A1 ( n1268 ) , .A2 ( popt_net_817 ) , 
     .Z ( popt_net_3904 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
@@ -44643,7 +44643,7 @@ NAND2V3_90S9T16R U36420 ( .A1 ( n21516 ) , .A2 ( n21616 ) , .ZN ( n29218 ) ,
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 INV1_90S9T16R U36320 ( .I ( n7338 ) , .ZN ( n9026_CDR1 ) , .VDD ( VDD ) , 
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-CLKNAND2V8_90S9T16R ctmTdsLR_1_3958 ( .A1 ( popt_net_1258 ) , 
+CLKNAND2V16_90S9T16R ctmTdsLR_1_3958 ( .A1 ( popt_net_1258 ) , 
     .A2 ( popt_net_1259 ) , .ZN ( sa00_sr[5] ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
 CLKINV10_90S9T16R U36125 ( .I ( n34515 ) , .ZN ( n43016_CDR1 ) , 
@@ -44674,7 +44674,7 @@ INV2_90S9T16R U35222 ( .I ( n5368 ) , .ZN ( n48416 ) , .VDD ( VDD ) ,
 NAND3BBV4_90S9T16R U35125 ( .A1 ( n39013_CDR1 ) , .A2 ( n51912 ) , 
     .B ( n8629 ) , .ZN ( n5538 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
-NOR2V3_90S9T16R ctmTdsLR_2_3959 ( .A1 ( n4284 ) , .A2 ( n4315_CDR1 ) , 
+NOR2V6_90S9T16R ctmTdsLR_2_3959 ( .A1 ( n4284 ) , .A2 ( n4315_CDR1 ) , 
     .ZN ( popt_net_1258 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
     .VSS ( VSS ) ) ;
 CLKNAND2V3_90S9T16R U34920 ( .A1 ( n53410 ) , .A2 ( n5387 ) , .ZN ( n47416 ) , 
@@ -44825,7 +44825,7 @@ CLKINV1_90S9T16R U28920 ( .I ( n25121_CDR1 ) , .ZN ( n6157_CDR1 ) ,
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 AND2V12_90S9T16R U28820 ( .A1 ( sa33[2] ) , .A2 ( n25816 ) , .Z ( n19616 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-MUX2NV3_90S9T16R ctmTdsLR_1_6208 ( .I0 ( popt_net_2056 ) , 
+MUX2NV4_90S9T16R ctmTdsLR_1_6208 ( .I0 ( popt_net_2056 ) , 
     .I1 ( popt_net_2055 ) , .S ( n1354 ) , .ZN ( n1357 ) , .VDD ( VDD ) , 
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 BUFV1_90S9T16R ZBUF_5_inst_11468 ( .I ( n26914 ) , .Z ( ZBUF_5_235 ) , 
@@ -45983,7 +45983,7 @@ CLKINV0P5_90S9T16R ctmTdsLR_3_2042 ( .I ( w0[17] ) , .ZN ( popt_net_79 ) ,
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 CLKINV0P5_90S9T16R ctmTdsLR_4_2043 ( .I ( w1[17] ) , .ZN ( popt_net_80 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-OAI211V2_90S9T16R ctmTdsLR_1_2247 ( .A1 ( popt_net_195 ) , 
+OAI211V6_90S9T16R ctmTdsLR_1_2247 ( .A1 ( popt_net_195 ) , 
     .A2 ( ZBUF_9_184 ) , .B ( popt_net_196 ) , .C ( popt_net_199 ) , 
     .ZN ( n608 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 NAND2XBV0P5_90S9T16R ctmTdsLR_9_6398 ( .A1 ( n801 ) , .B1 ( HFSNET_2 ) , 
@@ -46032,7 +46032,7 @@ INV1_90S9T16R ctmTdsLR_1_2665 ( .I ( popt_net_472 ) , .ZN ( n1299 ) ,
 AOI21V2_90S9T16R ctmTdsLR_2_2666 ( .A1 ( n1037 ) , .A2 ( popt_net_470 ) , 
     .B ( popt_net_471 ) , .ZN ( popt_net_472 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
-OAI211V2_90S9T16R ctmTdsLR_1_6695 ( .A1 ( ZINV_77_153 ) , 
+OAI211V1_90S9T16R ctmTdsLR_1_6695 ( .A1 ( ZINV_77_153 ) , 
     .A2 ( popt_net_149 ) , .B ( popt_net_2394 ) , .C ( popt_net_2756 ) , 
     .ZN ( N277 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 NOR4BBV4_90S9T16R ctmTdsLR_1_2094 ( .A1 ( n4911 ) , .A2 ( popt_net_94 ) , 
@@ -46183,7 +46183,7 @@ MUX2NV2_90S9T16R ctmTdsLR_10_2256 ( .I0 ( popt_net_197 ) ,
 NOR2XBV2_90S9T16R ctmTdsLR_11_2257 ( .A1 ( w0[2] ) , .B1 ( n626 ) , 
     .ZN ( popt_net_197 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
     .VSS ( VSS ) ) ;
-NOR2V3_90S9T16R ctmTdsLR_12_2258 ( .A1 ( n626 ) , .A2 ( w0[2] ) , 
+NOR2V2_90S9T16R ctmTdsLR_12_2258 ( .A1 ( n626 ) , .A2 ( w0[2] ) , 
     .ZN ( popt_net_198 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
     .VSS ( VSS ) ) ;
 CLKNAND2V1_90S9T16R ctmTdsLR_2_7292 ( .A1 ( net56717_CDR1 ) , 
@@ -46938,7 +46938,7 @@ CLKINV12_90S9T16R ctmTdsLR_1_8642 ( .I ( popt_net_3694 ) ,
 OAI211V1_90S9T16R ctmTdsLR_1_9166 ( .A1 ( popt_net_2783 ) , .A2 ( n1487 ) , 
     .B ( popt_net_2785 ) , .C ( popt_net_2990 ) , .ZN ( N147 ) , 
     .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
-CLKNOR2V2_90S9T16R ctmTdsLR_1_2880 ( .A1 ( popt_net_618 ) , 
+CLKNOR2V6_90S9T16R ctmTdsLR_1_2880 ( .A1 ( popt_net_618 ) , 
     .A2 ( popt_net_619 ) , .ZN ( n1891 ) , .VDD ( VDD ) , .VPW ( VSS ) , 
     .VNW ( VDD ) , .VSS ( VSS ) ) ;
 NOR2XBV1_90S9T16R ctmTdsLR_2_2881 ( .A1 ( n2742 ) , .B1 ( n2910 ) , 
@@ -52195,7 +52195,7 @@ NAND2XBV1_90S9T16R ctmTdsLR_3_8770 ( .A1 ( HFSNET_16 ) , .B1 ( n14310 ) ,
 CLKNAND2V0P5_90S9T16R ctmTdsLR_4_8771 ( .A1 ( HFSNET_16 ) , .A2 ( key[41] ) , 
     .ZN ( popt_net_3734 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
     .VSS ( VSS ) ) ;
-NAND2V4_90S9T16R ctmTdsLR_1_9176 ( .A1 ( sa10_sr[2] ) , .A2 ( sa00_sr[2] ) , 
+NAND2V14_90S9T16R ctmTdsLR_1_9176 ( .A1 ( sa10_sr[2] ) , .A2 ( sa00_sr[2] ) , 
     .ZN ( n626 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 NOR2V2_90S9T16R ctmTdsLR_3_9073 ( .A1 ( n4781 ) , .A2 ( n8082 ) , 
     .ZN ( popt_net_3862 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
@@ -52622,7 +52622,7 @@ CLKNAND2V2_90S9T16R ctmTdsLR_1_9792 ( .A1 ( popt_net_4171 ) ,
 CLKNOR2V1_90S9T16R ctmTdsLR_2_9793 ( .A1 ( n6074_CDR1 ) , .A2 ( n6094_CDR1 ) , 
     .ZN ( popt_net_4171 ) , .VDD ( VDD ) , .VPW ( VSS ) , .VNW ( VDD ) , 
     .VSS ( VSS ) ) ;
-NOR4BBV4_90S9T16R ctmTdsLR_1_9555 ( .A1 ( n3231 ) , .A2 ( n3221 ) , 
+NOR4BBV2_90S9T16R ctmTdsLR_1_9555 ( .A1 ( n3231 ) , .A2 ( n3221 ) , 
     .B1 ( n3213_CDR1 ) , .B2 ( n2012 ) , .ZN ( n1910 ) , .VDD ( VDD ) , 
     .VPW ( VSS ) , .VNW ( VDD ) , .VSS ( VSS ) ) ;
 NOR2V1_90S9T16R ctmTdsLR_3_9794 ( .A1 ( n6104_CDR1 ) , .A2 ( n6084_CDR1 ) , 
