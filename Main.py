@@ -45,10 +45,10 @@ if __name__ == '__main__':
             obs, _ = env.reset()
             agent = DT_ECO.create_agent(env)
             agent.train(
-                total_timesteps=1000,
+                total_timesteps=10000,
                 eval_env=env,
                 # start_time=time.time(),
             )
 
 # close all loggers
-close_all()
+tee.close_all()
