@@ -1,0 +1,13 @@
+{"time":"2024-10-15T10:38:12.318414847+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-15T10:38:12.318427978+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/wandb/run-20241015_103812-yo73bgz5/logs/debug-core.log"}
+{"time":"2024-10-15T10:38:12.32349367+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-15T10:38:12.326404562+08:00","level":"INFO","msg":"created new stream","id":"yo73bgz5"}
+{"time":"2024-10-15T10:38:12.326431378+08:00","level":"INFO","msg":"stream: started","id":"yo73bgz5"}
+{"time":"2024-10-15T10:38:12.326436247+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"yo73bgz5"}}
+{"time":"2024-10-15T10:38:12.326440649+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"yo73bgz5"}}
+{"time":"2024-10-15T10:38:12.326445666+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"yo73bgz5"}}
+{"time":"2024-10-15T10:38:12.810232058+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-15T10:38:12.810643429+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-15T10:43:28.690348978+08:00","level":"INFO","msg":"stream: closing","id":"yo73bgz5"}
+{"time":"2024-10-15T10:43:28.690370046+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-15T10:43:28.69119521+08:00","level":"INFO","msg":"Stopped system monitor"}

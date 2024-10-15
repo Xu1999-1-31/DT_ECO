@@ -1,9 +1,0 @@
-Building aes_cipher_top_inline Timing Graph.
-Runtime for One Path Inline Sizing: 0 hours, 0 minutes, 1.49 seconds
-Traceback (most recent call last):
-  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 43, in <module>
-    agent.buffer.add(obs=obs, next_obs=real_next_obs, action=actions, reward=rewards, done=terminated)
-  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO_Buffer.py", line 70, in add
-    self.next_timing_graph[self.ptr] = np.array(next_obs["timing_graph"]).copy()
-    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-ValueError: could not broadcast input array from shape (46139,5) into shape (49514,5)

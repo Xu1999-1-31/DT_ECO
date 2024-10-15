@@ -1,7 +1,0 @@
-Traceback (most recent call last):
-  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 49, in <module>
-    agent.train(
-  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 493, in train
-    if isinstance(value, dgl.heterograph.DGLGraph):
-                         ^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'function' object has no attribute 'DGLGraph'

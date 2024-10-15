@@ -6,7 +6,7 @@ def create_agent(env):
     agent = MOSAC(
         env=env,
         weights = np.array([1]), # weights of reward values
-        buffer_size = int(100), # size of resampling buffer 
+        buffer_size = int(1000), # size of resampling buffer 
         gamma = 0.99, # discount factor
         tau = 0.005, # soft update parameter
         batch_size = 5, # batch size

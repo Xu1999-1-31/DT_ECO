@@ -1,0 +1,15 @@
+{"time":"2024-10-15T10:25:17.42836466+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-15T10:25:17.428375076+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/wandb/run-20241015_102517-mp50v8ox/logs/debug-core.log"}
+{"time":"2024-10-15T10:25:17.432989817+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-15T10:25:17.434750364+08:00","level":"INFO","msg":"created new stream","id":"mp50v8ox"}
+{"time":"2024-10-15T10:25:17.43476729+08:00","level":"INFO","msg":"stream: started","id":"mp50v8ox"}
+{"time":"2024-10-15T10:25:17.434772108+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"mp50v8ox"}}
+{"time":"2024-10-15T10:25:17.434778678+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"mp50v8ox"}}
+{"time":"2024-10-15T10:25:17.434780478+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"mp50v8ox"}}
+{"time":"2024-10-15T10:25:18.013421007+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-15T10:25:18.013748037+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-15T10:25:18.026814699+08:00","level":"ERROR","msg":"error generating diff","error":"no diff found"}
+{"time":"2024-10-15T10:25:18.029854872+08:00","level":"ERROR","msg":"error generating diff","error":"no diff found"}
+{"time":"2024-10-15T10:28:44.817260269+08:00","level":"INFO","msg":"stream: closing","id":"mp50v8ox"}
+{"time":"2024-10-15T10:28:44.817279977+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-15T10:28:44.818311363+08:00","level":"INFO","msg":"Stopped system monitor"}

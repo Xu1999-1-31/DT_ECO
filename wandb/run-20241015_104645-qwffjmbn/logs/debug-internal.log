@@ -1,0 +1,13 @@
+{"time":"2024-10-15T10:46:45.079230924+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-15T10:46:45.079242118+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/wandb/run-20241015_104645-qwffjmbn/logs/debug-core.log"}
+{"time":"2024-10-15T10:46:45.089043109+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-15T10:46:45.09143791+08:00","level":"INFO","msg":"created new stream","id":"qwffjmbn"}
+{"time":"2024-10-15T10:46:45.091456039+08:00","level":"INFO","msg":"stream: started","id":"qwffjmbn"}
+{"time":"2024-10-15T10:46:45.091462307+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"qwffjmbn"}}
+{"time":"2024-10-15T10:46:45.091460217+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"qwffjmbn"}}
+{"time":"2024-10-15T10:46:45.091467922+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"qwffjmbn"}}
+{"time":"2024-10-15T10:46:45.566227681+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-15T10:46:45.566655363+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-15T10:47:48.472000051+08:00","level":"INFO","msg":"stream: closing","id":"qwffjmbn"}
+{"time":"2024-10-15T10:47:48.47202232+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-15T10:47:48.472781816+08:00","level":"INFO","msg":"Stopped system monitor"}

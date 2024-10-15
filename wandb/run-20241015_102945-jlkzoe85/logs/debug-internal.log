@@ -1,0 +1,13 @@
+{"time":"2024-10-15T10:29:45.752447651+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-15T10:29:45.7524603+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/wandb/run-20241015_102945-jlkzoe85/logs/debug-core.log"}
+{"time":"2024-10-15T10:29:45.86182637+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-15T10:29:45.864447713+08:00","level":"INFO","msg":"created new stream","id":"jlkzoe85"}
+{"time":"2024-10-15T10:29:45.864466108+08:00","level":"INFO","msg":"stream: started","id":"jlkzoe85"}
+{"time":"2024-10-15T10:29:45.86447434+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"jlkzoe85"}}
+{"time":"2024-10-15T10:29:45.864471856+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"jlkzoe85"}}
+{"time":"2024-10-15T10:29:45.864484889+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"jlkzoe85"}}
+{"time":"2024-10-15T10:29:46.365524204+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-15T10:29:46.365905345+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-15T10:31:14.939055633+08:00","level":"INFO","msg":"stream: closing","id":"jlkzoe85"}
+{"time":"2024-10-15T10:31:14.939075766+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-15T10:31:14.939713743+08:00","level":"INFO","msg":"Stopped system monitor"}

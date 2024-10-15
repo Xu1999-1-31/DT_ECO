@@ -1,0 +1,18 @@
+{"time":"2024-10-15T11:06:08.555010886+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-15T11:06:08.555020729+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/wandb/run-20241015_110608-rtmpjhmv/logs/debug-core.log"}
+{"time":"2024-10-15T11:06:08.559630228+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-15T11:06:08.561967711+08:00","level":"INFO","msg":"created new stream","id":"rtmpjhmv"}
+{"time":"2024-10-15T11:06:08.561992411+08:00","level":"INFO","msg":"stream: started","id":"rtmpjhmv"}
+{"time":"2024-10-15T11:06:08.56200261+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"rtmpjhmv"}}
+{"time":"2024-10-15T11:06:08.561997884+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"rtmpjhmv"}}
+{"time":"2024-10-15T11:06:08.562006527+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"rtmpjhmv"}}
+{"time":"2024-10-15T11:06:09.082842501+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-15T11:06:09.083702856+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-15T11:21:12.368382253+08:00","level":"INFO","msg":"stream: closing","id":"rtmpjhmv"}
+{"time":"2024-10-15T11:21:12.368402597+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-15T11:21:12.369390598+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-15T11:21:15.920244789+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-15T11:21:16.44935345+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"rtmpjhmv"}}
+{"time":"2024-10-15T11:21:16.449394023+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"rtmpjhmv"}}
+{"time":"2024-10-15T11:21:16.449420045+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"rtmpjhmv"}}
+{"time":"2024-10-15T11:21:16.449456551+08:00","level":"INFO","msg":"stream: closed","id":"rtmpjhmv"}

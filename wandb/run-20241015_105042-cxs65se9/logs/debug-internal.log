@@ -1,0 +1,13 @@
+{"time":"2024-10-15T10:50:42.271441846+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-15T10:50:42.271451853+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/wandb/run-20241015_105042-cxs65se9/logs/debug-core.log"}
+{"time":"2024-10-15T10:50:42.277820272+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-15T10:50:42.2800964+08:00","level":"INFO","msg":"created new stream","id":"cxs65se9"}
+{"time":"2024-10-15T10:50:42.280112876+08:00","level":"INFO","msg":"stream: started","id":"cxs65se9"}
+{"time":"2024-10-15T10:50:42.280117751+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"cxs65se9"}}
+{"time":"2024-10-15T10:50:42.280123106+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"cxs65se9"}}
+{"time":"2024-10-15T10:50:42.280121101+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"cxs65se9"}}
+{"time":"2024-10-15T10:50:42.830072877+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-15T10:50:42.831233941+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-15T10:51:43.113792482+08:00","level":"INFO","msg":"stream: closing","id":"cxs65se9"}
+{"time":"2024-10-15T10:51:43.113809942+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-15T10:51:43.11496676+08:00","level":"INFO","msg":"Stopped system monitor"}

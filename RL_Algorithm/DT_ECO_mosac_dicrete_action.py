@@ -536,7 +536,7 @@ class MOSAC(MOPolicy, MOAgent):
             if actions.ndim == 2:
                 actions = np.squeeze(actions)
             next_obs, rewards, terminated, truncated, infos = self.env.step(actions)
-            print(rewards)
+            print(f'Timing Step: {step}, rewards: {rewards}')
 
             # TRY NOT TO MODIFY: save data to reply buffer; handle `final_observation`
             real_next_obs = next_obs
@@ -564,9 +564,10 @@ class MOSAC(MOPolicy, MOAgent):
                 self.update()
                 # print(self.global_step)
                 if self.log and self.global_step % 100 == 0:
-                    print("SPS:", int(self.global_step / (time.time() - start_time)))
+                    print('SecondPerStep:', float(self.global_step / (time.time() - start_time)))
+                    print('Time consumed:', time.time() - start_time)
                     wandb.log(
-                        {"charts/SPS": int(self.global_step / (time.time() - start_time)), "global_step": self.global_step}
+                        {"charts/SPS": float(self.global_step / (time.time() - start_time)), "global_step": self.global_step}
                     )
 
             self.global_step += 1

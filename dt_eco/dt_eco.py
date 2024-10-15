@@ -31,7 +31,6 @@ search_paths = [
 module_dir = find_module_dir('Global_var', search_paths)
 if module_dir:
     sys.path.append(module_dir)
-    print(f"Project Main dir found by the 'dt_eco' environment file.")
 else:
     raise ImportError("Project Main dir not found by the 'dt_eco' environment file. Please check the working directory!")
 import Global_var
@@ -250,6 +249,7 @@ class DT_ECO(gym.Env):
     def step(self, action):  
         # new episode begin
         if self.current_path_index >= len(self.CriticalPaths):
+            print(f'All paths sized, new episode begin')
             self.current_path_index = 0
             self.sizedCellList
             self.inline = False
@@ -328,7 +328,7 @@ class DT_ECO(gym.Env):
         return self._get_obs(done), vec_reward, done, False, info
 
     def _get_gate_sizes(self):
-        gate_sizes = np.zeros(len(self.CriticalPaths[self.current_path_index].Cellname_to_Cell.keys()), dtype=np.int32)  # total number of gates on paths
+        gate_sizes = np.zeros(len(self.CriticalPaths[self.current_path_index].Cellname_to_Cell.keys()), dtype=np.float32)  # total number of gates on paths
         gate_sizes[:len(self.chosen_sizes)] = [val + self.gate_size_list[1] for val in self.chosen_sizes] # plus 1/max_length to avoid 0, since 0 means gate remain its original size
         self.gate_sizes[self.current_path_index, :len(gate_sizes)] = gate_sizes # update the gate sizes observation
         return gate_sizes
@@ -342,27 +342,27 @@ class DT_ECO(gym.Env):
             if chosedsize == 0:
                 pass # 0 means remain the original size
             elif chosedsize <= maxsize:
-                chosedsize = self.gate_size_list.index(chosedsize - self.gate_size_list[1]) # resore the size to the index
+                # restore the key value to the action space, consider the distubance introduced by minus and plus
+                chosedsize = min(range(len(self.gate_size_list)), key=lambda i: abs(self.gate_size_list[i] - (chosedsize - self.gate_size_list[1])))
                 newsize = self.footprint[cellfootprint][chosedsize]
                 sizedCell[cellname] = [originalsize, newsize]
             else:
                 pass # invalid size
+        # print(sizedCell)    
         return sizedCell
 
 if __name__ == "__main__": 
     start_time = time.time()
     env = DT_ECO()
     env.reset()
-    # for _ in range(env.steps_needed):
-    #     env.render()
-    #     action = env.action_space.sample() # random action space sampling
-    #     # print(f'action: {action}#{type(action)}')
-    #     current_state, vec_reward, done, truncated, info = env.step(action)
-    #     # np.set_printoptions(edgeitems=10, threshold=20, precision=4, suppress=False, linewidth=np.inf)
-    #     # print(current_state['gate_sizes'])
-    #     print(f'reward: {vec_reward}')
-    #     if done:
-    #         env.reset()
+    for i in range(env.steps_needed):
+        env.render()
+        action = env.action_space.sample() # random action space sampling
+        current_state, vec_reward, done, truncated, info = env.step(action)
+        # np.set_printoptions(edgeitems=10, threshold=20, precision=4, suppress=False, linewidth=np.inf)
+        print(f'step {i} reward: {vec_reward}')
+        if done:
+            env.reset()
     env.close()
     end_time = time.time()
     elapsed_time = end_time - start_time

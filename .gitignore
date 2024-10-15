@@ -24,5 +24,4 @@ DataTrans/Processed_Data/*
 
 __pycache__/
 
-MOSAC/wandb/*
-!MOSAC/wandb/.gitkeep
+*/wandb/*

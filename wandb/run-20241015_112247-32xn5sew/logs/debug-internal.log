@@ -1,0 +1,10 @@
+{"time":"2024-10-15T11:22:47.514506132+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-15T11:22:47.514512031+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/wandb/run-20241015_112247-32xn5sew/logs/debug-core.log"}
+{"time":"2024-10-15T11:22:47.527806356+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-15T11:22:47.529854893+08:00","level":"INFO","msg":"created new stream","id":"32xn5sew"}
+{"time":"2024-10-15T11:22:47.529876429+08:00","level":"INFO","msg":"stream: started","id":"32xn5sew"}
+{"time":"2024-10-15T11:22:47.529881405+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"32xn5sew"}}
+{"time":"2024-10-15T11:22:47.52988467+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"32xn5sew"}}
+{"time":"2024-10-15T11:22:47.529890024+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"32xn5sew"}}
+{"time":"2024-10-15T11:22:48.066757903+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-15T11:22:48.067209564+08:00","level":"INFO","msg":"Starting system monitor"}

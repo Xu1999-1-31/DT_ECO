@@ -1,0 +1,18 @@
+{"time":"2024-10-15T10:56:56.891256316+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-15T10:56:56.891266904+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/wandb/run-20241015_105656-aq9x3fiv/logs/debug-core.log"}
+{"time":"2024-10-15T10:56:56.898291459+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-15T10:56:56.900499011+08:00","level":"INFO","msg":"created new stream","id":"aq9x3fiv"}
+{"time":"2024-10-15T10:56:56.900515821+08:00","level":"INFO","msg":"stream: started","id":"aq9x3fiv"}
+{"time":"2024-10-15T10:56:56.900530925+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"aq9x3fiv"}}
+{"time":"2024-10-15T10:56:56.900566809+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"aq9x3fiv"}}
+{"time":"2024-10-15T10:56:56.900554092+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"aq9x3fiv"}}
+{"time":"2024-10-15T10:56:57.389193619+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-15T10:56:57.389625478+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-15T10:57:53.863911768+08:00","level":"INFO","msg":"stream: closing","id":"aq9x3fiv"}
+{"time":"2024-10-15T10:57:53.863930693+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-15T10:57:53.864776077+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-15T10:57:57.796670414+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-15T10:57:58.250320506+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"aq9x3fiv"}}
+{"time":"2024-10-15T10:57:58.250354701+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"aq9x3fiv"}}
+{"time":"2024-10-15T10:57:58.250352626+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"aq9x3fiv"}}
+{"time":"2024-10-15T10:57:58.250401262+08:00","level":"INFO","msg":"stream: closed","id":"aq9x3fiv"}

@@ -1,7 +1,0 @@
-Traceback (most recent call last):
-  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 43, in <module>
-    agent.buffer.add(obs=obs, next_obs=real_next_obs, action=actions, reward=rewards, done=terminated)
-  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO_Buffer.py", line 47, in add
-    self.gate_sizes[self.ptr] = obs['gate_sizes'].clone().to(self.device)
-                                ^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'numpy.ndarray' object has no attribute 'clone'
