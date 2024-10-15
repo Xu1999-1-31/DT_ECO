@@ -344,7 +344,8 @@ class DT_ECO(gym.Env):
         return self._get_obs(done), vec_reward, done, False, info
 
     def _get_gate_sizes(self):
-        gate_sizes = np.zeros(len(self.CriticalPaths[self.current_path_index].Cellname_to_Cell.keys()), dtype=np.float32)  # total number of gates on paths
+        # gate_sizes = np.zeros(len(self.CriticalPaths[self.current_path_index].Cellname_to_Cell.keys()), dtype=np.float32)  # total number of gates on paths
+        gate_sizes = np.full(len(self.CriticalPaths[self.current_path_index].Cellname_to_Cell.keys()), -1, dtype=np.float32)
         gate_sizes[:len(self.chosen_sizes)] = [val + self.gate_size_list[1] for val in self.chosen_sizes] # plus 1/max_length to avoid 0, since 0 means gate remain its original size
         self.gate_sizes[self.current_path_index, :len(gate_sizes)] = gate_sizes # update the gate sizes observation
         return gate_sizes
@@ -355,8 +356,8 @@ class DT_ECO(gym.Env):
             originalsize = celltype # NANDX2
             cellfootprint = self.timingLib[celltype].footprint # Cell Timing Lib Structure
             maxsize = len(self.footprint[cellfootprint])* self.gate_size_list[1] # chosed size should be less than maxsize
-            if chosedsize == 0:
-                pass # 0 means remain the original size
+            if chosedsize == 0 or chosedsize == -1:
+                pass # -1 means the gate on the current path not sized, 0 means padding
             elif chosedsize <= maxsize:
                 # restore the key value to the action space, consider the distubance introduced by minus and plus
                 chosedsize = min(range(len(self.gate_size_list)), key=lambda i: abs(self.gate_size_list[i] - (chosedsize - self.gate_size_list[1])))

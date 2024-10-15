@@ -17,7 +17,7 @@ class Tee(object):
     credits : http://stackoverflow.com/q/616645
     """
 
-    def __init__(self, filename, mode="a", buff=-1, file_filters=None, stream_filters=None):
+    def __init__(self, filename, mode="w", buff=-1, file_filters=None, stream_filters=None):
         """
         writes both to stream and to file.
         file_filters is a list of callables that processes a string just before being written
