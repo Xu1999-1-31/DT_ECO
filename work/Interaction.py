@@ -1,11 +1,18 @@
 import subprocess
+import shutil
 import os
 import sys
 root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(root_dir)
 import Global_var
 
+def check_command(command_name):
+    # check if the command is available
+    return shutil.which(command_name) is not None
+
 def Run_Pt_Script(script):
+    if not check_command('pt_shell'):
+        raise EnvironmentError("Error: 'pt_shell' not found. Please ensure PrimeTime is correctly installed and added to your PATH.")
     command = ['pt_shell', '-f', '../' + script]
     working_directory = os.path.join(Global_var.work_dir, 'log/')
     if not os.path.exists(working_directory):
@@ -24,6 +31,8 @@ def Run_Pt_Script(script):
     print('Return code:', process.returncode)
 
 def Run_Icc2_Script(script):
+    if not check_command('icc2_shell'):
+        raise EnvironmentError("Error: 'icc2_shell' not found. Please ensure IC_Compiler2 is correctly installed and added to your PATH.")
     command = ['icc2_shell', '-f', '../' + script]
     working_directory = os.path.join(Global_var.work_dir, 'log/')
     if not os.path.exists(working_directory):
