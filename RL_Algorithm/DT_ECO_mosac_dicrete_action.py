@@ -544,12 +544,12 @@ class MOSAC(MOPolicy, MOAgent):
                 real_next_obs = infos["final_observation"]
             self.buffer.add(obs=obs, next_obs=real_next_obs, action=actions, reward=rewards, done=terminated)
             #print(rewards)
-            if terminated == True:
-                # Log rewards to a CSV file 
-                # print(rewards)
-                rewards_to_log = rewards # Convert tensor to numpy array for easier handling 
-                csv_filename = f"sac_data/rewards_log_SAC{self.id}.csv" 
-                file_exists = os.path.isfile(csv_filename) 
+            # if terminated == True:
+            #     # Log rewards to a CSV file 
+            #     # print(rewards)
+            #     rewards_to_log = rewards # Convert tensor to numpy array for easier handling 
+            #     csv_filename = f"sac_data/rewards_log_SAC{self.id}.csv" 
+            #     file_exists = os.path.isfile(csv_filename) 
                 
 
             # TRY NOT TO MODIFY: CRUCIAL step easy to overlook

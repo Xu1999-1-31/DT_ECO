@@ -3,13 +3,37 @@ import numpy as np
 import gymnasium as gym
 from gymnasium import spaces
 import torch as th
+
+def find_module_dir(module_name, search_paths):
+    """
+    find the target module in the given paths
+    :param module_name: target module name
+    :param search_paths: list of search paths
+    :return: the path which contains the target module or None
+    """
+    for path in search_paths:
+        module_path = os.path.join(path, module_name + ".py")
+        if os.path.exists(module_path):
+            return path
+    return None
+
+
 import os
 import sys
 main_script_path = os.path.abspath(sys.argv[0])  # absolute path to the python script being run
 main_script_dir = os.path.dirname(main_script_path)  # main script directory
 parent_dir = os.path.dirname(main_script_dir) # root directory
-sys.path.append(parent_dir)
-sys.path.append('../')
+search_paths = [
+    main_script_dir,
+    parent_dir,
+    '../'
+]
+module_dir = find_module_dir('Global_var', search_paths)
+if module_dir:
+    sys.path.append(module_dir)
+    print(f"Project Main dir found by the 'dt_eco' environment file.")
+else:
+    raise ImportError("Project Main dir not found by the 'dt_eco' environment file. Please check the working directory!")
 import Global_var
 import DataBuilder
 import TimingGraphTrans
