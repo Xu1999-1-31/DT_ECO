@@ -155,7 +155,7 @@ class DT_ECO(gym.Env):
         # reward space [[low[0]:high[0]], [low[1]:high[1]]]
         self.reward_dim = 1
         
-        self.inline=False # if inline Verilog timing or not
+        # self.inline=False # if inline Verilog timing or not
         
         end_time = time.time()
         elapsed_time = end_time - start_time
@@ -201,6 +201,7 @@ class DT_ECO(gym.Env):
         self.current_path_index = 0 # the number of the path
         self.chosen_sizes = [] # the sizes of the gates on the path
         self.sizedCellList = [] # all dicts with sized cells
+        # self.inline = False # stop inline verilog change
         self.graph = TimingGraphTrans.LoadTimingGraph(self.current_design, False)
         self.nodes, self.nodes_rev = TimingGraphTrans.LoadNodeDict(self.current_design)
         self.Layout, _, self.Cpath_Padding, self.CriticalPaths = PhysicalDataTrans.LoadPhysicalData(self.current_design, 512, False)
@@ -247,16 +248,9 @@ class DT_ECO(gym.Env):
         return [tns, drc]
     
     def step(self, action):  
-        # new episode begin
-        if self.current_path_index >= len(self.CriticalPaths):
-            print(f'All paths sized, new episode begin')
-            self.current_path_index = 0
-            self.sizedCellList
-            self.inline = False
-             
         if self.current_gate_index < len(self.CriticalPaths[self.current_path_index].Cellname_to_Cell.keys()): # one action not finished // Cellname_to_Cell: U222 -> NAND
             self.chosen_sizes.append(self.gate_size_list[action])  # append the gate size list
-            self.gate_sizes = np.zeros((len(self.CriticalPaths), self.max_cells), dtype=np.float32)
+            self._get_gate_sizes()
             
             # if the action finished and episode not: one critical merged path is sized
             if len(self.chosen_sizes) == len(self.CriticalPaths[self.current_path_index].Cellname_to_Cell.keys()) and self.current_path_index != len(self.CriticalPaths) - 1:
@@ -266,21 +260,21 @@ class DT_ECO(gym.Env):
                 self.sizedCellList.append(changed_cell_dict)
                 if self.current_path_index == 0: # first path
                     Interaction.VerilogInlineChange(self.current_design, changed_cell_dict, Incremental=False)
-                    self.inline = True
+                    # self.inline = True
                 else:
                     Interaction.VerilogInlineChange(self.current_design, changed_cell_dict, Incremental=True) 
                     
-                # # run pt
-                Interaction.VerilogInline_PT_Iteration(self.current_design)
-                # Timing Graph update (inline)
-                self.graph = TimingGraphTrans.LoadTimingGraph(self.current_design+'_inline', True)               
-                self.nodes, self.nodes_rev = TimingGraphTrans.LoadNodeDict(self.current_design+'_inline')
+                # # run pt and do Timing Graph update (inline)
+                # Interaction.VerilogInline_PT_Iteration(self.current_design)
+                # self.graph = TimingGraphTrans.LoadTimingGraph(self.current_design+'_inline', True)               
+                # self.nodes, self.nodes_rev = TimingGraphTrans.LoadNodeDict(self.current_design+'_inline')
                 
                 done = False
                 info = {'message':'One critical merged path sized sucessfully'}
                 end_time = time.time()
                 report_time(end_time - start_time, 'One Path Inline Sizing')
-                vec_reward = self._get_tns_drc(self.inline, False)
+                vec_reward = [self._get_tns_drc(inline=True, ECO=False)[0] - self._get_tns_drc(inline=False, ECO=False)[0],
+                                self._get_tns_drc(inline=True, ECO=False)[1] - self._get_tns_drc(inline=False, ECO=False)[1]] # delta tns, delta drc
                 
             # if the action finished and episode finished: the whole design is sized
             elif len(self.chosen_sizes) == len(self.CriticalPaths[self.current_path_index].Cellname_to_Cell.keys()) and self.current_path_index == len(self.CriticalPaths) - 1:
@@ -291,22 +285,34 @@ class DT_ECO(gym.Env):
                 Interaction.VerilogInlineChange(self.current_design, changed_cell_dict, Incremental=True)
                 Interaction.Write_Incremental_ECO_Scripts(self.current_design, self.sizedCellList)
                 
-                # run icc2 and pt
+                # run icc2 and pt and do ECO data update
                 # Interaction.ECO_PRPT_Iteration(self.current_design)
                 # Timing Graph update (ECO)
-                self.graph = TimingGraphTrans.LoadTimingGraph(self.current_design+'_eco', True)
+                # self.graph = TimingGraphTrans.LoadTimingGraph(self.current_design+'_eco', True)
+                # self.nodes, self.nodes_rev = TimingGraphTrans.LoadNodeDict(self.current_design+'_eco')
                 # Physical Data update (ECO)
-                self.Layout, self.Padding_Mask, self.Cpath_Padding, self.CriticalPaths = PhysicalDataTrans.LoadPhysicalData(self.current_design+'_eco', 512, True)
+                # self.Layout, self.Padding_Mask, self.Cpath_Padding, self.CriticalPaths = PhysicalDataTrans.LoadPhysicalData(self.current_design+'_eco', 512, True)
+                
+                # run pt only and do Timing Graph update (inline)
+                # Interaction.VerilogInline_PT_Iteration(self.current_design)
+                # self.graph = TimingGraphTrans.LoadTimingGraph(self.current_design+'_inline', True)               
+                # self.nodes, self.nodes_rev = TimingGraphTrans.LoadNodeDict(self.current_design+'_inline')
                 
                 done = True
                 info = {'message':'One PR Episode completed sucessfully'}
                 end_time = time.time()
                 report_time(end_time - start_time, 'One PR Incremental Sizing')
-                vec_reward = self._get_tns_drc(False, True)
                 
+                # ECO reward
+                # vec_reward = [self._get_tns_drc(inline=False, ECO=True)[0] - self._get_tns_drc(inline=False, ECO=False)[0],
+                #                  self._get_tns_drc(inline=False, ECO=True)[1] - self._get_tns_drc(inline=False, ECO=False)[1]]
+                
+                # inLine reward
+                vec_reward = [self._get_tns_drc(inline=True, ECO=False)[0] - self._get_tns_drc(inline=False, ECO=False)[0],
+                                self._get_tns_drc(inline=True, ECO=False)[1] - self._get_tns_drc(inline=False, ECO=False)[1]] # delta tns, delta drc
             else:
                 done = False
-                vec_reward = self._get_tns_drc(self.inline)
+                vec_reward = [0, 0] # one path not finished, no reward
                 info = {}
             self._process_gate_features()
             # get the gate feature for the current gate
@@ -314,14 +320,24 @@ class DT_ECO(gym.Env):
         else: # new action begin
             self.current_gate_index = 0
             self.chosen_sizes = []
-            self.current_path_index += 1
             self.sizedCellList = []
+            self.current_path_index += 1
+            # new episode begin
+            if self.current_path_index >= len(self.CriticalPaths):
+                print(f'All paths sized, new episode begin')
+                self.current_path_index = 0
+                # reload origin timing graph and physical data
+                self.graph = TimingGraphTrans.LoadTimingGraph(self.current_design, False)
+                self.nodes, self.nodes_rev = TimingGraphTrans.LoadNodeDict(self.current_design)
+                self.Layout, _, self.Cpath_Padding, self.CriticalPaths = PhysicalDataTrans.LoadPhysicalData(self.current_design, 512, False)
+                self.gate_sizes = np.zeros((len(self.CriticalPaths), self.max_cells), dtype=np.float32)
+                # self.inline = False
             self.Gate_feature = th.zeros(15, dtype=th.float32)
             done = False
-            vec_reward = self._get_tns_drc(self.inline)
+            vec_reward = [0, 0] # one path not begin, no reward
             info = {}
         
-        vec_reward = -1/vec_reward[0]  # only return -tns
+        vec_reward = 0 if vec_reward[0] == 0 else -1/(vec_reward[0])  # only return -1/tns
         # get current graph padding
         self._add_graph_padding()
     

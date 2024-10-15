@@ -178,7 +178,7 @@ class SelfAttentionPool(torch.nn.Module):
         
         return pooled_output  # output dim: [batch_size, embedding_dim]
 
-class MultiModalNN(torch.nn.Module):
+class MultiModalNNWithGate(torch.nn.Module):
     def __init__(self, num_layers, hidden_nf, out_nf, output, embedding_dim, num_heads=4, num_Attention_layer=3, in_nf = 5, in_ef = 4, h1=32, h2=32, in_channels=4):
         super(MultiModalNN, self).__init__()
         self.gnn = MultiLayerTimingGNN(num_layers, hidden_nf, out_nf, in_nf, in_ef, h1, h2)
@@ -228,5 +228,54 @@ class MultiModalNN(torch.nn.Module):
 
         # Concatenate features across the batch
         combined_features = torch.cat([Img_feature, Gnn_feature, gsize, Gate_feature], dim=1)  # Concatenate along feature dim
+        Output = self.MLP_Output(combined_features)
+        return Output
+    
+class MultiModalNN(torch.nn.Module): # without gate feature
+    def __init__(self, num_layers, hidden_nf, out_nf, output, embedding_dim, num_heads=4, num_Attention_layer=3, in_nf = 5, in_ef = 4, h1=32, h2=32, in_channels=4):
+        super(MultiModalNN, self).__init__()
+        self.gnn = MultiLayerTimingGNN(num_layers, hidden_nf, out_nf, in_nf, in_ef, h1, h2)
+        self.cnn = CNN(in_channels)
+        self.AttentionPool = SelfAttentionPool(embedding_dim, num_heads, num_Attention_layer)
+        self.MLP_cnn_forward = MLP(64*64, 64, 64, 32)   # MLP after Padding
+        self.MLP_gnn_forward = MLP(out_nf, 64, 64, 32) # MLP after pooling
+        self.MLP_gsize_forward = MLP(embedding_dim, 64, 64, 32) # MLP after SelfAttentionPool
+        self.MLP_Output = MLP(96, 64, 64, output)
+        
+    def forward(self, g, img, padding_mask, Gate_size):
+        # Ensure the data is in batch form
+        if not hasattr(g, 'batch_size'):
+            g = dgl.batch([g])
+        if img.dim() == 3:
+            img = img.unsqueeze(0)
+        if padding_mask.dim() == 3:
+            padding_mask = padding_mask.unsqueeze(0)
+        if Gate_size.dim() == 2:
+            Gate_size = Gate_size.unsqueeze(0)
+        
+        # GNN part: process the batched graph
+        with g.local_scope():
+            nf = self.gnn(g)
+            padding_mask_expanded = g.ndata['padding_mask'].unsqueeze(-1)
+            g.ndata['feature'] = nf * padding_mask_expanded
+            sum_nf = dgl.sum_nodes(g, 'feature')
+            num_masked_nodes = dgl.sum_nodes(g, 'padding_mask').unsqueeze(-1)
+            pooled_nf = sum_nf / (num_masked_nodes + 1e-6) # avoide division by zero
+
+        # CNN part: process the batch of images
+        img_batch_size = img.size(0)  # Assume img is of shape (batch_size, channels, height, width)
+        img = self.cnn(img)  # Process each image
+        img = torch.mul(img, padding_mask) 
+        img = img.view(img_batch_size, -1)
+        
+        # Gate size part: process the gate size sequence
+        gsize = self.AttentionPool(Gate_size)
+        gsize = self.MLP_gsize_forward(gsize)
+        
+        Img_feature = self.MLP_cnn_forward(img)
+        Gnn_feature = self.MLP_gnn_forward(pooled_nf)
+
+        # Concatenate features across the batch
+        combined_features = torch.cat([Img_feature, Gnn_feature, gsize], dim=1)  # Concatenate along feature dim
         Output = self.MLP_Output(combined_features)
         return Output

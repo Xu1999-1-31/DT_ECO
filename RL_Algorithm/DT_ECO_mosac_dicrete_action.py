@@ -83,7 +83,8 @@ class MOSoftQNetwork(nn.Module):
         Gate_sizes = obs['gate_sizes']
         Gate_feature = obs['gate_features']
         
-        q_values = self.critic(g, img, padding_mask, Gate_feature, Gate_sizes)
+        # q_values = self.critic(g, img, padding_mask, Gate_feature, Gate_sizes)
+        q_values = self.critic(g, img, padding_mask, Gate_sizes)
         return q_values.view(-1, self.action_dim, self.reward_dim)
 
 
@@ -130,7 +131,7 @@ class MOSACActor(nn.Module):
         padding_mask = obs['padding_mask']
         Gate_sizes = obs['gate_sizes']
         Gate_feature = obs['gate_features']
-        logits = self.actor_net(g, img, padding_mask, Gate_feature, Gate_sizes)
+        logits = self.actor_net(g, img, padding_mask, Gate_sizes)
 
         return logits
 

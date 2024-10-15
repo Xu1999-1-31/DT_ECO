@@ -329,7 +329,7 @@ def BuildDrcNumber(design, verbose=False):
     DrcNumber = len(DrcList)
     if verbose:
         print(f'{design} drc number complete!')
-    return DrcNumber
+    return float(DrcNumber)
     
 def BuildDrcMap(design, verbose=False):
     if verbose:
