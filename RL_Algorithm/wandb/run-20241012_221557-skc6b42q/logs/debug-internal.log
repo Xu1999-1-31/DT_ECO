@@ -1,0 +1,19 @@
+{"time":"2024-10-12T22:15:57.49071588+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-12T22:15:57.490726129+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241012_221557-skc6b42q/logs/debug-core.log"}
+{"time":"2024-10-12T22:15:57.495808055+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-12T22:15:57.497944637+08:00","level":"INFO","msg":"created new stream","id":"skc6b42q"}
+{"time":"2024-10-12T22:15:57.497960191+08:00","level":"INFO","msg":"stream: started","id":"skc6b42q"}
+{"time":"2024-10-12T22:15:57.497976567+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"skc6b42q"}}
+{"time":"2024-10-12T22:15:57.498005232+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"skc6b42q"}}
+{"time":"2024-10-12T22:15:57.498001357+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"skc6b42q"}}
+{"time":"2024-10-12T22:15:58.04229771+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-12T22:15:58.04283663+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-12T22:15:58.042967245+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-12T22:15:58.465774548+08:00","level":"INFO","msg":"stream: closing","id":"skc6b42q"}
+{"time":"2024-10-12T22:15:58.699538121+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-12T22:15:58.700407891+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-12T22:15:59.941666756+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-12T22:16:00.415771102+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"skc6b42q"}}
+{"time":"2024-10-12T22:16:00.415810282+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"skc6b42q"}}
+{"time":"2024-10-12T22:16:00.415822501+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"skc6b42q"}}
+{"time":"2024-10-12T22:16:00.415852862+08:00","level":"INFO","msg":"stream: closed","id":"skc6b42q"}

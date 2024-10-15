@@ -1,0 +1,19 @@
+{"time":"2024-10-12T14:10:30.719994229+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-12T14:10:30.720005789+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241012_141030-6z7f8bef/logs/debug-core.log"}
+{"time":"2024-10-12T14:10:30.728933368+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-12T14:10:30.731210442+08:00","level":"INFO","msg":"created new stream","id":"6z7f8bef"}
+{"time":"2024-10-12T14:10:30.731227565+08:00","level":"INFO","msg":"stream: started","id":"6z7f8bef"}
+{"time":"2024-10-12T14:10:30.7312326+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"6z7f8bef"}}
+{"time":"2024-10-12T14:10:30.731234812+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"6z7f8bef"}}
+{"time":"2024-10-12T14:10:30.731239591+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"6z7f8bef"}}
+{"time":"2024-10-12T14:10:31.22546759+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-12T14:10:31.225925594+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-12T14:10:31.226065274+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-12T14:10:33.093610138+08:00","level":"INFO","msg":"stream: closing","id":"6z7f8bef"}
+{"time":"2024-10-12T14:10:33.093631158+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-12T14:10:33.094322389+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-12T14:10:34.173411181+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-12T14:10:34.674262362+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"6z7f8bef"}}
+{"time":"2024-10-12T14:10:34.674296811+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"6z7f8bef"}}
+{"time":"2024-10-12T14:10:34.674314168+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"6z7f8bef"}}
+{"time":"2024-10-12T14:10:34.674335345+08:00","level":"INFO","msg":"stream: closed","id":"6z7f8bef"}

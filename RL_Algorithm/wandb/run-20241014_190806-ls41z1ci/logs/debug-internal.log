@@ -1,0 +1,19 @@
+{"time":"2024-10-14T19:08:06.846616226+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T19:08:06.846621648+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_190806-ls41z1ci/logs/debug-core.log"}
+{"time":"2024-10-14T19:08:06.855623321+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T19:08:06.858613871+08:00","level":"INFO","msg":"created new stream","id":"ls41z1ci"}
+{"time":"2024-10-14T19:08:06.858623365+08:00","level":"INFO","msg":"stream: started","id":"ls41z1ci"}
+{"time":"2024-10-14T19:08:06.858634041+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"ls41z1ci"}}
+{"time":"2024-10-14T19:08:06.858660153+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"ls41z1ci"}}
+{"time":"2024-10-14T19:08:06.858670768+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"ls41z1ci"}}
+{"time":"2024-10-14T19:08:07.383279134+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T19:08:07.383610644+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T19:08:07.383691925+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T19:10:44.151024937+08:00","level":"INFO","msg":"stream: closing","id":"ls41z1ci"}
+{"time":"2024-10-14T19:10:44.151043424+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T19:10:44.152149073+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T19:10:47.345715256+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T19:10:47.868677894+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"ls41z1ci"}}
+{"time":"2024-10-14T19:10:47.868698536+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"ls41z1ci"}}
+{"time":"2024-10-14T19:10:47.868696225+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"ls41z1ci"}}
+{"time":"2024-10-14T19:10:47.868749739+08:00","level":"INFO","msg":"stream: closed","id":"ls41z1ci"}

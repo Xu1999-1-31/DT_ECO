@@ -1,0 +1,19 @@
+{"time":"2024-10-14T11:08:41.13968633+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T11:08:41.139695882+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_110841-oz09pki4/logs/debug-core.log"}
+{"time":"2024-10-14T11:08:41.145075334+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T11:08:41.147888951+08:00","level":"INFO","msg":"created new stream","id":"oz09pki4"}
+{"time":"2024-10-14T11:08:41.147910818+08:00","level":"INFO","msg":"stream: started","id":"oz09pki4"}
+{"time":"2024-10-14T11:08:41.147918371+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"oz09pki4"}}
+{"time":"2024-10-14T11:08:41.147916141+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"oz09pki4"}}
+{"time":"2024-10-14T11:08:41.147929406+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"oz09pki4"}}
+{"time":"2024-10-14T11:08:41.749289876+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T11:08:41.749583135+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T11:08:41.749649827+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T11:08:42.459751801+08:00","level":"INFO","msg":"stream: closing","id":"oz09pki4"}
+{"time":"2024-10-14T11:08:42.459796896+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T11:08:42.460517613+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T11:08:43.730106553+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T11:08:44.255509846+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"oz09pki4"}}
+{"time":"2024-10-14T11:08:44.255544995+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"oz09pki4"}}
+{"time":"2024-10-14T11:08:44.255528479+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"oz09pki4"}}
+{"time":"2024-10-14T11:08:44.255582542+08:00","level":"INFO","msg":"stream: closed","id":"oz09pki4"}

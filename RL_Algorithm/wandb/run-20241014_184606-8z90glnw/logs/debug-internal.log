@@ -1,0 +1,19 @@
+{"time":"2024-10-14T18:46:06.137906907+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T18:46:06.137911906+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_184606-8z90glnw/logs/debug-core.log"}
+{"time":"2024-10-14T18:46:06.147072747+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T18:46:06.148463887+08:00","level":"INFO","msg":"created new stream","id":"8z90glnw"}
+{"time":"2024-10-14T18:46:06.148473482+08:00","level":"INFO","msg":"stream: started","id":"8z90glnw"}
+{"time":"2024-10-14T18:46:06.148476206+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"8z90glnw"}}
+{"time":"2024-10-14T18:46:06.148478973+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"8z90glnw"}}
+{"time":"2024-10-14T18:46:06.148479022+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"8z90glnw"}}
+{"time":"2024-10-14T18:46:06.672889585+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T18:46:06.673307682+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T18:46:06.673455385+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T18:46:57.489655568+08:00","level":"INFO","msg":"stream: closing","id":"8z90glnw"}
+{"time":"2024-10-14T18:46:57.489674362+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T18:46:57.490447111+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T18:46:58.595776196+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T18:46:59.099058092+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"8z90glnw"}}
+{"time":"2024-10-14T18:46:59.099091677+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"8z90glnw"}}
+{"time":"2024-10-14T18:46:59.099118827+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"8z90glnw"}}
+{"time":"2024-10-14T18:46:59.099130728+08:00","level":"INFO","msg":"stream: closed","id":"8z90glnw"}

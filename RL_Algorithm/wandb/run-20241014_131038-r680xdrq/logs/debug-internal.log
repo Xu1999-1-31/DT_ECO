@@ -1,0 +1,19 @@
+{"time":"2024-10-14T13:10:38.230032672+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T13:10:38.230037149+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_131038-r680xdrq/logs/debug-core.log"}
+{"time":"2024-10-14T13:10:38.235002737+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T13:10:38.236775953+08:00","level":"INFO","msg":"created new stream","id":"r680xdrq"}
+{"time":"2024-10-14T13:10:38.236785902+08:00","level":"INFO","msg":"stream: started","id":"r680xdrq"}
+{"time":"2024-10-14T13:10:38.236790228+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"r680xdrq"}}
+{"time":"2024-10-14T13:10:38.236794592+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"r680xdrq"}}
+{"time":"2024-10-14T13:10:38.236794046+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"r680xdrq"}}
+{"time":"2024-10-14T13:10:38.783057073+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T13:10:38.783358627+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T13:10:38.783428621+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T13:11:02.157777915+08:00","level":"INFO","msg":"stream: closing","id":"r680xdrq"}
+{"time":"2024-10-14T13:11:02.157792542+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T13:11:02.158433361+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T13:11:03.730784148+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T13:11:04.23801468+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"r680xdrq"}}
+{"time":"2024-10-14T13:11:04.238035188+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"r680xdrq"}}
+{"time":"2024-10-14T13:11:04.238055364+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"r680xdrq"}}
+{"time":"2024-10-14T13:11:04.238065759+08:00","level":"INFO","msg":"stream: closed","id":"r680xdrq"}

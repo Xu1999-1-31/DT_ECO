@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 41, in <module>
+    next_obs, rewards, terminated, truncated, infos = env.step(actions)
+                                                      ^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/gymnasium/wrappers/order_enforcing.py", line 56, in step
+    return self.env.step(action)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/mo_gymnasium/envs/dt_eco/dt_eco.py", line 285, in step
+    current_gate = self.CriticalPaths[self.current_path_index].Cellname_to_Cell.keys()[self.current_gate_index]
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'dict_keys' object is not subscriptable

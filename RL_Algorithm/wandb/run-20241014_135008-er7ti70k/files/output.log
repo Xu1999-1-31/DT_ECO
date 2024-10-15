@@ -1,0 +1,37 @@
+torch.Size([49514, 5])
+tensor([[ 2.0402e-02, -3.0302e-02, -9.6298e-02,  5.4804e-02, -1.1866e-01,
+          1.1958e-01,  6.5076e-02, -4.9103e-04,  7.1474e-02, -1.1732e-02,
+         -6.0831e-02,  4.4417e-02,  4.5867e-02, -7.4767e-05]],
+       grad_fn=<AddmmBackward0>)
+()
+actions: 6
+6
+sa10_reg_2_/D sa10_reg_2_/Q
+torch.Size([49514, 5])
+tensor([[ 0.0196, -0.0273, -0.0939,  0.0523, -0.1175,  0.1206,  0.0687,  0.0041,
+          0.0740, -0.0130, -0.0559,  0.0463,  0.0460, -0.0066]],
+       grad_fn=<AddmmBackward0>)
+()
+actions: 5
+5
+Traceback (most recent call last):
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 50, in <module>
+    agent.train(
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 541, in train
+    self.update()
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 401, in update
+    (mb_obs, mb_act, mb_rewards, mb_next_obs, mb_dones) = self.buffer.sample(
+                                                          ^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO_Buffer.py", line 120, in sample
+    batched_graph = dgl.batch([clone_graph(self.timing_graph[i]) for i in inds])
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO_Buffer.py", line 120, in <listcomp>
+    batched_graph = dgl.batch([clone_graph(self.timing_graph[i]) for i in inds])
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO_Buffer.py", line 10, in clone_graph
+    g_clone = dgl.heterograph({
+                              ^
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO_Buffer.py", line 11, in <dictcomp>
+    (g.get_ntype(g.srcnodes(etype=etype)), etype, g.get_ntype(g.dstnodes(etype=etype))):
+    ^^^^^^^^^^^
+AttributeError: 'DGLGraph' object has no attribute 'get_ntype'

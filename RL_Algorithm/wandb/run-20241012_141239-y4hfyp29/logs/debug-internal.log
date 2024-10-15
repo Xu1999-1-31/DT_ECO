@@ -1,0 +1,14 @@
+{"time":"2024-10-12T14:12:39.475446814+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-12T14:12:39.475464416+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241012_141239-y4hfyp29/logs/debug-core.log"}
+{"time":"2024-10-12T14:12:39.481120634+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-12T14:12:39.48240968+08:00","level":"INFO","msg":"created new stream","id":"y4hfyp29"}
+{"time":"2024-10-12T14:12:39.482426503+08:00","level":"INFO","msg":"stream: started","id":"y4hfyp29"}
+{"time":"2024-10-12T14:12:39.482437973+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"y4hfyp29"}}
+{"time":"2024-10-12T14:12:39.482431993+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"y4hfyp29"}}
+{"time":"2024-10-12T14:12:39.482449974+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"y4hfyp29"}}
+{"time":"2024-10-12T14:12:39.973264591+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-12T14:12:39.973555129+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-12T14:12:39.973665891+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-12T14:16:02.982868438+08:00","level":"INFO","msg":"stream: closing","id":"y4hfyp29"}
+{"time":"2024-10-12T14:16:02.982891734+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-12T14:16:02.983739176+08:00","level":"INFO","msg":"Stopped system monitor"}

@@ -1,0 +1,36 @@
+torch.Size([49514, 5])
+tensor([[ 0.1141, -0.1224,  0.1249, -0.0451,  0.0689,  0.0771, -0.0641,  0.0187,
+          0.0600, -0.0418,  0.1250, -0.1897,  0.0664,  0.0270]],
+       grad_fn=<AddmmBackward0>)
+()
+actions: 4
+4
+sa10_reg_2_/D sa10_reg_2_/Q
+torch.Size([49514, 5])
+tensor([[ 0.1143, -0.1189,  0.1204, -0.0401,  0.0690,  0.0731, -0.0605,  0.0168,
+          0.0591, -0.0453,  0.1182, -0.1900,  0.0737,  0.0362]],
+       grad_fn=<AddmmBackward0>)
+()
+actions: 0
+0
+Traceback (most recent call last):
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 50, in <module>
+    agent.train(
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 541, in train
+    self.update()
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 401, in update
+    (mb_obs, mb_act, mb_rewards, mb_next_obs, mb_dones) = self.buffer.sample(
+                                                          ^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO_Buffer.py", line 116, in sample
+    batched_graph = dgl.batch([clone_graph(self.timing_graph[i]) for i in inds])
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO_Buffer.py", line 116, in <listcomp>
+    batched_graph = dgl.batch([clone_graph(self.timing_graph[i]) for i in inds])
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO_Buffer.py", line 9, in clone_graph
+    g_clone = dgl.heterograph({
+              ^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/convert.py", line 318, in heterograph
+    for (sty, ety, dty), data in data_dict.items():
+        ^^^^^^^^^^^^^^^
+ValueError: too many values to unpack (expected 3)

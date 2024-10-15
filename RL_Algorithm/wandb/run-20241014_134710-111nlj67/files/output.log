@@ -1,0 +1,41 @@
+torch.Size([49514, 5])
+tensor([[ 0.0672, -0.1216,  0.0257, -0.0985,  0.1389,  0.0028, -0.0604,  0.0334,
+          0.0565, -0.1457, -0.0260,  0.0493, -0.0272,  0.0991]],
+       grad_fn=<AddmmBackward0>)
+()
+actions: 3
+3
+sa10_reg_2_/D sa10_reg_2_/Q
+torch.Size([49514, 5])
+tensor([[ 0.0644, -0.1238,  0.0277, -0.0946,  0.1354, -0.0025, -0.0610,  0.0352,
+          0.0608, -0.1454, -0.0302,  0.0482, -0.0303,  0.0996]],
+       grad_fn=<AddmmBackward0>)
+()
+actions: 7
+7
+Traceback (most recent call last):
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 50, in <module>
+    agent.train(
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 541, in train
+    self.update()
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 401, in update
+    (mb_obs, mb_act, mb_rewards, mb_next_obs, mb_dones) = self.buffer.sample(
+                                                          ^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO_Buffer.py", line 102, in sample
+    batched_graph = dgl.batch([clone_graph(self.timing_graph[i]) for i in inds])
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO_Buffer.py", line 102, in <listcomp>
+    batched_graph = dgl.batch([clone_graph(self.timing_graph[i]) for i in inds])
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO_Buffer.py", line 7, in clone_graph
+    g_clone = dgl.graph((g.edges()[0], g.edges()[1]), num_nodes=g.num_nodes())
+                         ^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/view.py", line 179, in __call__
+    return self._graph.all_edges(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/heterograph.py", line 3591, in all_edges
+    src, dst, eid = self._graph.edges(self.get_etype_id(etype), order)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/heterograph.py", line 1406, in get_etype_id
+    raise DGLError(
+dgl._ffi.base.DGLError: Edge type name must be specified if there are more than one edge types.

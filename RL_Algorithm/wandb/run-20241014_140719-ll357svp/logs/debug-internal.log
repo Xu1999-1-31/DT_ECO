@@ -1,0 +1,19 @@
+{"time":"2024-10-14T14:07:19.342549855+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T14:07:19.342554935+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_140719-ll357svp/logs/debug-core.log"}
+{"time":"2024-10-14T14:07:19.351686957+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T14:07:19.353448209+08:00","level":"INFO","msg":"created new stream","id":"ll357svp"}
+{"time":"2024-10-14T14:07:19.353465883+08:00","level":"INFO","msg":"stream: started","id":"ll357svp"}
+{"time":"2024-10-14T14:07:19.353467342+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"ll357svp"}}
+{"time":"2024-10-14T14:07:19.353484562+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"ll357svp"}}
+{"time":"2024-10-14T14:07:19.353469936+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"ll357svp"}}
+{"time":"2024-10-14T14:07:19.907002146+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T14:07:19.90741311+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T14:07:19.907608559+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T14:07:44.127592956+08:00","level":"INFO","msg":"stream: closing","id":"ll357svp"}
+{"time":"2024-10-14T14:07:44.127604738+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T14:07:44.128386912+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T14:07:45.364579655+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T14:07:45.875391877+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"ll357svp"}}
+{"time":"2024-10-14T14:07:45.875426288+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"ll357svp"}}
+{"time":"2024-10-14T14:07:45.875417322+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"ll357svp"}}
+{"time":"2024-10-14T14:07:45.875483545+08:00","level":"INFO","msg":"stream: closed","id":"ll357svp"}

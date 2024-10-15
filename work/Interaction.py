@@ -4,8 +4,6 @@ import sys
 root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(root_dir)
 import Global_var
-import TimingGraphTrans
-import PhysicalDataTrans
 
 def Run_Pt_Script(script):
     command = ['pt_shell', '-f', '../' + script]

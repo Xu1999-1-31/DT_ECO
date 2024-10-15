@@ -1,0 +1,19 @@
+{"time":"2024-10-14T14:04:03.491659984+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T14:04:03.491668748+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_140403-v3anzicc/logs/debug-core.log"}
+{"time":"2024-10-14T14:04:03.496806651+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T14:04:03.498419111+08:00","level":"INFO","msg":"created new stream","id":"v3anzicc"}
+{"time":"2024-10-14T14:04:03.498429944+08:00","level":"INFO","msg":"stream: started","id":"v3anzicc"}
+{"time":"2024-10-14T14:04:03.498432865+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"v3anzicc"}}
+{"time":"2024-10-14T14:04:03.498436984+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"v3anzicc"}}
+{"time":"2024-10-14T14:04:03.498434448+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"v3anzicc"}}
+{"time":"2024-10-14T14:04:04.036986002+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T14:04:04.037268593+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T14:04:04.038618278+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T14:04:28.113601066+08:00","level":"INFO","msg":"stream: closing","id":"v3anzicc"}
+{"time":"2024-10-14T14:04:28.113616406+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T14:04:28.114288106+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T14:04:29.652063565+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T14:04:30.171563424+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"v3anzicc"}}
+{"time":"2024-10-14T14:04:30.171589188+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"v3anzicc"}}
+{"time":"2024-10-14T14:04:30.171624394+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"v3anzicc"}}
+{"time":"2024-10-14T14:04:30.171627538+08:00","level":"INFO","msg":"stream: closed","id":"v3anzicc"}

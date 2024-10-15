@@ -1,0 +1,19 @@
+{"time":"2024-10-12T22:13:00.280182521+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-12T22:13:00.280195778+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241012_221300-38r613zr/logs/debug-core.log"}
+{"time":"2024-10-12T22:13:00.284149654+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-12T22:13:00.286256441+08:00","level":"INFO","msg":"created new stream","id":"38r613zr"}
+{"time":"2024-10-12T22:13:00.286280103+08:00","level":"INFO","msg":"stream: started","id":"38r613zr"}
+{"time":"2024-10-12T22:13:00.286300395+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"38r613zr"}}
+{"time":"2024-10-12T22:13:00.286287174+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"38r613zr"}}
+{"time":"2024-10-12T22:13:00.286299354+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"38r613zr"}}
+{"time":"2024-10-12T22:13:00.865839504+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-12T22:13:00.866172746+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-12T22:13:00.866292018+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-12T22:13:01.360807275+08:00","level":"INFO","msg":"stream: closing","id":"38r613zr"}
+{"time":"2024-10-12T22:13:01.668703188+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-12T22:13:01.669536197+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-12T22:13:02.740014804+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-12T22:13:03.215631973+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"38r613zr"}}
+{"time":"2024-10-12T22:13:03.215669696+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"38r613zr"}}
+{"time":"2024-10-12T22:13:03.215706671+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"38r613zr"}}
+{"time":"2024-10-12T22:13:03.215712582+08:00","level":"INFO","msg":"stream: closed","id":"38r613zr"}

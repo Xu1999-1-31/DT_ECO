@@ -1,0 +1,19 @@
+{"time":"2024-10-14T13:21:38.253226452+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T13:21:38.253231557+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_132138-ihkubyos/logs/debug-core.log"}
+{"time":"2024-10-14T13:21:38.365748774+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T13:21:38.367549363+08:00","level":"INFO","msg":"created new stream","id":"ihkubyos"}
+{"time":"2024-10-14T13:21:38.367564068+08:00","level":"INFO","msg":"stream: started","id":"ihkubyos"}
+{"time":"2024-10-14T13:21:38.367576093+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"ihkubyos"}}
+{"time":"2024-10-14T13:21:38.367603463+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"ihkubyos"}}
+{"time":"2024-10-14T13:21:38.367603071+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"ihkubyos"}}
+{"time":"2024-10-14T13:21:39.114220345+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T13:21:39.114544185+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T13:21:39.114668911+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T13:22:03.119122752+08:00","level":"INFO","msg":"stream: closing","id":"ihkubyos"}
+{"time":"2024-10-14T13:22:03.119161846+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T13:22:03.11972062+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T13:22:04.20734177+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T13:22:04.762986869+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"ihkubyos"}}
+{"time":"2024-10-14T13:22:04.763009056+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"ihkubyos"}}
+{"time":"2024-10-14T13:22:04.763035161+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"ihkubyos"}}
+{"time":"2024-10-14T13:22:04.763050575+08:00","level":"INFO","msg":"stream: closed","id":"ihkubyos"}

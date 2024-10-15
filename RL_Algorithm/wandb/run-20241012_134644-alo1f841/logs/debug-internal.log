@@ -1,0 +1,19 @@
+{"time":"2024-10-12T13:46:44.611400792+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-12T13:46:44.611409965+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241012_134644-alo1f841/logs/debug-core.log"}
+{"time":"2024-10-12T13:46:44.616273352+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-12T13:46:44.618739436+08:00","level":"INFO","msg":"created new stream","id":"alo1f841"}
+{"time":"2024-10-12T13:46:44.618759569+08:00","level":"INFO","msg":"stream: started","id":"alo1f841"}
+{"time":"2024-10-12T13:46:44.618775602+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"alo1f841"}}
+{"time":"2024-10-12T13:46:44.618801055+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"alo1f841"}}
+{"time":"2024-10-12T13:46:44.618798852+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"alo1f841"}}
+{"time":"2024-10-12T13:46:45.121778245+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-12T13:46:45.122244926+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-12T13:46:45.122358965+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-12T13:46:46.904790399+08:00","level":"INFO","msg":"stream: closing","id":"alo1f841"}
+{"time":"2024-10-12T13:46:46.904826185+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-12T13:46:46.905500989+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-12T13:46:48.029992187+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-12T13:46:48.654874986+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"alo1f841"}}
+{"time":"2024-10-12T13:46:48.654910395+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"alo1f841"}}
+{"time":"2024-10-12T13:46:48.654939301+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"alo1f841"}}
+{"time":"2024-10-12T13:46:48.654955537+08:00","level":"INFO","msg":"stream: closed","id":"alo1f841"}

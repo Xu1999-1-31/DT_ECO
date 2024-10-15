@@ -1,0 +1,19 @@
+{"time":"2024-10-12T20:08:11.472642515+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-12T20:08:11.472652095+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241012_200811-cml2edfk/logs/debug-core.log"}
+{"time":"2024-10-12T20:08:11.482951525+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-12T20:08:11.485441479+08:00","level":"INFO","msg":"created new stream","id":"cml2edfk"}
+{"time":"2024-10-12T20:08:11.485460927+08:00","level":"INFO","msg":"stream: started","id":"cml2edfk"}
+{"time":"2024-10-12T20:08:11.485478857+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"cml2edfk"}}
+{"time":"2024-10-12T20:08:11.485494978+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"cml2edfk"}}
+{"time":"2024-10-12T20:08:11.485496917+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"cml2edfk"}}
+{"time":"2024-10-12T20:08:12.016455087+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-12T20:08:12.016914283+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-12T20:08:12.016987289+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-12T20:08:12.145943482+08:00","level":"INFO","msg":"stream: closing","id":"cml2edfk"}
+{"time":"2024-10-12T20:08:12.145969817+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-12T20:08:12.14657806+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-12T20:08:13.836146382+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-12T20:08:14.346246708+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"cml2edfk"}}
+{"time":"2024-10-12T20:08:14.346288653+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"cml2edfk"}}
+{"time":"2024-10-12T20:08:14.346295344+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"cml2edfk"}}
+{"time":"2024-10-12T20:08:14.346330308+08:00","level":"INFO","msg":"stream: closed","id":"cml2edfk"}

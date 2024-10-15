@@ -1,0 +1,19 @@
+{"time":"2024-10-14T16:05:03.83296791+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T16:05:03.8329733+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_160503-wpqvfbzg/logs/debug-core.log"}
+{"time":"2024-10-14T16:05:03.844874264+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T16:05:03.846549061+08:00","level":"INFO","msg":"created new stream","id":"wpqvfbzg"}
+{"time":"2024-10-14T16:05:03.846561648+08:00","level":"INFO","msg":"stream: started","id":"wpqvfbzg"}
+{"time":"2024-10-14T16:05:03.846564562+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"wpqvfbzg"}}
+{"time":"2024-10-14T16:05:03.846567245+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"wpqvfbzg"}}
+{"time":"2024-10-14T16:05:03.846571319+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"wpqvfbzg"}}
+{"time":"2024-10-14T16:05:04.351617192+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T16:05:04.351905417+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T16:05:04.351967201+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T16:06:20.653182899+08:00","level":"INFO","msg":"stream: closing","id":"wpqvfbzg"}
+{"time":"2024-10-14T16:06:20.6531957+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T16:06:20.654236338+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T16:06:22.207069828+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T16:06:22.697244328+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"wpqvfbzg"}}
+{"time":"2024-10-14T16:06:22.697273732+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"wpqvfbzg"}}
+{"time":"2024-10-14T16:06:22.697295758+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"wpqvfbzg"}}
+{"time":"2024-10-14T16:06:22.697314411+08:00","level":"INFO","msg":"stream: closed","id":"wpqvfbzg"}

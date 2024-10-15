@@ -1,0 +1,19 @@
+{"time":"2024-10-14T15:44:14.495387469+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T15:44:14.495392635+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_154414-cdjtjsq7/logs/debug-core.log"}
+{"time":"2024-10-14T15:44:14.505807679+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T15:44:14.507454962+08:00","level":"INFO","msg":"created new stream","id":"cdjtjsq7"}
+{"time":"2024-10-14T15:44:14.507464299+08:00","level":"INFO","msg":"stream: started","id":"cdjtjsq7"}
+{"time":"2024-10-14T15:44:14.507474145+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"cdjtjsq7"}}
+{"time":"2024-10-14T15:44:14.507503995+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"cdjtjsq7"}}
+{"time":"2024-10-14T15:44:14.507512089+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"cdjtjsq7"}}
+{"time":"2024-10-14T15:44:15.008978795+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T15:44:15.009269508+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T15:44:15.009327918+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T15:44:15.95875965+08:00","level":"INFO","msg":"stream: closing","id":"cdjtjsq7"}
+{"time":"2024-10-14T15:44:15.958776525+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T15:44:15.959461478+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T15:44:17.036690694+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T15:44:17.592145134+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"cdjtjsq7"}}
+{"time":"2024-10-14T15:44:17.592182924+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"cdjtjsq7"}}
+{"time":"2024-10-14T15:44:17.59219604+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"cdjtjsq7"}}
+{"time":"2024-10-14T15:44:17.592222727+08:00","level":"INFO","msg":"stream: closed","id":"cdjtjsq7"}

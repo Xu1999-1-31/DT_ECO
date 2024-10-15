@@ -1,0 +1,17 @@
+()
+actions: 6
+sa10_reg_2_/D sa10_reg_2_/Q
+()
+actions: 1
+Traceback (most recent call last):
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 49, in <module>
+    agent.train(
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 542, in train
+    self.update()
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 401, in update
+    (mb_obs, mb_act, mb_rewards, mb_next_obs, mb_dones) = self.buffer.sample(
+                                                          ^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO_Buffer.py", line 104, in sample
+    'gate_sizes': self.gate_sizes[inds].to(self.device),  # gate_sizes as NumPy array
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'to'

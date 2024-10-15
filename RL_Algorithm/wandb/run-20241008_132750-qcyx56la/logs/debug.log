@@ -1,0 +1,26 @@
+2024-10-08 13:27:50,913 INFO    MainThread:1431685 [wandb_setup.py:_flush():79] Current SDK version is 0.18.2
+2024-10-08 13:27:50,913 INFO    MainThread:1431685 [wandb_setup.py:_flush():79] Configure stats pid to 1431685
+2024-10-08 13:27:50,913 INFO    MainThread:1431685 [wandb_setup.py:_flush():79] Loading settings from /home/jiajiexu/.config/wandb/settings
+2024-10-08 13:27:50,913 INFO    MainThread:1431685 [wandb_setup.py:_flush():79] Loading settings from /home/jiajiexu/DT_ECO/RL/wandb/settings
+2024-10-08 13:27:50,913 INFO    MainThread:1431685 [wandb_setup.py:_flush():79] Loading settings from environment variables: {}
+2024-10-08 13:27:50,913 INFO    MainThread:1431685 [wandb_setup.py:_flush():79] Applying setup settings: {'mode': None, '_disable_service': None}
+2024-10-08 13:27:50,913 INFO    MainThread:1431685 [wandb_setup.py:_flush():79] Inferring run settings from compute environment: {'program_relpath': 'test_cgra_dse.py', 'program_abspath': '/home/jiajiexu/DT_ECO/RL/test_cgra_dse.py', 'program': '/home/jiajiexu/DT_ECO/RL/test_cgra_dse.py'}
+2024-10-08 13:27:50,914 INFO    MainThread:1431685 [wandb_setup.py:_flush():79] Applying login settings: {}
+2024-10-08 13:27:50,914 INFO    MainThread:1431685 [wandb_init.py:_log_setup():532] Logging user logs to /home/jiajiexu/DT_ECO/RL/wandb/run-20241008_132750-qcyx56la/logs/debug.log
+2024-10-08 13:27:50,914 INFO    MainThread:1431685 [wandb_init.py:_log_setup():533] Logging internal logs to /home/jiajiexu/DT_ECO/RL/wandb/run-20241008_132750-qcyx56la/logs/debug-internal.log
+2024-10-08 13:27:50,914 INFO    MainThread:1431685 [wandb_init.py:init():616] calling init triggers
+2024-10-08 13:27:50,914 INFO    MainThread:1431685 [wandb_init.py:init():623] wandb.init called with sweep_config: {}
+config: {'env_id': 'dt-eco-v0', 'buffer_size': 1000, 'gamma': 0.99, 'tau': 0.005, 'batch_size': 128, 'learning_starts': 0, 'net_arch': [256, 256], 'policy_lr': 0.0001, 'q_lr': 0.0001, 'policy_freq': 2, 'target_net_freq': 1, 'alpha': 1.0, 'autotune': True, 'seed': 42, 'algo': 'MOSAC'}
+2024-10-08 13:27:50,914 INFO    MainThread:1431685 [wandb_init.py:init():666] starting backend
+2024-10-08 13:27:50,914 INFO    MainThread:1431685 [wandb_init.py:init():670] sending inform_init request
+2024-10-08 13:27:50,914 INFO    MainThread:1431685 [backend.py:_multiprocessing_setup():104] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-10-08 13:27:50,915 INFO    MainThread:1431685 [wandb_init.py:init():683] backend started and connected
+2024-10-08 13:27:50,916 INFO    MainThread:1431685 [wandb_init.py:init():778] updated telemetry
+2024-10-08 13:27:50,916 INFO    MainThread:1431685 [wandb_init.py:init():811] communicating run to backend with 90.0 second timeout
+2024-10-08 13:27:51,461 INFO    MainThread:1431685 [wandb_init.py:init():862] starting run threads in backend
+2024-10-08 13:27:51,603 INFO    MainThread:1431685 [wandb_run.py:_console_start():2464] atexit reg
+2024-10-08 13:27:51,603 INFO    MainThread:1431685 [wandb_run.py:_redirect():2312] redirect: wrap_raw
+2024-10-08 13:27:51,604 INFO    MainThread:1431685 [wandb_run.py:_redirect():2377] Wrapping output streams.
+2024-10-08 13:27:51,604 INFO    MainThread:1431685 [wandb_run.py:_redirect():2402] Redirects installed.
+2024-10-08 13:27:51,605 INFO    MainThread:1431685 [wandb_init.py:init():906] run started, returning control to user process
+2024-10-08 13:27:52,564 WARNING MsgRouterThr:1431685 [router.py:message_loop():77] message_loop has been closed

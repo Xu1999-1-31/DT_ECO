@@ -1,0 +1,19 @@
+{"time":"2024-10-14T14:22:37.264441137+08:00","level":"INFO","msg":"using version","core version":"0.18.2"}
+{"time":"2024-10-14T14:22:37.264446932+08:00","level":"INFO","msg":"created symlink","path":"/home/jiajiexu/DT_ECO/MOSAC/wandb/run-20241014_142237-3digr6tc/logs/debug-core.log"}
+{"time":"2024-10-14T14:22:37.273227623+08:00","level":"ERROR","msg":"dialing: google: could not find default credentials. See https://cloud.google.com/docs/authentication/external/set-up-adc for more information"}
+{"time":"2024-10-14T14:22:37.274758432+08:00","level":"INFO","msg":"created new stream","id":"3digr6tc"}
+{"time":"2024-10-14T14:22:37.274768246+08:00","level":"INFO","msg":"stream: started","id":"3digr6tc"}
+{"time":"2024-10-14T14:22:37.27477773+08:00","level":"INFO","msg":"handler: started","stream_id":{"value":"3digr6tc"}}
+{"time":"2024-10-14T14:22:37.274804273+08:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"3digr6tc"}}
+{"time":"2024-10-14T14:22:37.274840886+08:00","level":"INFO","msg":"sender: started","stream_id":{"value":"3digr6tc"}}
+{"time":"2024-10-14T14:22:37.817453849+08:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-10-14T14:22:37.817766028+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-14T14:22:37.817829447+08:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2024-10-14T14:23:02.119873043+08:00","level":"INFO","msg":"stream: closing","id":"3digr6tc"}
+{"time":"2024-10-14T14:23:02.119898693+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-14T14:23:02.120478115+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-14T14:23:03.240143045+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-14T14:23:03.744400265+08:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"3digr6tc"}}
+{"time":"2024-10-14T14:23:03.744428738+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"3digr6tc"}}
+{"time":"2024-10-14T14:23:03.7444511+08:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"3digr6tc"}}
+{"time":"2024-10-14T14:23:03.744471523+08:00","level":"INFO","msg":"stream: closed","id":"3digr6tc"}

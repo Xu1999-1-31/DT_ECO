@@ -1,0 +1,60 @@
+Traceback (most recent call last):
+  File "/home/jiajiexu/DT_ECO/MOSAC/DT_ECO.py", line 49, in <module>
+    agent.train(
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 495, in train
+    actions, _, _ = self.actor.get_action(th_obs)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 133, in get_action
+    logits = self(obs)
+             ^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/MOSAC/mosac_dicrete_action.py", line 127, in forward
+    logits = self.actor_net(g, img, padding_mask, Gate_feature)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/DT_ECO/Model/models.py", line 180, in forward
+    num_masked_nodes = dgl.sum_nodes(g, 'padding_mask')
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/readout.py", line 195, in sum_nodes
+    return readout_nodes(graph, feat, weight, ntype=ntype, op="sum")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/readout.py", line 101, in readout_nodes
+    return segment.segment_reduce(graph.batch_num_nodes(ntype), x, reducer=op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/ops/segment.py", line 54, in segment_reduce
+    rst = F.segment_reduce(reducer, value, offsets)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/backend/pytorch/sparse.py", line 1128, in segment_reduce
+    return SegmentReduce.apply(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/torch/autograd/function.py", line 539, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/backend/pytorch/sparse.py", line 831, in forward
+    y, arg = _segment_reduce(op, x, offsets)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/_sparse_ops.py", line 683, in _segment_reduce
+    _CAPI_DGLKernelSegmentReduce(
+  File "dgl/_ffi/_cython/./function.pxi", line 295, in dgl._ffi._cy3.core.FunctionBase.__call__
+  File "dgl/_ffi/_cython/./function.pxi", line 241, in dgl._ffi._cy3.core.FuncCall
+dgl._ffi.base.DGLError: [11:04:39] /opt/dgl/src/array/kernel.cc:364: Check failed: (feat->dtype).code == kDGLFloat || (feat->dtype.code == kDGLBfloat): Feature data must be float type
+Stack trace:
+  [bt] (0) /home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/libdgl.so(+0x7c3ff1) [0x7ff694333ff1]
+  [bt] (1) /home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/libdgl.so(dgl::aten::SegmentReduceDispatch(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, dgl::runtime::NDArray, dgl::runtime::NDArray, dgl::runtime::NDArray, dgl::runtime::NDArray)+0x1b5) [0x7ff694341755]
+  [bt] (2) /home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/libdgl.so(+0x7e065a) [0x7ff69435065a]
+  [bt] (3) /home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/libdgl.so(+0x7e07b1) [0x7ff6943507b1]
+  [bt] (4) /home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/libdgl.so(DGLFuncCall+0x4c) [0x7ff694391e5c]
+  [bt] (5) /home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/_ffi/_cy3/core.cpython-311-x86_64-linux-gnu.so(+0x1b651) [0x7ff6ac98f651]
+  [bt] (6) /home/jiajiexu/anaconda3/lib/python3.11/site-packages/dgl/_ffi/_cy3/core.cpython-311-x86_64-linux-gnu.so(+0x1b98f) [0x7ff6ac98f98f]
+  [bt] (7) python(_PyObject_MakeTpCall+0x26c) [0x5041ac]
+  [bt] (8) python(_PyEval_EvalFrameDefault+0x6a7) [0x5116e7]
