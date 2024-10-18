@@ -14,7 +14,7 @@ class Net:
     def __repr__(self):
         inpins_repr = ', '.join([f'{pin}' for pin in self.inpins])
         outpins_repr = ', '.join([f'{pin}' for pin in self.outpins])
-        return f"Net(name='{self.name}', totalCap_max='{self.totalCap_max:.8f}', totalCap_min='{self.totalCap_min:.8f}', \ninpins={{ {inpins_repr} }}, \noutpins={{ {outpins_repr} }}\n)"
+        return f"Net(name='{self.name}', totalCap='{self.totalCap:.8f}', \ninpins={{ {inpins_repr} }}, \noutpins={{ {outpins_repr} }}\n)"
 
 def Read_PtNetRpt(inrpt):
     nets = {}

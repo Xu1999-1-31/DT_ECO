@@ -1,6 +1,5 @@
 import argparse
 import mo_gymnasium as mo_gym
-# import time
 import DT_ECO
 import tee
 
@@ -40,14 +39,13 @@ if not args.disable_log:
 if __name__ == '__main__':
     if args.train:
         with tee.StdoutTee(stdout_file), tee.StderrTee(stderr_file):
-            env = mo_gym.make('dt-eco-v0')
+            env = mo_gym.make('dt-eco-v1')
             # reset env and agent
             obs, _ = env.reset()
             agent = DT_ECO.create_agent(env)
             agent.train(
-                total_timesteps=10000,
+                total_timesteps=2000,
                 eval_env=env,
-                # start_time=time.time(),
             )
 
 # close all loggers

@@ -7,11 +7,11 @@ class GraphSpace(spaces.Space):
     
     def __init__(self, graph):
         """Initialize the space with a DGL graph and define the shape based on node and edge counts."""
-        assert isinstance(graph, dgl.DGLHeteroGraph), "Input must be a DGLHeteroGraph"
+        assert isinstance(graph, dgl.DGLGraph), "Input must be a DGLGraph"
         
         # Define the shape as (number_of_nodes, number_of_edges)
         # node numbers, node features, edge numbers, cellarc features, netarc features
-        shape = (graph.number_of_nodes(), graph.ndata['feature'].shape[1], graph.number_of_edges(), graph.edata['feature'][('node', 'cellarc', 'node')].shape[1], graph.edata['feature'][('node', 'netarc', 'node')].shape[1])
+        shape = (graph.number_of_nodes(), graph.number_of_edges())
         self.graph = graph
         
         # Call the parent constructor and pass the shape
@@ -24,7 +24,7 @@ class GraphSpace(spaces.Space):
     
     def contains(self, x):
         """Check if x is a valid graph that can be used in this space."""
-        return isinstance(x, dgl.DGLHeteroGraph)
+        return isinstance(x, dgl.DGLGraph)
     
     def __repr__(self):
         """Return a string representation of the space with shape details."""

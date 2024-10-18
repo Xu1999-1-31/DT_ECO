@@ -23,10 +23,14 @@ def Run_Pt_Script(script):
             print(line, end='')  # cmd output     
         for err_line in process.stderr:
             print(err_line, end='')  # cmd err
+        # stdout, stderr = process.communicate()
         
         # wait for the process to exit
         process.wait()
 
+    # print(stdout)
+    # print(stderr)
+    
     # check the return code
     print('Return code:', process.returncode)
 
@@ -43,6 +47,7 @@ def Run_Icc2_Script(script):
             print(line, end='')  # cmd output     
         for err_line in process.stderr:
             print(err_line, end='')  # cmd err
+        pass
         
         # wait for the process to exit
         process.wait()

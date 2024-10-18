@@ -25,7 +25,7 @@ from PIL import Image
 # DataBuilder.BuildTimingArc('aes_cipher_top')
 # DataBuilder.BuildEndPoint('aes_cipher_top')
 # DataBuilder.LoadEndPoint('aes_cipher_top')
-# TimingGraphTrans.TimingGraphTrans('aes_cipher_top')
+TimingGraphTrans.TimingGraphTrans('aes_cipher_top')
 # DataBuilder.BuildPortData('aes_cipher_top')
 # PhysicalDataTrans.PhysicalDataTrans('vga_enh_top', 512)
 # DataBuilder.BuildGlobalTimingData('vga_enh_top')

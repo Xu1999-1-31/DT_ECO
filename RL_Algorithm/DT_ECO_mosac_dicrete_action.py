@@ -20,6 +20,7 @@ import torch.optim as optim
 import wandb
 import sys
 import os
+import csv
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # from morl_baselines.common.buffer import ReplayBuffer
@@ -87,9 +88,6 @@ class MOSoftQNetwork(nn.Module):
         q_values = self.critic(g, img, padding_mask, Gate_sizes)
         return q_values.view(-1, self.action_dim, self.reward_dim)
 
-
-LOG_STD_MAX = 2
-LOG_STD_MIN = -5
 
 
 class MOSACActor(nn.Module):
@@ -545,13 +543,21 @@ class MOSAC(MOPolicy, MOAgent):
                 real_next_obs = infos["final_observation"]
             self.buffer.add(obs=obs, next_obs=real_next_obs, action=actions, reward=rewards, done=terminated)
             #print(rewards)
-            # if terminated == True:
-            #     # Log rewards to a CSV file 
-            #     # print(rewards)
-            #     rewards_to_log = rewards # Convert tensor to numpy array for easier handling 
-            #     csv_filename = f"sac_data/rewards_log_SAC{self.id}.csv" 
-            #     file_exists = os.path.isfile(csv_filename) 
-                
+            if terminated == True:
+                # Log rewards to a CSV file 
+                # print(rewards)
+                rewards_to_log = rewards # Convert tensor to numpy array for easier handling 
+                csv_filename = f"rewards.csv" 
+                file_exists = os.path.isfile(csv_filename) 
+
+                with open(csv_filename, mode='a', newline='') as file: 
+                    writer = csv.writer(file) 
+                    if not file_exists: 
+                        writer.writerow(["obs", "Reward[0]", "Reward[1]"]) # Write header if file doesn't exist 
+                    writer.writerow([obs, rewards_to_log[0], rewards_to_log[1]]) 
+                log_str = f"_{self.id}" if self.id is not None else ""
+                to_log = {f"rewards{log_str}/Reward[0]": rewards_to_log[0]}
+                wandb.log(to_log)
 
             # TRY NOT TO MODIFY: CRUCIAL step easy to overlook
             obs = next_obs

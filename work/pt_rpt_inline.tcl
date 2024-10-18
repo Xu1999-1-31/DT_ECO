@@ -42,11 +42,11 @@ update_timing -full
 report_timing -nosplit -nets -input_pins -transition_time -capacitance -significant_digit 6 -max_path 100000 > ../PtRpt/${top_design}_inline.rpt
 report_global_timing -significant_digits 8 > ../PtRpt/${top_design}_inline_global.rpt
 report_cell -connections -nosplit > ../PtRpt/${top_design}_inline_cell.rpt
-report_net -connections -verbose > ../PtRpt/${top_design}_inline_net.rpt
-report_analysis_coverage -status_details violated -check_type setup -nosplit -significant_digits 8 > ../PtRpt/${top_design}_inline_violated_endpoint.rpt
-report_analysis_coverage -status_details met -check_type setup -nosplit -significant_digits 8 > ../PtRpt/${top_design}_inline_met_endpoint.rpt
-report_analysis_coverage -status_details untested -check_type setup -nosplit -significant_digits 8 > ../PtRpt/${top_design}_inline_untested_endpoint.rpt
-write_sdf -significant_digits 8 -input_port_nets -output_port_nets ../PtRpt/${top_design}_inline.sdf
+# report_net -connections -verbose > ../PtRpt/${top_design}_inline_net.rpt
+# report_analysis_coverage -status_details violated -check_type setup -nosplit -significant_digits 8 > ../PtRpt/${top_design}_inline_violated_endpoint.rpt
+# report_analysis_coverage -status_details met -check_type setup -nosplit -significant_digits 8 > ../PtRpt/${top_design}_inline_met_endpoint.rpt
+# report_analysis_coverage -status_details untested -check_type setup -nosplit -significant_digits 8 > ../PtRpt/${top_design}_inline_untested_endpoint.rpt
+# write_sdf -significant_digits 8 -input_port_nets -output_port_nets ../PtRpt/${top_design}_inline.sdf
 
 
 if {[file exists ../Delay_scripts/${top_design}_Delay.tcl]} {

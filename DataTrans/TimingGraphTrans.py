@@ -1,9 +1,10 @@
 import DataBuilder
-from sklearn.preprocessing import MinMaxScaler
+# from sklearn.preprocessing import MinMaxScaler
 import dgl
 from dgl.data.utils import save_graphs
 from dgl.data.utils import load_graphs
 import torch
+import numpy as np
 import pickle
 import sys
 import os
@@ -11,127 +12,103 @@ root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(root_dir)
 import Global_var
 
-
 # Build Timing Graph
 def TimingGraphTrans(design, rebuilt = False, verbose = False):
     print(f'Building {design} Timing Graph.')
     if rebuilt:
-        DataBuilder.BuildTimingArc(design)
-        DataBuilder.BuildEndPoint(design)
-        DataBuilder.BuildPtRpt(design)
-    CellArcs, NetArcs = DataBuilder.LoadTimingArc(design)
-    EndPoints = DataBuilder.LoadEndPoint(design)
-    Critical_Paths = DataBuilder.LoadPtRpt(design)
-    # node dict
-    nodes = {} # nodes: {'pin1': 0, 'pin2': 1, ...}
-    nodes_rev = {} # nodes_rev: {0: 'pin1', 1: 'pin2', ...}
-    nodes_feature = {} # nodes_feature: {0: [], 1 : [], ...}
-    nodes_slack = {} # nodes_slack: {0: 0, 1: 0, ...}
-    nodes_feature_vec = []
-    # decide node number and node feature
-    for _, cellarc in CellArcs.items():
-        if cellarc != None:
-            if(cellarc.from_pin not in nodes.keys()):
-                nodes[cellarc.from_pin] = len(nodes)
-                nodes_rev[len(nodes)-1] = cellarc.from_pin
-                nodes_feature[len(nodes)-1] = None
-                nodes_slack[len(nodes)-1] = None
-            if(cellarc.to_pin not in nodes.keys()):
-                nodes[cellarc.to_pin] = len(nodes)
-                nodes_rev[len(nodes)-1] = cellarc.to_pin
-                nodes_feature[len(nodes)-1] = None
-                nodes_slack[len(nodes)-1] = None
-    for _, netarc in NetArcs.items():
-        if(netarc.from_pin not in nodes.keys()):
-            nodes[netarc.from_pin] = len(nodes)
-            nodes_rev[len(nodes)-1] = netarc.from_pin
-            nodes_feature[len(nodes)-1] = None
-            nodes_slack[len(nodes)-1] = None
-        if(nodes_feature[nodes[netarc.from_pin]] == None):
-            nodes_feature[nodes[netarc.from_pin]] = [netarc.inpin_caps[0], netarc.inpin_caps[1], netarc.isinPinPIPO, 0] # min_cap, max_cap, isPIPO/self loop, isFIFO
-        if(netarc.to_pin not in nodes.keys()):
-            nodes[netarc.to_pin] = len(nodes)
-            nodes_rev[len(nodes)-1] = netarc.to_pin
-            nodes_feature[len(nodes)-1] = None
-            nodes_slack[len(nodes)-1] = None
-        if(nodes_feature[nodes[netarc.to_pin]] == None):
-            nodes_feature[nodes[netarc.to_pin]] = [netarc.outpin_caps[0], netarc.outpin_caps[1], netarc.isoutPinPIPO, 1]
-    for key, value in nodes_feature.items():
-        if value == None:
-            nodes_feature[key] = [0, 0, 2, 1] # min_cap, max_cap, isPIPO/self loop, isFIFO 
-            value = [0, 0, 2, 1]
-        if nodes_rev[key] in EndPoints.keys():
-            value.append(EndPoints[nodes_rev[key]])
-        else:
-            value.append(0)
-        nodes_feature_vec.append(value)
+        CellArcs, _ = DataBuilder.BuildTimingArc(design)
+        PtCells = DataBuilder.BuildPtCells(design)
+        PtNets = DataBuilder.BuildPtNets(design)
+        Critical_Paths = DataBuilder.BuildPtRpt(design)
+    else:
+        CellArcs, _ = DataBuilder.LoadTimingArc(design)
+        PtCells = DataBuilder.LoadPtCells(design)
+        PtNets = DataBuilder.LoadPtNets(design)
+        Critical_Paths = DataBuilder.LoadPtRpt(design)
+    timingLib, footprint = DataBuilder.LoadNormalizedTimingLib()
+    keyCell_in_Lib = list(timingLib.keys())
     
-    scaler = MinMaxScaler()
-    nodes_feature_vec = torch.tensor(scaler.fit_transform(nodes_feature_vec), dtype=torch.float32)
-
-    # add edges and edge features
-    U_CellArc = []; V_CellArc = []
-    U_NetArc = []; V_NetArc = []
-    CellArcs_feature_vec = []
-    NetArcs_feature_vec = []
-    for _, cellarc in CellArcs.items():
-        if cellarc != None:
-            U_CellArc.append(nodes[cellarc.from_pin]); V_CellArc.append(nodes[cellarc.to_pin])
-            CellArcs_feature_vec.append([cellarc.loadCap, cellarc.loadRes, cellarc.effectCap[0], cellarc.effectCap[1], cellarc.outslew[0], cellarc.outslew[1], cellarc.inslew[0], cellarc.inslew[1], cellarc.Delay[0], cellarc.Delay[1]])
-    for _, netarc in NetArcs.items():
-        U_NetArc.append(nodes[netarc.from_pin]); V_NetArc.append(nodes[netarc.to_pin])
-        NetArcs_feature_vec.append([netarc.totalCap, netarc.resistance, netarc.Delay[0], netarc.Delay[1]])
-    CellArcs_feature_vec = torch.tensor(scaler.fit_transform(CellArcs_feature_vec), dtype=torch.float32)
-    NetArcs_feature_vec = torch.tensor(scaler.fit_transform(NetArcs_feature_vec), dtype=torch.float32)
-    # build graph
-    data_dict = {
-        ('node', 'cellarc', 'node'): (U_CellArc, V_CellArc),
-        ('node', 'netarc', 'node'): (U_NetArc, V_NetArc)
-    }
-    G = dgl.heterograph(data_dict)
+    nodes = {} # nodes: {'U22': 0, 'U23': 1, ...}
+    nodes_rev = {} # nodes_rev: {0: 'U22', 1: 'U23', ...}
     
-    G.edata['feature'] = {
-        'cellarc': CellArcs_feature_vec, # [loadCap, loadRes, effectCap*2, outslew*2, inslew*2, Delay*2]
-        'netarc': NetArcs_feature_vec   # [totalCap, resistance, Delay*2]
-    }
+    U_forward, V_forward, U_backward, V_backward = [] , [], [], [] # start and end point of edges
     
-    G.ndata['feature'] = nodes_feature_vec # [min_cap, max_cap, isPIPO/self loop, isFIFO, EndPoint Slack]
-
+    # Building the Pt Netlist graph, node are the cells
+    for _, value in PtNets.items():
+        inpins, outpins = [], []
+        for inpin in value.inpins:
+            if inpin.split('/')[0] not in PtCells.keys(): # filer out Prime Input/Output
+                pass
+            elif inpin.split('/')[0] not in nodes.keys():
+                nodes[inpin.split('/')[0]] = len(nodes)
+                nodes_rev[len(nodes)-1] = inpin.split('/')[0]
+            if inpin.split('/')[0] in PtCells.keys():
+                inpins.append(inpin.split('/')[0])
+        for outpin in value.outpins:
+            if outpin.split('/')[0] not in PtCells.keys(): # filer out Prime Input/Output
+                pass
+            elif outpin.split('/')[0] not in nodes.keys():
+                nodes[outpin.split('/')[0]] = len(nodes)
+                nodes_rev[len(nodes)-1] = outpin.split('/')[0]
+            if outpin.split('/')[0] in PtCells.keys():
+                outpins.append(outpin.split('/')[0])
+        for inpin in inpins:
+            for outpin in outpins:
+                U_forward.append(nodes[inpin]); V_backward.append(nodes[inpin])
+                V_forward.append(nodes[outpin]); U_backward.append(nodes[outpin])
+    
+    # node feature vector 
+    # [max out slew, current gate size, max gate size, TNS, WNS]
+    nodes_feature_bidirectional = np.zeros((len(nodes.keys()), 5), dtype=np.float32)
+    # [max in slew]
+    nodes_feature_forward = np.zeros((len(nodes.keys()), 1), dtype=np.float32)
+    # [total cap, total res]
+    nodes_feature_backward = np.zeros((len(nodes.keys()), 2), dtype=np.float32)
+    # cell type feature, represents the cell type of the node
+    nodes_celltype = np.zeros((len(nodes.keys()), 1), dtype=np.int64)
+    
+    for arc in CellArcs.values():
+        if arc != None:
+            Cell = arc.from_pin.split('/')[0]
+            celltype = keyCell_in_Lib.index(PtCells[Cell].type)
+            node_number = nodes[Cell]
+            # add cell type, encoded by Int64
+            if np.all(nodes_celltype[node_number] == 0):
+                nodes_celltype[node_number][0] = celltype
+            # add node features, [total cap, total res, max in slew, max out slew, current gate size, max gate size, TNS, WNS]
+            if np.all(nodes_feature_bidirectional[node_number] == 0):
+                outslew = max(arc.outslew[0], arc.outslew[1])
+                inslew = max(arc.inslew[0], arc.inslew[1])
+                cellfootprint = timingLib[PtCells[Cell].type].footprint
+                gatesize = float(footprint[cellfootprint].index(PtCells[Cell].type))
+                maxlength = float(len(footprint[cellfootprint]))
+                nodes_feature_bidirectional[node_number] = [outslew, gatesize, maxlength, 0, 0]
+                nodes_feature_forward[node_number] = [inslew]
+                nodes_feature_backward[node_number] = [arc.loadCap, arc.loadRes]
+            else:
+                outslew = max(arc.outslew[0], arc.outslew[1], nodes_feature_bidirectional[node_number][0])
+                inslew = max(arc.inslew[0], arc.inslew[1], nodes_feature_forward[node_number][0])
+                nodes_feature_bidirectional[node_number][0] = outslew
+                nodes_feature_forward[node_number][0] = inslew
+    
     # Collect Critical Path data
     for path in Critical_Paths:
         path_slack = path.slack
-        for pin in reversed(path.Pins):
-            if(nodes_slack[nodes[pin.name]] != None):
-                nodes_slack[nodes[pin.name]][0] += path_slack
-                if(path_slack < nodes_slack[nodes[pin.name]][1]):
-                    nodes_slack[nodes[pin.name]][1] = path_slack
-            else:
-                nodes_slack[nodes[pin.name]] = [path_slack, path_slack, -pin.delay, pin.outtrans] # tns, wns, -pin delay, pin outtrans, rf
-                if(pin.rf == 'r'):
-                    nodes_slack[nodes[pin.name]].append(0)
-                else:
-                    nodes_slack[nodes[pin.name]].append(1)
+        for arc in path.Cellarcs:
+            Cell = arc.name.split('->')[0].split('/')[0]
+            node_number = nodes[Cell]
+            # Gate wise TNS
+            nodes_feature_bidirectional[node_number][3] += path_slack
+            # Gate wise WNS
+            if path_slack < nodes_feature_bidirectional[node_number][4]:
+                nodes_feature_bidirectional[node_number][4] = path_slack
     
-    temp = []
-    for _, value in nodes_slack.items():
-        if(value != None):
-            temp.append(value)
-
-    temp = scaler.fit_transform(temp)
-    CPath_nf = []
-    nodeID = 0
-    for key, value in nodes_slack.items():
-        if(value != None):
-            CPath_nf.append(torch.tensor(temp[nodeID], dtype=torch.float32))
-            nodeID += 1
-        else:
-            CPath_nf.append(torch.tensor([float('nan'), float('nan'), float('nan'), float('nan'), float('nan')]))
-    CPath_nf = torch.stack(CPath_nf)
-    G.ndata['CPath'] = CPath_nf
-    
-    # for i, row in enumerate(G.ndata['CPath']):
-    #     if ~torch.all(torch.isnan(row)):
-    #         print(row)
+    # build graph
+    G = dgl.graph((U_forward, V_forward))
+    G.ndata['bidirection_feature'] = torch.from_numpy(nodes_feature_bidirectional)
+    G.ndata['forward_feature'] = torch.from_numpy(nodes_feature_forward)
+    G.ndata['backward_feature'] = torch.from_numpy(nodes_feature_backward)
+    G.ndata['celltype'] = torch.from_numpy(nodes_celltype)
     
     Save_Dir = Global_var.Trans_Data_Path + 'TimingGraph' 
     if not os.path.exists(Save_Dir):
@@ -143,6 +120,62 @@ def TimingGraphTrans(design, rebuilt = False, verbose = False):
         pickle.dump([nodes, nodes_rev], f)
     if verbose:
         print(f'{design} Timing Graph complete!')
+    
+def IncrementalUpdate(design, G, nodes):
+    CellArcs, PtCells = DataBuilder.BuildCellArc(design)
+    Critical_Paths = DataBuilder.LoadPtRpt(design)
+    timingLib, footprint = DataBuilder.LoadNormalizedTimingLib()
+    keyCell_in_Lib = list(timingLib.keys())
+    # node feature vector 
+    # [max out slew, current gate size, max gate size, TNS, WNS]
+    nodes_feature_bidirectional = np.zeros((len(nodes.keys()), 5), dtype=np.float32)
+    # [max in slew]
+    nodes_feature_forward = np.zeros((len(nodes.keys()), 1), dtype=np.float32)
+    # [total cap, total res]
+    nodes_feature_backward = np.zeros((len(nodes.keys()), 2), dtype=np.float32)
+    # cell type feature, represents the cell type of the node
+    nodes_celltype = np.zeros((len(nodes.keys()), 1), dtype=np.int64)
+
+    for arc in CellArcs.values():
+        if arc != None:
+            Cell = arc.from_pin.split('/')[0]
+            celltype = keyCell_in_Lib.index(PtCells[Cell].type)
+            node_number = nodes[Cell]
+            # add cell type, encoded by Int64
+            if np.all(nodes_celltype[node_number] == 0):
+                nodes_celltype[node_number][0] = celltype
+            # add node features, [total cap, total res, max in slew, max out slew, current gate size, max gate size, TNS, WNS]
+            if np.all(nodes_feature_bidirectional[node_number] == 0):
+                outslew = max(arc.outslew[0], arc.outslew[1])
+                inslew = max(arc.inslew[0], arc.inslew[1])
+                cellfootprint = timingLib[PtCells[Cell].type].footprint
+                gatesize = float(footprint[cellfootprint].index(PtCells[Cell].type))
+                maxlength = float(len(footprint[cellfootprint]))
+                nodes_feature_bidirectional[node_number] = [outslew, gatesize, maxlength, 0, 0]
+                nodes_feature_forward[node_number] = [inslew]
+                nodes_feature_backward[node_number] = [arc.loadCap, arc.loadRes]
+            else:
+                outslew = max(arc.outslew[0], arc.outslew[1], nodes_feature_bidirectional[node_number][0])
+                inslew = max(arc.inslew[0], arc.inslew[1], nodes_feature_forward[node_number][0])
+                nodes_feature_bidirectional[node_number][0] = outslew
+                nodes_feature_forward[node_number][0] = inslew
+    
+    # Collect Critical Path data
+    for path in Critical_Paths:
+        path_slack = path.slack
+        for arc in path.Cellarcs:
+            Cell = arc.name.split('->')[0].split('/')[0]
+            node_number = nodes[Cell]
+            # Gate wise TNS
+            nodes_feature_bidirectional[node_number][3] += path_slack
+            # Gate wise WNS
+            if path_slack < nodes_feature_bidirectional[node_number][4]:
+                nodes_feature_bidirectional[node_number][4] = path_slack
+    
+    G.ndata['bidirection_feature'] = torch.from_numpy(nodes_feature_bidirectional)
+    G.ndata['forward_feature'] = torch.from_numpy(nodes_feature_forward)
+    G.ndata['backward_feature'] = torch.from_numpy(nodes_feature_backward)
+    G.ndata['celltype'] = torch.from_numpy(nodes_celltype)
     
 def LoadTimingGraph(design, rebuild=False, verbose = False):
     # Load Timing Graph

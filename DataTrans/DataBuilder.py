@@ -573,6 +573,7 @@ def BuildPtRpt(design, verbose=False):
         pickle.dump(paths, f)
     if verbose:
         print(f'{design} PrimeTime Rpt complete!')
+    return paths
 
 def LoadPtRpt(design, verbose=False):
     if verbose:
@@ -615,6 +616,7 @@ def BuildPtCells(design, verbose=False):
         pickle.dump(PtCells, f)
     if verbose:
         print(f'{design} PrimeTime Cells complete!')
+    return PtCells
         
 def LoadPtCells(design, verbose=False):
     if verbose:
@@ -628,6 +630,54 @@ def LoadPtCells(design, verbose=False):
     if verbose:
         print(f'{design} PrimeTime Cells loaded!')
     return PtCells
+
+def BuildPtNets(design, verbose=False):
+    if verbose:
+        print(f'Building {design} PrimeTime Nets.')
+    inPtNetRpt = Global_var.PtRpt_Path + design + '_net.rpt'
+    PtNets = PtNetRpt_Parser.Read_PtNetRpt(inPtNetRpt)
+    save_dir = Save_Path + 'PtNet/' + design
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+    save_path = os.path.join(save_dir, 'PtNet.sav')
+    with open(save_path, 'wb') as f:
+        pickle.dump(PtNets, f)
+    if verbose:
+        print(f'{design} PrimeTime Nets complete!')
+    return PtNets
+
+def LoadPtNets(design, verbose=False):
+    if verbose:
+        print(f'Loading {design} PrimeTime Nets.')
+    save_dir = Save_Path + 'PtNet/' + design
+    save_path = os.path.join(save_dir, 'PtNet.sav')
+    if not os.path.exists(save_path):
+        BuildPtNets(design)
+    with open(save_path, 'rb') as f:
+        PtNets = pickle.load(f)
+    if verbose:
+        print(f'{design} PrimeTime Nets loaded!')
+    return PtNets
+
+def BuildCellArc(design, verbose=False):
+    if verbose:
+        print(f'Building {design} Timing Arc.')
+    inPtCellRpt = Global_var.PtRpt_Path + design + '_cell.rpt'
+    inPtDelayRpt = Global_var.PtRpt_Path + design + '_Delay.rpt'
+    PtCells = PtCellRpt_Parser.Read_PtCellRpt(inPtCellRpt)
+    PtCellArcs = PtDelayRpt_Parser.Read_PtDelayRpt(inPtDelayRpt)
+    CellArcs = {}
+    for cellname, cell in PtCells.items():
+        for inpin in cell.inpins:
+            for outpin in cell.outpins:
+                CellArcs[(cellname + '/' + inpin, cellname + '/' + outpin)] = None
+
+    for _, arc in PtCellArcs.items():
+        CellArcs[(arc.from_pin, arc.to_pin)] = arc
+
+    if verbose:
+        print(f'{design} Timing Arc complete!')
+    return CellArcs, PtCells
 
 def BuildTimingArc(design, verbose=False):
     if verbose:
@@ -678,6 +728,7 @@ def BuildTimingArc(design, verbose=False):
         pickle.dump((CellArcs, NetArcs), f)
     if verbose:
         print(f'{design} Timing Arc complete!')
+    return CellArcs, NetArcs
 
 def LoadTimingArc(design, verbose=False):
     if verbose:

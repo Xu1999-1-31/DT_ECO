@@ -15,3 +15,4 @@ import mo_gymnasium.envs.resource_gathering
 import mo_gymnasium.envs.water_reservoir
 # import mo_gymnasium.envs.dim_test
 import mo_gymnasium.envs.dt_eco
+import mo_gymnasium.envs.dt_eco1

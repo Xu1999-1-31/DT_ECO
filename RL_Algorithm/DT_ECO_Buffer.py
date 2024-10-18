@@ -9,7 +9,7 @@ class ReplayBuffer:
         self,
         obs_shape,
         action_dim,
-        rew_dim=1,
+        rew_dim=2,
         max_size=100,
         device='cpu',
     ):
@@ -19,41 +19,29 @@ class ReplayBuffer:
         self.device = device
         
         # Initialize buffer for each part of the observation space, the original data are saved in CPU memory
-        self.gate_sizes = th.zeros((max_size,) + obs_shape['gate_sizes'], dtype=th.float32, device='cpu')  # gate_sizes as NumPy array
-        self.layout = th.zeros((max_size,) + obs_shape['layout'], dtype=th.float32, device='cpu')
-        self.padding_mask = th.zeros((max_size,) + obs_shape['padding_mask'], dtype=th.float32, device='cpu')
-        self.gate_features = th.zeros((max_size,) + obs_shape['gate_features'], dtype=th.float32, device='cpu')
+        self.delta_strength = th.zeros((max_size,) + obs_shape['delta_strength'], dtype=th.float32, device='cpu')
 
         # Buffer for storing DGL graph objects (timing graph)
         self.timing_graph = [None] * max_size  # List for DGL graphs
 
         # Initialize buffer for next observations
-        self.next_gate_sizes = th.zeros_like(self.gate_sizes)  # gate_sizes as NumPy array
-        self.next_layout = th.zeros_like(self.layout)
-        self.next_padding_mask = th.zeros_like(self.padding_mask)
-        self.next_gate_features = th.zeros_like(self.gate_features)
+        self.next_delta_strength = th.zeros_like(self.delta_strength)
         self.next_timing_graph = [None] * max_size  # List for next DGL graphs
 
         # Initialize buffer for actions, rewards, and done signals using NumPy arrays
-        self.actions = np.zeros((max_size, action_dim), dtype=np.float32)
+        self.actions = np.zeros((max_size,) + action_dim, dtype=np.float32)
         self.rewards = np.zeros((max_size, rew_dim), dtype=np.float32)
         self.dones = np.zeros((max_size, 1), dtype=np.bool_)  # Boolean array for done signals
 
     def add(self, obs, action, reward, next_obs, done):
         """Add a new experience to the buffer, using mixed data types."""
         # Store current observation components
-        self.gate_sizes[self.ptr] = obs['gate_sizes'].clone().to('cpu')  # Store gate_sizes as NumPy array
-        self.layout[self.ptr] = obs['layout'].clone().to('cpu')
-        self.padding_mask[self.ptr] = obs['padding_mask'].clone().to('cpu')
-        self.gate_features[self.ptr] = obs['gate_features'].clone().to('cpu')
-        self.timing_graph[self.ptr] = obs['timing_graph'].to('cpu')  # Store DGL graph object directly
+        self.delta_strength[self.ptr] = obs['delta_strength'].clone().to('cpu')
+        self.timing_graph[self.ptr] = obs['timing_graph'].clone().to('cpu')
 
         # Store next observation components
-        self.next_gate_sizes[self.ptr] = next_obs['gate_sizes'].clone().to('cpu')  # Next gate_sizes as NumPy array
-        self.next_layout[self.ptr] = next_obs['layout'].clone().to('cpu')
-        self.next_padding_mask[self.ptr] = next_obs['padding_mask'].clone().to('cpu')
-        self.next_gate_features[self.ptr] = next_obs['gate_features'].clone().to('cpu')
-        self.next_timing_graph[self.ptr] = next_obs['timing_graph'].to('cpu')  # Store next DGL graph object
+        self.next_delta_strength[self.ptr] = next_obs['delta_strength'].clone().to('cpu')
+        self.next_timing_graph[self.ptr] = next_obs['timing_graph'].clone().to('cpu')
 
         # Store action, reward, and done (NumPy arrays)
         self.actions[self.ptr] = np.array(action).copy()
@@ -72,23 +60,17 @@ class ReplayBuffer:
 
         # Create a dictionary for observations (PyTorch tensors and NumPy arrays)
         observations = {
-            'gate_sizes': self.gate_sizes[inds].to(self.device),  # gate_sizes as NumPy array
-            'layout': self.layout[inds].to(self.device),
-            'padding_mask': self.padding_mask[inds].to(self.device),
-            'gate_features': self.gate_features[inds].clone().detach().to(self.device),
+            'delta_strength': self.delta_strength[inds].clone().to(self.device),
         }
 
         # Create a dictionary for next observations
         next_observations = {
-            'gate_sizes': self.next_gate_sizes[inds].to(self.device),  # Next gate_sizes as NumPy array
-            'layout': self.next_layout[inds].to(self.device),
-            'padding_mask': self.next_padding_mask[inds].to(self.device),
-            'gate_features': self.next_gate_features[inds].clone().detach().to(self.device),
+            'delta_strength': self.next_delta_strength[inds].clone().to(self.device),
         }
 
         # Batch the DGL graphs for both current and next observations
-        batched_graph = dgl.batch([self.timing_graph[i] for i in inds]).to(self.device)
-        next_batched_graph = dgl.batch([self.next_timing_graph[i] for i in inds]).to(self.device)
+        batched_graph = dgl.batch([self.timing_graph[i].clone() for i in inds]).to(self.device)
+        next_batched_graph = dgl.batch([self.next_timing_graph[i].clone() for i in inds]).to(self.device)
         
         observations['timing_graph'] = batched_graph
         next_observations['timing_graph'] = next_batched_graph
